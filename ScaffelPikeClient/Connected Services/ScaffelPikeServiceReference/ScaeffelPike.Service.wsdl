@@ -13,30 +13,10 @@
   <wsdl:message name="IScaffelPikeService_LogIn_OutputMessage">
     <wsdl:part name="parameters" element="tns:LogInResponse" />
   </wsdl:message>
-  <wsdl:message name="IScaffelPikeService_LogIn2AsyncMethod_InputMessage">
-    <wsdl:part name="parameters" element="tns:LogIn2AsyncMethod" />
-  </wsdl:message>
-  <wsdl:message name="IScaffelPikeService_LogIn2AsyncMethod_OutputMessage">
-    <wsdl:part name="parameters" element="tns:LogIn2AsyncMethodResponse" />
-  </wsdl:message>
-  <wsdl:message name="IScaffelPikeService_LogIn3Task_InputMessage">
-    <wsdl:part name="parameters" element="tns:LogIn3Task" />
-  </wsdl:message>
-  <wsdl:message name="IScaffelPikeService_LogIn3Task_OutputMessage">
-    <wsdl:part name="parameters" element="tns:LogIn3TaskResponse" />
-  </wsdl:message>
   <wsdl:portType name="IScaffelPikeService">
     <wsdl:operation name="LogIn">
       <wsdl:input wsaw:Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn" message="tns:IScaffelPikeService_LogIn_InputMessage" />
       <wsdl:output wsaw:Action="http://ScaeffelPike.Service/IScaffelPikeService/LogInResponse" message="tns:IScaffelPikeService_LogIn_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="LogIn2AsyncMethod">
-      <wsdl:input wsaw:Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn2AsyncMethod" message="tns:IScaffelPikeService_LogIn2AsyncMethod_InputMessage" />
-      <wsdl:output wsaw:Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn2AsyncMethodResponse" message="tns:IScaffelPikeService_LogIn2AsyncMethod_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="LogIn3Task">
-      <wsdl:input wsaw:Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn3Task" message="tns:IScaffelPikeService_LogIn3Task_InputMessage" />
-      <wsdl:output wsaw:Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn3TaskResponse" message="tns:IScaffelPikeService_LogIn3Task_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

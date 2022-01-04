@@ -28,18 +28,11 @@ namespace ScaffelPikeClient
                     var password = Console.ReadLine();
                     Console.WriteLine($"Input: {username} and {password}\n");
 
-                    if (username.ToLower() == "stop" || password.ToLower() == "stop")
-                    {
-                        loop = false;
+                    loop = (username.ToLower() == "stop" || password.ToLower() == "stop");
+                    if (loop)
                         continue;
-                    }
-                    //PasswordDto output = client.LogIn(username, password);
-                    //PasswordDto output = client.LogIn2AsyncMethod(username, password);
 
-                    Task<PasswordDto> outputTask = client.LogIn3TaskAsync(username, password);
-                    outputTask.Wait();
-                    PasswordDto output = outputTask.Result;
-
+                    var output = client.LogIn(username, password);
                     Console.WriteLine($"Sucessful: {output.Success}\nName: {output.OtherData}");
                     Console.WriteLine();
                 }

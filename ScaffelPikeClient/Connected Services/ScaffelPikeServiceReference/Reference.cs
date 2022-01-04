@@ -20,18 +20,6 @@ namespace ScaffelPikeClient.ScaffelPikeServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn", ReplyAction="http://ScaeffelPike.Service/IScaffelPikeService/LogInResponse")]
         System.Threading.Tasks.Task<ScaffelPikeLib.PasswordDto> LogInAsync(string username, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn2AsyncMethod", ReplyAction="http://ScaeffelPike.Service/IScaffelPikeService/LogIn2AsyncMethodResponse")]
-        ScaffelPikeLib.PasswordDto LogIn2AsyncMethod(string username, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn2AsyncMethod", ReplyAction="http://ScaeffelPike.Service/IScaffelPikeService/LogIn2AsyncMethodResponse")]
-        System.Threading.Tasks.Task<ScaffelPikeLib.PasswordDto> LogIn2AsyncMethodAsync(string username, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn3Task", ReplyAction="http://ScaeffelPike.Service/IScaffelPikeService/LogIn3TaskResponse")]
-        ScaffelPikeLib.PasswordDto LogIn3Task(string username, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn3Task", ReplyAction="http://ScaeffelPike.Service/IScaffelPikeService/LogIn3TaskResponse")]
-        System.Threading.Tasks.Task<ScaffelPikeLib.PasswordDto> LogIn3TaskAsync(string username, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -67,22 +55,6 @@ namespace ScaffelPikeClient.ScaffelPikeServiceReference {
         
         public System.Threading.Tasks.Task<ScaffelPikeLib.PasswordDto> LogInAsync(string username, string password) {
             return base.Channel.LogInAsync(username, password);
-        }
-        
-        public ScaffelPikeLib.PasswordDto LogIn2AsyncMethod(string username, string password) {
-            return base.Channel.LogIn2AsyncMethod(username, password);
-        }
-        
-        public System.Threading.Tasks.Task<ScaffelPikeLib.PasswordDto> LogIn2AsyncMethodAsync(string username, string password) {
-            return base.Channel.LogIn2AsyncMethodAsync(username, password);
-        }
-        
-        public ScaffelPikeLib.PasswordDto LogIn3Task(string username, string password) {
-            return base.Channel.LogIn3Task(username, password);
-        }
-        
-        public System.Threading.Tasks.Task<ScaffelPikeLib.PasswordDto> LogIn3TaskAsync(string username, string password) {
-            return base.Channel.LogIn3TaskAsync(username, password);
         }
     }
 }

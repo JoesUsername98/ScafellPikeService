@@ -6,14 +6,14 @@ namespace ScaffelPikeLib
 {
     public class ScaffelPikeService : IScaffelPikeService
     {
-        public PasswordDto LogIn(string username, string password)
+        public async Task<PasswordDto> LogIn(string username, string password)
         {
-            var a = Task.Run(() => doLogInAsync(username, password));
-            a.Wait();
-            return a.Result;
+            return await Task<PasswordDto>.Factory.StartNew(() =>
+            {
+                return doLogIn(username, password);
+            });
         }
-
-        private PasswordDto doLogInAsync(string username, string password)
+        private PasswordDto doLogIn(string username, string password)
         {
             Console.WriteLine($"Recieved Log In Request with Username: {username}, Password: {password}");
 
@@ -25,27 +25,6 @@ namespace ScaffelPikeLib
 
             Console.WriteLine("Failed");
             return new PasswordDto() { Success = false, OtherData = "" };
-        }
-        // Implement this for Log In 
-        public IAsyncResult BeginLogIn2AsyncMethod(string username, string password, AsyncCallback callback, object asyncState)
-        {
-            Console.WriteLine("BeginLogInAsyncMethod called with: {0} {1}", username, password);
-            return new CompletedAsyncResult<PasswordDto>(doLogInAsync(username, password));
-        }
-
-        public PasswordDto EndLogIn2AsyncMethod(IAsyncResult r)
-        {
-            CompletedAsyncResult<PasswordDto> result = r as CompletedAsyncResult<PasswordDto>;
-            Console.WriteLine("EndLogInAsyncMethod called with result: {0}", result.Data.Success);
-            return result.Data;
-        }
-
-        public async Task<PasswordDto> LogIn3TaskAsync(string username, string password)
-        {
-            return await Task<PasswordDto>.Factory.StartNew(() =>
-            {
-                return doLogInAsync(username, password);
-            });
         }
     }
 }
