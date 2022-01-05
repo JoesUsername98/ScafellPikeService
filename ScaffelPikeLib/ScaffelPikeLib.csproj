@@ -44,7 +44,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompletedAsyncResult.cs" />
     <Compile Include="IScaffelPikeService.cs" />
     <Compile Include="PasswordDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
