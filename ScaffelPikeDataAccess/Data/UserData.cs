@@ -6,22 +6,26 @@ using ScaffelPikeDataAccess.Models;
 
 namespace ScaffelPikeDataAccess.Data
 {
-    public class UserData
+  public class UserData
+  {
+    readonly ISqlDataAccess _db;
+    public UserData(ISqlDataAccess db)
     {
-        private readonly ISqlDataAccess _db;
-        public UserData(ISqlDataAccess db)
-        {
-            _db = db;
-        }
-
-        public Task<IEnumerable<UserModel>> GetUsers() =>
-          _db.LoadData<UserModel, dynamic>(storedProcedure: "dbo.spUser_GetAll", new { });
-
-
-        public async Task<UserModel> GetUser(int id)
-        {
-            var result = await _db.LoadData<UserModel, dynamic>(storedProcedure: "dbo.spUser_Get", new { Id = id });
-            return result.FirstOrDefault();
-        }
+      _db = db;
     }
+
+    public UserData()
+    {
+      _db = new SqlDataAccess();
+    }
+    public Task<IEnumerable<UserModel>> GetUsers() =>
+      _db.LoadData<UserModel, dynamic>(storedProcedure: "dbo.spUser_GetAll", new { });
+
+
+    public async Task<UserModel> GetUser(int id)
+    {
+      var result = await _db.LoadData<UserModel, dynamic>(storedProcedure: "dbo.spUser_Get", new { Id = id });
+      return result.FirstOrDefault();
+    }
+  }
 }

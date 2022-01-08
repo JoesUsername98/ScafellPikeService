@@ -1,6 +1,7 @@
 ﻿using ScaffelPikeLib;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
@@ -18,12 +19,10 @@ namespace ScaffelPikeHost
 
             // Step 2: Create a ServiceHost instance.
             ServiceHost selfHost = new ServiceHost(typeof(ScaffelPikeService), baseAddress);
-
-            try
+      try
             {
                 // Step 3: Add a service endpoint.
-                selfHost.AddServiceEndpoint(typeof(IScaffelPikeService), new WSHttpBinding(), "ScaffelPikeService");
-                  
+                selfHost.AddServiceEndpoint(typeof(IScaffelPikeService), new WSHttpBinding(), "ScaffelPikeService");        
                 // Step 4: Enable metadata exchange.
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
                 smb.HttpGetEnabled = true;

@@ -28,8 +28,8 @@ namespace ScaffelPikeClient
                     var password = Console.ReadLine();
                     Console.WriteLine($"Input: {username} and {password}\n");
 
-                    loop = (username.ToLower() == "stop" || password.ToLower() == "stop");
-                    if (loop)
+                    loop = (username.ToLower() != "stop" && password.ToLower() != "stop");
+                    if (!loop)
                         continue;
 
                     var output = client.LogIn(username, password);
