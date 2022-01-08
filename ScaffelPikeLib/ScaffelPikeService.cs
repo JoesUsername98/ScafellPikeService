@@ -8,10 +8,6 @@ namespace ScaffelPikeLib
 {
   public class ScaffelPikeService : IScaffelPikeService
   {
-    private readonly string connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog = ScaffelPikeDB;" +
-                                          @"Integrated Security = True; Connect Timeout = 30; Encrypt=False;" +
-                                          @"TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
     public async Task<PasswordDto> LogIn(string username, string password)
     {
       return await Task<PasswordDto>.Factory.StartNew(() => {
