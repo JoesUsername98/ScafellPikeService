@@ -18,10 +18,10 @@ namespace ScaffelPikeDataAccess.Data
           _db.LoadData<UserModel, dynamic>(storedProcedure: "dbo.spUser_GetAll", new { });
 
 
-        public async Task<UserModel?> GetUser(int id)
+        public async Task<UserModel> GetUser(int id)
         {
             var result = await _db.LoadData<UserModel, dynamic>(storedProcedure: "dbo.spUser_Get", new { Id = id });
-            return result.FirstOrDefault;
+            return result.FirstOrDefault();
         }
     }
 }
