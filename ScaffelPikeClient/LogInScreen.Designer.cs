@@ -105,7 +105,6 @@
             this.MinimumSize = new System.Drawing.Size(275, 197);
             this.Name = "LogInScreen";
             this.Text = "LogInScreen";
-            this.Load += new System.EventHandler(this.LogInScreen_Load);
             this.groupBoxLogIn.ResumeLayout(false);
             this.groupBoxLogIn.PerformLayout();
             this.ResumeLayout(false);

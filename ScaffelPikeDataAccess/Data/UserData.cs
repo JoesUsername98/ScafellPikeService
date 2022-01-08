@@ -27,5 +27,15 @@ namespace ScaffelPikeDataAccess.Data
       var result = await _db.LoadData<UserModel, dynamic>(storedProcedure: "dbo.spUser_Get", new { Id = id });
       return result.FirstOrDefault();
     }
+
+    public Task InsertUser(UserModel user) =>
+        _db.SaveDate(storedProcedure: "dbo.spUser_Insert",
+          new { user.FirstName, user.Surname, user.Username, user.Password });
+
+    public Task DeleteUser(int id) =>
+      _db.SaveDate(storedProcedure: "dbo.spUser_Delete", new { Id = id });
+
+    public Task UpdateUser(UserModel user) =>
+      _db.SaveDate(storedProcedure: "dbo.spUser_Update", user);
   }
 }
