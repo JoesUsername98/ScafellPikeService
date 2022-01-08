@@ -30,7 +30,7 @@ namespace ScaffelPikeDataAccess.Data
 
     public Task InsertUser(UserModel user) =>
         _db.SaveDate(storedProcedure: "dbo.spUser_Insert",
-          new { user.FirstName, user.Surname, user.Username, user.Password });
+          new { user.FirstName, user.Surname, user.Username, user.Password, user.Admin });
 
     public Task DeleteUser(int id) =>
       _db.SaveDate(storedProcedure: "dbo.spUser_Delete", new { Id = id });

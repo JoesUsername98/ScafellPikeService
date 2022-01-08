@@ -21,7 +21,8 @@ namespace ScaffelPikeTests
         FirstName = "Joe",
         Surname = "Osborne",
         Username = "JoesUsername",
-        Password = "Ozzy1"
+        Password = "Ozzy1",
+        Admin = true
       };
       new UserData().InsertUser(user1);
 
@@ -30,7 +31,8 @@ namespace ScaffelPikeTests
         FirstName = "Mark",
         Surname = "Zucc",
         Username = "LizardMan",
-        Password = "MetaIsCool"
+        Password = "MetaIsCool",
+        Admin = false
       };
       new UserData().InsertUser(user2);
 
@@ -39,7 +41,8 @@ namespace ScaffelPikeTests
         FirstName = "Tony",
         Surname = "Stark",
         Username = "TonyS",
-        Password = "Peppa"
+        Password = "Peppa",
+        Admin = false
       };
       new UserData().InsertUser(user3);
 
@@ -48,10 +51,10 @@ namespace ScaffelPikeTests
         FirstName = "Elon",
         Surname = "Musk",
         Username = "ElonM",
-        Password = "MelonUsk"
+        Password = "MelonUsk",
+        Admin = false
       };
       new UserData().InsertUser(user4);
-
     }
 
     [Fact]
