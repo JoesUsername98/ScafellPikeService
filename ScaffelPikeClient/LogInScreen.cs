@@ -7,14 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ScaffelPikeClient.ScaffelPikeServiceReference;
 
 namespace ScaffelPikeClient
 {
   public partial class LogInScreen : Form
   {
-    private readonly ScaffelPikeServiceClient _client;
-    public LogInScreen(ScaffelPikeServiceClient client)
+    private readonly ScaffelPikeServiceClient.ScaffelPikeServiceClient _client;
+    public LogInScreen(ScaffelPikeServiceClient.ScaffelPikeServiceClient client)
     {
       InitializeComponent();
       _client = client;

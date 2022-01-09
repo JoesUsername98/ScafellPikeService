@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ScaffelPikeClient.ScaffelPikeServiceReference;
 
 namespace ScaffelPikeClient
 {
   internal class LogInCLI
   {
-    public LogInCLI(ScaffelPikeServiceClient client)
+    public LogInCLI(ScaffelPikeServiceClient.ScaffelPikeServiceClient client)
     {
       ////Step 1: Create an instance of the WCF proxy.
       bool loop = true;

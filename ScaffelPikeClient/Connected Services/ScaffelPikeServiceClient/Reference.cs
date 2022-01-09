@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ScaffelPikeClient.ScaffelPikeServiceReference {
+namespace ScaffelPikeClient.ScaffelPikeServiceClient {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://ScaeffelPike.Service", ConfigurationName="ScaffelPikeServiceReference.IScaffelPikeService")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://ScaeffelPike.Service", ConfigurationName="ScaffelPikeServiceClient.IScaffelPikeService")]
     public interface IScaffelPikeService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn", ReplyAction="http://ScaeffelPike.Service/IScaffelPikeService/LogInResponse")]
@@ -23,12 +23,12 @@ namespace ScaffelPikeClient.ScaffelPikeServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IScaffelPikeServiceChannel : ScaffelPikeClient.ScaffelPikeServiceReference.IScaffelPikeService, System.ServiceModel.IClientChannel {
+    public interface IScaffelPikeServiceChannel : ScaffelPikeClient.ScaffelPikeServiceClient.IScaffelPikeService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ScaffelPikeServiceClient : System.ServiceModel.ClientBase<ScaffelPikeClient.ScaffelPikeServiceReference.IScaffelPikeService>, ScaffelPikeClient.ScaffelPikeServiceReference.IScaffelPikeService {
+    public partial class ScaffelPikeServiceClient : System.ServiceModel.ClientBase<ScaffelPikeClient.ScaffelPikeServiceClient.IScaffelPikeService>, ScaffelPikeClient.ScaffelPikeServiceClient.IScaffelPikeService {
         
         public ScaffelPikeServiceClient() {
         }

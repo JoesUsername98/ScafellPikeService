@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\ScaffelPikeServiceReference\Reference.cs">
+    <Compile Include="Connected Services\ScaffelPikeServiceClient\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -67,17 +67,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Connected Services\ScaffelPikeServiceReference\ScaeffelPike.Service.wsdl" />
-    <None Include="Connected Services\ScaffelPikeServiceReference\ScaeffelPike.Service.xsd">
+    <None Include="Connected Services\ScaffelPikeServiceClient\item.wsdl" />
+    <None Include="Connected Services\ScaffelPikeServiceClient\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ScaffelPikeServiceReference\ScaffelPikeLib.xsd">
+    <None Include="Connected Services\ScaffelPikeServiceClient\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ScaffelPikeServiceReference\service.wsdl" />
-    <None Include="Connected Services\ScaffelPikeServiceReference\service.xsd">
+    <None Include="Connected Services\ScaffelPikeServiceClient\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ScaffelPikeServiceClient\ScaffelPikeService.wsdl" />
     <None Include="Properties\DataSources\ScaffelPikeLib.PasswordDto.datasource" />
     <None Include="Properties\DataSources\ScaffelPikeLib.PasswordDto1.datasource" />
   </ItemGroup>
@@ -91,24 +91,27 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ScaffelPikeServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ScaffelPikeServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ScaffelPikeServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ScaffelPikeServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="LogInScreen.resx">
       <DependentUpon>LogInScreen.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ScaffelPikeServiceClient\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ScaffelPikeServiceClient\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ScaffelPikeServiceClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ScaffelPikeServiceClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ScaffelPikeServiceClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

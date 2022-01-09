@@ -8,13 +8,18 @@ namespace ScaffelPikeLib
 {
   public class ScaffelPikeService : IScaffelPikeService
   {
+    private readonly IScaffelPikeLogger _logger;
+    public ScaffelPikeService(IScaffelPikeLogger logger)
+    {
+      _logger = logger;
+    }
     public async Task<PasswordDto> LogIn(string username, string password)
     {
       return await Task<PasswordDto>.Factory.StartNew(() => {
         return doLogIn(username, password);
       });
     }
-    private PasswordDto doLogIn(string username, string password)
+    public PasswordDto doLogIn(string username, string password)
     {
       Console.WriteLine($"Recieved Log In Request with Username: {username}, Password: {password}");
 

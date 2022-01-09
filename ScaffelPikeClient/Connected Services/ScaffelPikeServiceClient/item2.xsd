@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://ScaeffelPike.Service" elementFormDefault="qualified" targetNamespace="http://ScaeffelPike.Service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/ScaffelPikeLib" />
+  <xs:import schemaLocation="http://localhost:8080/ScaffelPikeService/ScaffelPikeService/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ScaffelPikeLib" />
   <xs:element name="LogIn">
     <xs:complexType>
       <xs:sequence>
