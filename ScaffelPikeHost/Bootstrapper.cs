@@ -1,5 +1,8 @@
 ﻿using Autofac;
 using ScaffelPikeLib;
+using ScaffelPikeLogger;
+using ScaffelPikeLogger.Configuration;
+using System.Configuration;
 
 namespace ScaffelPikeHost
 {
@@ -8,8 +11,8 @@ namespace ScaffelPikeHost
     public static ContainerBuilder RegisterContainerBuilder()
     {
       ContainerBuilder builder = new ContainerBuilder();
-      builder.Register(c => new ScaffelPikeLogger()).As<IScaffelPikeLogger>();
-      builder.Register(c => new ScaffelPikeService(c.Resolve<IScaffelPikeLogger>())).As<IScaffelPikeService>();
+      builder.Register(c => new TextLogger((LoggerConfiguration)ConfigurationManager.GetSection("LoggerConfiguration"))).As<ILogger>();
+      builder.Register(c => new ScaffelPikeService(c.Resolve<ILogger>())).As<IScaffelPikeService>();
       return builder;
     }
   }

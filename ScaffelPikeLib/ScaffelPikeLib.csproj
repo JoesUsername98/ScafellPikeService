@@ -59,6 +59,10 @@
       <Project>{c55eaf43-4518-44f1-be81-54463cbe14f6}</Project>
       <Name>ScaffelPikeDataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ScaffelPikeLogger\ScaffelPikeLogger.csproj">
+      <Project>{F6150ED0-6CB7-4D66-90F3-530F32726091}</Project>
+      <Name>ScaffelPikeLogger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

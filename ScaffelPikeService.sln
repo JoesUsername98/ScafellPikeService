@@ -18,7 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeDataAccess", "ScaffelPikeDataAccess\ScaffelPikeDataAccess.csproj", "{C55EAF43-4518-44F1-BE81-54463CBE14F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeTests", "ScaffelPikeTests\ScaffelPikeTests.csproj", "{FAB41391-EFDE-4559-AEF0-B302F38F739A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScaffelPikeTests", "ScaffelPikeTests\ScaffelPikeTests.csproj", "{FAB41391-EFDE-4559-AEF0-B302F38F739A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeLogger", "ScaffelPikeLogger\ScaffelPikeLogger.csproj", "{F6150ED0-6CB7-4D66-90F3-530F32726091}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,10 @@ Global
 		{FAB41391-EFDE-4559-AEF0-B302F38F739A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAB41391-EFDE-4559-AEF0-B302F38F739A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAB41391-EFDE-4559-AEF0-B302F38F739A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6150ED0-6CB7-4D66-90F3-530F32726091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6150ED0-6CB7-4D66-90F3-530F32726091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6150ED0-6CB7-4D66-90F3-530F32726091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6150ED0-6CB7-4D66-90F3-530F32726091}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
