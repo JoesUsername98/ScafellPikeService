@@ -5,7 +5,7 @@ namespace ScaffelPikeLogger.Configuration
   public class TextLoggerConfiguration : ConfigurationElement
   {
     #region Constructors
-    public TextLoggerConfiguration()
+    static TextLoggerConfiguration()
     {
       s_propDirectory = new ConfigurationProperty("Directory", typeof(string), null, ConfigurationPropertyOptions.IsRequired);
       s_propFileName = new ConfigurationProperty("FileName", typeof(string), null, ConfigurationPropertyOptions.IsRequired);
