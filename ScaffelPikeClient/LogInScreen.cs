@@ -35,5 +35,15 @@ namespace ScaffelPikeClient
     {
       //Inits
     }
+
+    private void pictureBoxViewPassword_MouseHover(object sender, EventArgs e)
+    {
+      textBoxPassword.UseSystemPasswordChar = false;
+    }
+
+    private void pictureBoxViewPassword_MouseLeave(object sender, EventArgs e)
+    {
+      textBoxPassword.UseSystemPasswordChar = true;
+    }
   }
 }
