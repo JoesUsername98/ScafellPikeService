@@ -3,8 +3,9 @@ using ScaffelPikeLib;
 using ScaffelPikeLogger;
 using ScaffelPikeLogger.Configuration;
 using System.Configuration;
+using System.ServiceModel;
 
-namespace ScaffelPikeHost
+namespace ScaffelPikeClient
 {
   internal class Bootstrapper
   {
@@ -12,9 +13,7 @@ namespace ScaffelPikeHost
     {
       ContainerBuilder builder = new ContainerBuilder();
       builder.Register(c => new TextLogger((LoggerConfiguration)ConfigurationManager.GetSection("LoggerConfiguration"))).As<ILogger>();
-      //TODO DB IoC Dependancy Injection =>
-      //builder.Register(c => new TextLogger((LoggerConfiguration)ConfigurationManager.GetSection("LoggerConfiguration"))).As<ILogger>();
-      builder.Register(c => new ScaffelPikeService(c.Resolve<ILogger>())).As<IScaffelPikeService>();
+      builder.Register(c => new ScaffelPikeServiceClient.ScaffelPikeServiceClient()).As<ScaffelPikeServiceClient.IScaffelPikeService>();
       return builder;
     }
   }

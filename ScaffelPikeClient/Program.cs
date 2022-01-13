@@ -1,13 +1,18 @@
-﻿namespace ScaffelPikeClient
+﻿using Autofac;
+using ScaffelPikeLogger;
+
+namespace ScaffelPikeClient
 {
   internal class Program
   {
     static void Main(string[] args)
     {
-      ScaffelPikeServiceClient.ScaffelPikeServiceClient client = new ScaffelPikeServiceClient.ScaffelPikeServiceClient();
-      //new LogInCLI(client);
-      LogInScreen f = new LogInScreen(client);
-      f.ShowDialog();
+      using (var container = Bootstrapper.RegisterContainerBuilder().Build().BeginLifetimeScope())
+      {
+        var client  = container.Resolve<ScaffelPikeServiceClient.IScaffelPikeService>();
+        var f = new LogInScreen(client, container.Resolve<ILogger>());
+        f.ShowDialog();
+      }
     }
   }
 }

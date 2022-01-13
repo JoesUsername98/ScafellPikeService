@@ -121,6 +121,7 @@
             this.MinimumSize = new System.Drawing.Size(270, 185);
             this.Name = "LogInScreen";
             this.Text = "LogInScreen";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LogInScreen_FormClosed);
             this.groupBoxLogIn.ResumeLayout(false);
             this.groupBoxLogIn.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxViewPassword)).EndInit();

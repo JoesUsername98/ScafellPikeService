@@ -1,39 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using ScaffelPikeClient.ScaffelPikeServiceClient;
+using ScaffelPikeLogger;
 
 namespace ScaffelPikeClient
 {
   public partial class LogInScreen : Form
   {
-    private readonly ScaffelPikeServiceClient.ScaffelPikeServiceClient _client;
-    public LogInScreen(ScaffelPikeServiceClient.ScaffelPikeServiceClient client)
+    private readonly IScaffelPikeService _client;
+    private readonly ILogger _logger;
+    public LogInScreen(IScaffelPikeService client, ILogger logger)
     {
       InitializeComponent();
       _client = client;
+      _logger = logger;
+      _logger.Information("LogInScreen", "Initialized Logger");
     }
 
     private void buttonLogIn_Click(object sender, EventArgs e)
     {
       var username = textBoxUsername.Text;
       var password = textBoxPassword.Text;
+      
+      _logger.Information("buttonLogIn_Click", $"Log In Attempt with Username [{username}] Passsword [{password}]");
       var output = _client.LogIn(username, password);
+      _logger.Information("buttonLogIn_Click", $"Log In Attempt Successful {output.Success}");
 
       if (output.Success)
         MessageBox.Show($"Welcome {output.OtherData}", "Log in Success", MessageBoxButtons.OK);
       else
         MessageBox.Show($"Who do you think you are?", "Log in Failed", MessageBoxButtons.OK);
-    }
-
-    private void LogInScreen_Load(object sender, EventArgs e)
-    {
-      //Inits
     }
 
     private void pictureBoxViewPassword_MouseHover(object sender, EventArgs e)
@@ -44,6 +40,11 @@ namespace ScaffelPikeClient
     private void pictureBoxViewPassword_MouseLeave(object sender, EventArgs e)
     {
       textBoxPassword.UseSystemPasswordChar = true;
+    }
+
+    private void LogInScreen_FormClosed(object sender, FormClosedEventArgs e)
+    {
+      _logger.Information("LogInScreen_FormClosed", "Closing form");
     }
   }
 }
