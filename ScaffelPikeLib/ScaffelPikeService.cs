@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using ScaffelPikeDataAccess.Data;
-using ScaffelPikeLib;
 using System.Linq;
 using ScaffelPikeLogger;
 
@@ -10,9 +9,11 @@ namespace ScaffelPikeLib
   public class ScaffelPikeService : IScaffelPikeService
   {
     private readonly ILogger _logger;
-    public ScaffelPikeService(ILogger logger)
+    private readonly IUserData _UserDA;
+    public ScaffelPikeService(ILogger logger, IUserData UserDA)
     {
       _logger = logger;
+      _UserDA = UserDA;
       InitService();
     }
     private void InitService()
@@ -33,7 +34,7 @@ namespace ScaffelPikeLib
       _logger.Information("doLogIn", "Entered doLogIn");
       Console.WriteLine($"Recieved Log In Request with Username: {username}, Password: {password}");
 
-      var clientsRequest = new UserData().GetUsers();
+      var clientsRequest = _UserDA.GetUsers();
       clientsRequest.Wait();
       var client = clientsRequest.Result.FirstOrDefault(c => c.Username == username && c.Password == password);
 

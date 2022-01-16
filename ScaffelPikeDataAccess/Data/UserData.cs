@@ -6,7 +6,7 @@ using ScaffelPikeDataAccess.Models;
 
 namespace ScaffelPikeDataAccess.Data
 {
-  public class UserData
+  public class UserData : IUserData
   {
     readonly ISqlDataAccess _db;
     public UserData(ISqlDataAccess db)
@@ -14,10 +14,10 @@ namespace ScaffelPikeDataAccess.Data
       _db = db;
     }
 
-    public UserData()
-    {
-      _db = new SqlDataAccess();
-    }
+    //public UserData()
+    //{
+    //  _db = new SqlDataAccess();
+    //}
     public Task<IEnumerable<UserModel>> GetUsers() =>
       _db.LoadData<UserModel, dynamic>(storedProcedure: "dbo.spUser_GetAll", new { });
 

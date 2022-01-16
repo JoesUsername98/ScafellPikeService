@@ -8,12 +8,12 @@ using System.Configuration;
 
 namespace ScaffelPikeDataAccess.DbAccess
 {
-  internal class SqlDataAccess : ISqlDataAccess
+  public class SqlDataAccess : ISqlDataAccess
   {
     private readonly ConnectionStringSettingsCollection _conStrings;
-    public SqlDataAccess()
+    public SqlDataAccess(ConnectionStringSettingsCollection connectionString)
     {
-       _conStrings = ConfigurationManager.ConnectionStrings;
+      _conStrings = connectionString;
     }
 
     public async Task<IEnumerable<T>> LoadData<T, U>(

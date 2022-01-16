@@ -91,6 +91,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScaffelPikeDataAccess\ScaffelPikeDataAccess.csproj">
+      <Project>{C55EAF43-4518-44F1-BE81-54463CBE14F6}</Project>
+      <Name>ScaffelPikeDataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScaffelPikeLib\ScaffelPikeLib.csproj">
       <Project>{C4B3289F-AC1C-4CD0-9F95-B10D7CD33FE7}</Project>
       <Name>ScaffelPikeLib</Name>
