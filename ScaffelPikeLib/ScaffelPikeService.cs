@@ -10,15 +10,18 @@ namespace ScaffelPikeLib
   {
     private readonly ILogger _logger;
     private readonly IUserData _UserDA;
-    public ScaffelPikeService(ILogger logger, IUserData UserDA)
+    private readonly string _env;
+
+    public ScaffelPikeService(ILogger logger, IUserData UserDA, string env)
     {
       _logger = logger;
       _UserDA = UserDA;
+      _env = env;
       InitService();
     }
     private void InitService()
     {
-      _logger.Information("InitService", "Initialise ScaffelPikeService - Start");
+      _logger.Information("InitService", $"Initialise ScaffelPikeService - Start - env:{_env}");
 
       _logger.Information("InitService", "Initialise ScaffelPikeService - End");
     }

@@ -9,10 +9,13 @@ namespace ScaffelPikeClient.ScaffelPikeServiceClient
 {
   public partial class ScaffelPikeServiceClient
   {
-    private readonly ILogger _logger;
-    public ScaffelPikeServiceClient(ILogger logger)
+    public readonly ILogger _logger;
+    public readonly string _env;
+
+    public ScaffelPikeServiceClient(ILogger logger, string env)
     {
       _logger = logger;
+      _env = env;
       InitClient();
     }
 
