@@ -64,8 +64,8 @@ namespace ScaffelPikeLogger
 
     private static string FormatLogItem(LogRecord logItem)
     {
-      return $"[{logItem.Now:yyyy-MM-dd HH-mm-ss.fffff}] [{logItem.ThreadName,-30}:{logItem.ThreadId:000}]" +
-        $"[{logItem.LogLevel}] {logItem.Message}\n";
+      return $"[{logItem.Now:yyyy-MM-dd HH-mm-ss.fffff}] [{logItem.ThreadName,-10}:{logItem.ThreadId:000}]" +
+        $"[{logItem.LogLevel}][{logItem.Module}] {logItem.Message}\n";
     }
 
     protected override void Log(LogLevel logLevel, string module, string message)
