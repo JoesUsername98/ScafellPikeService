@@ -13,11 +13,6 @@ namespace ScaffelPikeDataAccess.Data
     {
       _db = db;
     }
-
-    //public UserData()
-    //{
-    //  _db = new SqlDataAccess();
-    //}
     public Task<IEnumerable<UserModel>> GetUsers() =>
       _db.LoadData<UserModel, dynamic>(storedProcedure: "dbo.spUser_GetAll", new { });
 
