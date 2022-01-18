@@ -3,6 +3,7 @@ using Autofac.Integration.Wcf;
 using ScaffelPikeLib;
 using System;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 
 namespace ScaffelPikeHost
 {
@@ -12,7 +13,6 @@ namespace ScaffelPikeHost
     {
       using (var container = Bootstrapper.RegisterContainerBuilder().Build())
       {
-
         ServiceHost selfHost = new ServiceHost(typeof(ScaffelPikeService));
         try
         {
@@ -27,27 +27,21 @@ namespace ScaffelPikeHost
           }
 
           selfHost.AddDependencyInjectionBehavior<IScaffelPikeService>(container);
-          selfHost.Open();
 
-          var service = selfHost.Description.Behaviors.Find<AutofacDependencyInjectionServiceBehavior>();
+          selfHost.Open();
+          Console.WriteLine("The service is ready." + Environment.NewLine);
 
           foreach (var endpoint in selfHost.Description.Endpoints)
-          {
-            Console.WriteLine("-------------------------------------------------");
-            Console.WriteLine(endpoint.Address.Uri.ToString());
-            Console.WriteLine("-------------------------------------------------");
-          }
+            Console.WriteLine(PrintServiceStartMetaData(endpoint));
 
-          Console.WriteLine("The service is ready.");
-          Console.WriteLine("Enter q to terminate the service.");
-          Console.WriteLine();
+          Console.WriteLine(Environment.NewLine + "Enter q to terminate the service." + Environment.NewLine);
           while (true)
           {
             var stop = Console.ReadLine();
             if (stop == "q")
               break;
           }
-          
+
           selfHost.Close();
         }
         catch (CommunicationException ce)
@@ -57,6 +51,27 @@ namespace ScaffelPikeHost
           Console.ReadLine();
         }
       }
+    }
+
+    private static string PrintServiceStartMetaData(ServiceEndpoint serviceEndpoint)
+    {
+      string equals = "";
+      string dash = "";
+      for (int i = 0; i < serviceEndpoint.Address.Uri.AbsoluteUri.Length + 15; i++)
+      {
+        equals += "=";
+        dash += "-";
+      }
+
+      string output = equals + Environment.NewLine;
+      output += "Starting Service" + Environment.NewLine;
+      output += dash + Environment.NewLine;
+      output += string.Format("{0,10} : {1,9:C2}", "Service", serviceEndpoint.Name) + Environment.NewLine;
+      output += string.Format("{0,10} : {1,9:C2}", "Contract", serviceEndpoint.Contract.Name) + Environment.NewLine;
+      output += string.Format("{0,10} : {1,9:C2}", "URI", serviceEndpoint.Address.Uri.AbsoluteUri) + Environment.NewLine;
+      output += equals + Environment.NewLine;
+
+      return output;
     }
   }
 }
