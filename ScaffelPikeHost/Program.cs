@@ -12,6 +12,7 @@ namespace ScaffelPikeHost
     {
       using (var container = Bootstrapper.RegisterContainerBuilder().Build())
       {
+
         ServiceHost selfHost = new ServiceHost(typeof(ScaffelPikeService));
         try
         {
@@ -26,9 +27,9 @@ namespace ScaffelPikeHost
           }
 
           selfHost.AddDependencyInjectionBehavior<IScaffelPikeService>(container);
-
           selfHost.Open();
-          Console.WriteLine("The service is ready.");
+
+          var service = selfHost.Description.Behaviors.Find<AutofacDependencyInjectionServiceBehavior>();
 
           foreach (var endpoint in selfHost.Description.Endpoints)
           {
@@ -37,6 +38,7 @@ namespace ScaffelPikeHost
             Console.WriteLine("-------------------------------------------------");
           }
 
+          Console.WriteLine("The service is ready.");
           Console.WriteLine("Enter q to terminate the service.");
           Console.WriteLine();
           while (true)

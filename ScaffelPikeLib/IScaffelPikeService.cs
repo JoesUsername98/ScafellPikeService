@@ -9,7 +9,11 @@ namespace ScaffelPikeLib
   {
     [OperationContract]
     Task<PasswordDto> LogIn(string username, string password);
-    [OperationContract]
-    Task<Guid> RecieveHeartbeat(Guid clientGuid);
+
+    //[OperationContract]
+    //Task<Guid> RecieveHeartbeat(Guid clientGuid);
+
+    //Guid doRecieveHeartbeat(Guid clientGuid);
+
     }
 }
