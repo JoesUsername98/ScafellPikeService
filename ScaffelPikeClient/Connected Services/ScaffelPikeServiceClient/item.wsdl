@@ -13,10 +13,20 @@
   <wsdl:message name="IScaffelPikeService_LogIn_OutputMessage">
     <wsdl:part name="parameters" element="tns:LogInResponse" />
   </wsdl:message>
+  <wsdl:message name="IScaffelPikeService_RecieveHeartbeat_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecieveHeartbeat" />
+  </wsdl:message>
+  <wsdl:message name="IScaffelPikeService_RecieveHeartbeat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecieveHeartbeatResponse" />
+  </wsdl:message>
   <wsdl:portType name="IScaffelPikeService">
     <wsdl:operation name="LogIn">
       <wsdl:input wsaw:Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn" message="tns:IScaffelPikeService_LogIn_InputMessage" />
       <wsdl:output wsaw:Action="http://ScaeffelPike.Service/IScaffelPikeService/LogInResponse" message="tns:IScaffelPikeService_LogIn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecieveHeartbeat">
+      <wsdl:input wsaw:Action="http://ScaeffelPike.Service/IScaffelPikeService/RecieveHeartbeat" message="tns:IScaffelPikeService_RecieveHeartbeat_InputMessage" />
+      <wsdl:output wsaw:Action="http://ScaeffelPike.Service/IScaffelPikeService/RecieveHeartbeatResponse" message="tns:IScaffelPikeService_RecieveHeartbeat_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

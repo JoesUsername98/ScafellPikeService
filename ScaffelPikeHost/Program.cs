@@ -41,7 +41,7 @@ namespace ScaffelPikeHost
             if (stop == "q")
               break;
           }
-          
+
           selfHost.Close();
         }
         catch (CommunicationException ce)

@@ -20,6 +20,12 @@ namespace ScaffelPikeClient.ScaffelPikeServiceClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ScaeffelPike.Service/IScaffelPikeService/LogIn", ReplyAction="http://ScaeffelPike.Service/IScaffelPikeService/LogInResponse")]
         System.Threading.Tasks.Task<ScaffelPikeLib.PasswordDto> LogInAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://ScaeffelPike.Service/IScaffelPikeService/RecieveHeartbeat", ReplyAction="http://ScaeffelPike.Service/IScaffelPikeService/RecieveHeartbeatResponse")]
+        System.Guid RecieveHeartbeat(System.Guid clientGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://ScaeffelPike.Service/IScaffelPikeService/RecieveHeartbeat", ReplyAction="http://ScaeffelPike.Service/IScaffelPikeService/RecieveHeartbeatResponse")]
+        System.Threading.Tasks.Task<System.Guid> RecieveHeartbeatAsync(System.Guid clientGuid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace ScaffelPikeClient.ScaffelPikeServiceClient {
         
         public System.Threading.Tasks.Task<ScaffelPikeLib.PasswordDto> LogInAsync(string username, string password) {
             return base.Channel.LogInAsync(username, password);
+        }
+        
+        public System.Guid RecieveHeartbeat(System.Guid clientGuid) {
+            return base.Channel.RecieveHeartbeat(clientGuid);
+        }
+        
+        public System.Threading.Tasks.Task<System.Guid> RecieveHeartbeatAsync(System.Guid clientGuid) {
+            return base.Channel.RecieveHeartbeatAsync(clientGuid);
         }
     }
 }
