@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using ScaffelPikeClient.ScaffelPikeServiceClient;
+using ScaffelPikeContracts;
 using ScaffelPikeLogger;
 
 namespace ScaffelPikeClient
@@ -23,7 +23,12 @@ namespace ScaffelPikeClient
       var password = textBoxPassword.Text;
       
       _logger.Information("buttonLogIn_Click", $"Log In Attempt with Username [{username}] Passsword [{password}]");
-      var output = _client.LogIn(username, password);
+      
+      //clean up with awiat and seperate in MVC fashion
+      var outputTask = _client.LogIn(username, password);
+      outputTask.Wait();
+      var output = outputTask.Result;
+
       _logger.Information("buttonLogIn_Click", $"Log In Attempt Successful {output.Success}");
 
       if (output.Success)

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using ScaffelPikeContracts;
 using ScaffelPikeLogger;
 
 namespace ScaffelPikeClient
@@ -9,7 +10,7 @@ namespace ScaffelPikeClient
     {
       using (var container = Bootstrapper.RegisterContainerBuilder().Build().BeginLifetimeScope())
       {
-        var client  = container.Resolve<ScaffelPikeServiceClient.IScaffelPikeService>();
+        var client  = container.Resolve<IScaffelPikeService>();
         var f = new LogInScreen(client, container.Resolve<ILogger>());
         f.ShowDialog();
       }

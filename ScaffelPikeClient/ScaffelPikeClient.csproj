@@ -86,11 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Connected Services\ScaffelPikeServiceClient\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="LogInCLI.cs" />
     <Compile Include="LogInScreen.cs">
       <SubType>Form</SubType>
@@ -109,17 +104,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Connected Services\ScaffelPikeServiceClient\item.wsdl" />
-    <None Include="Connected Services\ScaffelPikeServiceClient\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ScaffelPikeServiceClient\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ScaffelPikeServiceClient\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ScaffelPikeServiceClient\ScaffelPikeService.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\ScaffelPikeContracts.PasswordDto.datasource" />
     <None Include="Properties\DataSources\ScaffelPikeLib.PasswordDto.datasource" />
@@ -146,24 +130,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ScaffelPikeServiceClient\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ScaffelPikeServiceClient\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ScaffelPikeServiceClient\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ScaffelPikeServiceClient\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ScaffelPikeServiceClient\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ScaffelPikeIcon.ico" />
