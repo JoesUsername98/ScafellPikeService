@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ScaffelPikeDataAccess.Data;
 using ScaffelPikeLogger;
 
-namespace ScaffelPikeLib
+namespace ScaffelPikeServices
 {
   //Used To hold DI objects
   public static class ServiceReferences

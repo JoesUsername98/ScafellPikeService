@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ScaffelPikeDataAccess.Data;
-using ScaffelPikeLogger;
+using ScaffelPikeContracts;
 
-namespace ScaffelPikeLib
+namespace ScaffelPikeServices
 {
   public static class LogInManager
   {

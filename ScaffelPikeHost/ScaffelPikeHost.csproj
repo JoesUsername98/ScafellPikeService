@@ -95,13 +95,17 @@
       <Project>{C55EAF43-4518-44F1-BE81-54463CBE14F6}</Project>
       <Name>ScaffelPikeDataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ScaffelPikeLib\ScaffelPikeLib.csproj">
+    <ProjectReference Include="..\ScaffelPikeLib\ScaffelPikeContracts.csproj">
       <Project>{C4B3289F-AC1C-4CD0-9F95-B10D7CD33FE7}</Project>
-      <Name>ScaffelPikeLib</Name>
+      <Name>ScaffelPikeContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScaffelPikeLogger\ScaffelPikeLogger.csproj">
       <Project>{F6150ED0-6CB7-4D66-90F3-530F32726091}</Project>
       <Name>ScaffelPikeLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScaffelPikeServices\ScaffelPikeServices.csproj">
+      <Project>{39A81D6C-B0DB-4700-AB21-2894C452C825}</Project>
+      <Name>ScaffelPikeServices</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeLib
+namespace ScaffelPikeContracts
 {
   [ServiceContract(Namespace = "http://ScaeffelPike.Service")]
   public interface IScaffelPikeService

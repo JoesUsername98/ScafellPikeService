@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using ScaffelPikeLib;
+using ScaffelPikeContracts;
 using ScaffelPikeLogger;
 using ScaffelPikeLogger.Configuration;
 using System.Configuration;

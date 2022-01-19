@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeHost", "ScaffelP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeClient", "ScaffelPikeClient\ScaffelPikeClient.csproj", "{09E3E928-BC13-49DE-8755-5FE14358EF32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeLib", "ScaffelPikeLib\ScaffelPikeLib.csproj", "{C4B3289F-AC1C-4CD0-9F95-B10D7CD33FE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeContracts", "ScaffelPikeLib\ScaffelPikeContracts.csproj", "{C4B3289F-AC1C-4CD0-9F95-B10D7CD33FE7}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{311A4632-2441-4459-859C-747FAA04ABC7}"
 EndProject
@@ -21,6 +21,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScaffelPikeTests", "ScaffelPikeTests\ScaffelPikeTests.csproj", "{FAB41391-EFDE-4559-AEF0-B302F38F739A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeLogger", "ScaffelPikeLogger\ScaffelPikeLogger.csproj", "{F6150ED0-6CB7-4D66-90F3-530F32726091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeServices", "ScaffelPikeServices\ScaffelPikeServices.csproj", "{39A81D6C-B0DB-4700-AB21-2894C452C825}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{F6150ED0-6CB7-4D66-90F3-530F32726091}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6150ED0-6CB7-4D66-90F3-530F32726091}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6150ED0-6CB7-4D66-90F3-530F32726091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39A81D6C-B0DB-4700-AB21-2894C452C825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39A81D6C-B0DB-4700-AB21-2894C452C825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39A81D6C-B0DB-4700-AB21-2894C452C825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39A81D6C-B0DB-4700-AB21-2894C452C825}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

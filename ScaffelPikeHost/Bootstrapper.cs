@@ -1,9 +1,10 @@
 ﻿using Autofac;
 using ScaffelPikeDataAccess.Data;
 using ScaffelPikeDataAccess.DbAccess;
-using ScaffelPikeLib;
+using ScaffelPikeContracts;
 using ScaffelPikeLogger;
 using ScaffelPikeLogger.Configuration;
+using ScaffelPikeServices;
 using System.Configuration;
 
 namespace ScaffelPikeHost

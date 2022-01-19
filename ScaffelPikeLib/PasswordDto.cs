@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace ScaffelPikeLib
+namespace ScaffelPikeContracts
 {
     [DataContract]
     public class PasswordDto

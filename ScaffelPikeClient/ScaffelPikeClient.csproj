@@ -48,6 +48,7 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="ScaffelPikeLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -120,6 +121,7 @@
     </None>
     <None Include="Connected Services\ScaffelPikeServiceClient\ScaffelPikeService.wsdl" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\ScaffelPikeContracts.PasswordDto.datasource" />
     <None Include="Properties\DataSources\ScaffelPikeLib.PasswordDto.datasource" />
     <None Include="Properties\DataSources\ScaffelPikeLib.PasswordDto1.datasource" />
   </ItemGroup>
@@ -127,9 +129,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ScaffelPikeLib\ScaffelPikeLib.csproj">
+    <ProjectReference Include="..\ScaffelPikeLib\ScaffelPikeContracts.csproj">
       <Project>{c4b3289f-ac1c-4cd0-9f95-b10d7cd33fe7}</Project>
-      <Name>ScaffelPikeLib</Name>
+      <Name>ScaffelPikeContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScaffelPikeLogger\ScaffelPikeLogger.csproj">
       <Project>{F6150ED0-6CB7-4D66-90F3-530F32726091}</Project>

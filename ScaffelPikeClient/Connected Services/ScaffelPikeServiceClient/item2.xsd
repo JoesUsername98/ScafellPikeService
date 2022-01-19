@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://ScaeffelPike.Service" elementFormDefault="qualified" targetNamespace="http://ScaeffelPike.Service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8080/ScaffelPikeService/ScaffelPikeService/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ScaffelPikeLib" />
-  <xs:import schemaLocation="http://localhost:8080/ScaffelPikeService/ScaffelPikeService/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:8080/ScaffelPikeService/ScaffelPikeService/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ScaffelPikeContracts" />
   <xs:element name="LogIn">
     <xs:complexType>
       <xs:sequence>
@@ -13,21 +12,7 @@
   <xs:element name="LogInResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ScaffelPikeLib" minOccurs="0" name="LogInResult" nillable="true" type="q1:PasswordDto" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RecieveHeartbeat">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="clientGuid" type="q2:guid" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RecieveHeartbeatResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="RecieveHeartbeatResult" type="q3:guid" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ScaffelPikeContracts" minOccurs="0" name="LogInResult" nillable="true" type="q1:PasswordDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

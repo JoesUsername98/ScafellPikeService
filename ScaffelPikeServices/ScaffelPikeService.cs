@@ -1,14 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ScaffelPikeDataAccess.Data;
-using System.Linq;
 using ScaffelPikeLogger;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading;
-using System.ServiceModel;
+using ScaffelPikeContracts;
 
-namespace ScaffelPikeLib
+namespace ScaffelPikeServices
 {
   public class ScaffelPikeService : IScaffelPikeService
   {
