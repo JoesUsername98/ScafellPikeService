@@ -10,10 +10,8 @@ namespace ScaffelPikeContracts
     [OperationContract]
     Task<PasswordDto> LogIn(string username, string password);
 
-    //[OperationContract]
-    //Task<Guid> RecieveHeartbeat(Guid clientGuid);
+    [OperationContract]
+    Task<HeartbeatDto> Heartbeat(HeartbeatDto heartbeat);
 
-    //Guid doRecieveHeartbeat(Guid clientGuid);
-
-    }
+  }
 }

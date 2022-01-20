@@ -8,8 +8,8 @@
     <ProjectGuid>{C4B3289F-AC1C-4CD0-9F95-B10D7CD33FE7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScaffelPikeLib</RootNamespace>
-    <AssemblyName>ScaffelPikeLib</AssemblyName>
+    <RootNamespace>ScaffelPikeContracts</RootNamespace>
+    <AssemblyName>ScaffelPikeContracts</AssemblyName>
     <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <StartArguments>/client:"WcfTestClient.exe"</StartArguments>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -55,6 +55,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HeartbeatType.cs" />
+    <Compile Include="HeartbeatDto.cs" />
     <Compile Include="IScaffelPikeService.cs" />
     <Compile Include="PasswordDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

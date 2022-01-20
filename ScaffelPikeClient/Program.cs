@@ -11,8 +11,8 @@ namespace ScaffelPikeClient
     {
       using (var container = Bootstrapper.RegisterContainerBuilder().Build())
       {
-        var client = container.Resolve<IScaffelPikeService>();
-        var f = new LogInScreen(client, container.Resolve<ILogger>());
+        ClientReferences.Configure(container.Resolve<ILogger>(), container.Resolve<IScaffelPikeService>());
+        var f = new LogInScreen();
         f.ShowDialog();
 
       }

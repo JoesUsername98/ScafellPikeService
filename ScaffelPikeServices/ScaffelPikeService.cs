@@ -2,6 +2,7 @@
 using ScaffelPikeDataAccess.Data;
 using ScaffelPikeLogger;
 using ScaffelPikeContracts;
+using System;
 
 namespace ScaffelPikeServices
 {
@@ -19,9 +20,19 @@ namespace ScaffelPikeServices
     }
     public async Task<PasswordDto> LogIn(string username, string password)
     {
-      return await Task<PasswordDto>.Factory.StartNew(() => {
+      return await Task<PasswordDto>.Factory.StartNew(() => 
+      {
         return LogInManager.ProcessLogInRequest(username, password);
       });
+    }
+
+    public Task<HeartbeatDto> Heartbeat(HeartbeatDto incomingHeartbeat)
+    {
+      return Task<HeartbeatDto>.Factory.StartNew(() => 
+      { 
+        return HeartbeatManagerServerSide.Echo(incomingHeartbeat);
+      });
+  
     }
   }
 }

@@ -7,29 +7,26 @@ namespace ScaffelPikeClient
 {
   public partial class LogInScreen : Form
   {
-    private readonly IScaffelPikeService _client;
-    private readonly ILogger _logger;
-    public LogInScreen(IScaffelPikeService client, ILogger logger)
+    public LogInScreen()
     {
       InitializeComponent();
-      _client = client;
-      _logger = logger;
-      _logger.Information("LogInScreen", "Initialized Logger");
+      ClientReferences.Logger.Information("LogInScreen", "Initialized Logger");
+      HeartbeatManagerClientSide.TryEstablishConnectionAsync();
     }
 
     private void buttonLogIn_Click(object sender, EventArgs e)
     {
       var username = textBoxUsername.Text;
       var password = textBoxPassword.Text;
-      
-      _logger.Information("buttonLogIn_Click", $"Log In Attempt with Username [{username}] Passsword [{password}]");
+
+      ClientReferences.Logger.Information("buttonLogIn_Click", $"Log In Attempt with Username [{username}] Passsword [{password}]");
       
       //clean up with awiat and seperate in MVC fashion
-      var outputTask = _client.LogIn(username, password);
+      var outputTask = ClientReferences.ScaffelPikeChannel.LogIn(username, password);
       outputTask.Wait();
       var output = outputTask.Result;
 
-      _logger.Information("buttonLogIn_Click", $"Log In Attempt Successful {output.Success}");
+      ClientReferences.Logger.Information("buttonLogIn_Click", $"Log In Attempt Successful {output.Success}");
 
       if (output.Success)
         MessageBox.Show($"Welcome {output.OtherData}", "Log in Success", MessageBoxButtons.OK);
@@ -49,7 +46,12 @@ namespace ScaffelPikeClient
 
     private void LogInScreen_FormClosed(object sender, FormClosedEventArgs e)
     {
-      _logger.Information("LogInScreen_FormClosed", "Closing form");
+      ClientReferences.Logger.Information("LogInScreen_FormClosed", "Closing form");
+    }
+
+    private void LogInScreen_Load(object sender, EventArgs e)
+    {
+
     }
   }
 }

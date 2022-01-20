@@ -15,13 +15,6 @@ namespace ScaffelPikeClient
       ContainerBuilder builder = new ContainerBuilder();
       builder.Register(c => new TextLogger((LoggerConfiguration)ConfigurationManager.GetSection("LoggerConfiguration"))).As<ILogger>();
       builder.Register(c => new ChannelFactory<IScaffelPikeService>("ScaffelPike").CreateChannel()).As<IScaffelPikeService>();
-      builder.Register(c => 
-        new ScaffelPikeServiceClient
-        (
-          c.Resolve<ILogger>(),
-          ConfigurationManager.AppSettings["Environment"],
-          c.Resolve<IScaffelPikeService>())
-        ).As<IScaffelPikeServiceClient>();
       return builder;
     }
   }

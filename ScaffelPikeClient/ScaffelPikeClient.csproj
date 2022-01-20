@@ -48,7 +48,9 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="ScaffelPikeLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="ScaffelPikeContracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\ScaffelPikeLib\bin\Debug\ScaffelPikeContracts.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -86,9 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="HeartbeatManager.cs" />
-    <Compile Include="IScaffelPikeServiceClient.cs" />
-    <Compile Include="LogInCLI.cs" />
+    <Compile Include="HeartbeatManagerClientSide.cs" />
     <Compile Include="LogInScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,20 +102,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ScaffelPikeServiceClient.cs" />
+    <Compile Include="ClientReferences.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\ScaffelPikeContracts.PasswordDto.datasource" />
-    <None Include="Properties\DataSources\ScaffelPikeLib.PasswordDto.datasource" />
-    <None Include="Properties\DataSources\ScaffelPikeLib.PasswordDto1.datasource" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ScaffelPikeLib\ScaffelPikeContracts.csproj">
+    <ProjectReference Include="..\ScaffelPikeContracts\ScaffelPikeContracts.csproj">
       <Project>{c4b3289f-ac1c-4cd0-9f95-b10d7cd33fe7}</Project>
       <Name>ScaffelPikeContracts</Name>
     </ProjectReference>

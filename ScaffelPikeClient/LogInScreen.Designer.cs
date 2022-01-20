@@ -122,6 +122,7 @@
             this.Name = "LogInScreen";
             this.Text = "LogInScreen";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LogInScreen_FormClosed);
+            this.Load += new System.EventHandler(this.LogInScreen_Load);
             this.groupBoxLogIn.ResumeLayout(false);
             this.groupBoxLogIn.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxViewPassword)).EndInit();
