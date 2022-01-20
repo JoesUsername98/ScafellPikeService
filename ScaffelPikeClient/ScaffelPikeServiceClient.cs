@@ -7,17 +7,17 @@ using ScaffelPikeLogger;
 
 namespace ScaffelPikeClient
 {
-  public class ScaffelPikeServiceClient : IScaffelPikeService
+  public class ScaffelPikeServiceClient : IScaffelPikeServiceClient
   {
     public readonly ILogger _logger;
     public readonly string _env;
     private readonly IScaffelPikeService _scaffelPikeChannel;
-    public ScaffelPikeServiceClient(ILogger logger, string env)
+    public ScaffelPikeServiceClient(ILogger logger, string env, IScaffelPikeService scaffelPikeChannel)
     {
       _logger = logger;
       _env = env;
+      _scaffelPikeChannel = scaffelPikeChannel;
 
-      _scaffelPikeChannel = new ChannelFactory<IScaffelPikeService>("WSHttpBinding_IScaffelPikeService").CreateChannel();
       InitClient();
     }
 
