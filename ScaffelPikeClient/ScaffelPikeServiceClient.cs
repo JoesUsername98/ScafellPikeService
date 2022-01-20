@@ -17,16 +17,7 @@ namespace ScaffelPikeClient
       _logger = logger;
       _env = env;
 
-      Configuration appConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-      ServiceModelSectionGroup serviceModel = ServiceModelSectionGroup.GetSectionGroup(appConfig);
-      BindingsSection bindings = serviceModel.Bindings;
-
-      ChannelEndpointElementCollection endpoints = serviceModel.Client.Endpoints;
-      EndpointAddress endpoint = new EndpointAddress(endpoints[0].Address.AbsoluteUri);
-
-      //TODO: Get Info From Cofigs into ChannelFatory
-
-      _scaffelPikeChannel = new ChannelFactory<IScaffelPikeService>(bindings.WSHttpBinding.BindingName, endpoint).CreateChannel();
+      _scaffelPikeChannel = new ChannelFactory<IScaffelPikeService>("WSHttpBinding_IScaffelPikeService").CreateChannel();
       InitClient();
     }
 
