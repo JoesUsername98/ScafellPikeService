@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="HeartbeatManager.cs" />
     <Compile Include="IScaffelPikeServiceClient.cs" />
     <Compile Include="LogInCLI.cs" />
     <Compile Include="LogInScreen.cs">

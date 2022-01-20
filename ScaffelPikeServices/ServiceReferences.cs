@@ -4,7 +4,12 @@ using ScaffelPikeLogger;
 
 namespace ScaffelPikeServices
 {
-  //Used To hold DI objects
+
+  //Consider Container Injection in the future
+  //https://stackoverflow.com/questions/2042609/injecting-data-to-a-wcf-service/2042858#2042858
+  /// <summary>
+  /// Used to hold DI objects in the future
+  /// </summary>
   public static class ServiceReferences
   {
     public static ILogger Logger { get; private set; }
