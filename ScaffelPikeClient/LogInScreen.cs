@@ -1,7 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using ScaffelPikeContracts;
-using ScaffelPikeLogger;
 
 namespace ScaffelPikeClient
 {
@@ -10,8 +10,22 @@ namespace ScaffelPikeClient
     public LogInScreen()
     {
       InitializeComponent();
+      InitializeTiner();
       ClientReferences.Logger.Information("LogInScreen", "Initialized Logger");
       HeartbeatManagerClientSide.TryEstablishConnectionAsync();
+    }
+
+    private void InitializeTiner()
+    {
+      Timer t1 = new Timer();
+      t1.Interval = 5000;
+      t1.Tick += new EventHandler(RefreshConnectionLabel);
+      t1.Enabled = true;
+    }
+
+    private void RefreshConnectionLabel(object sender, EventArgs e)
+    {
+        labelConnections.Text = $"Connections Available : {HeartbeatManagerClientSide.Connections.Count}";
     }
 
     private void buttonLogIn_Click(object sender, EventArgs e)

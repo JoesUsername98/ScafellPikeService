@@ -36,6 +36,7 @@
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.labelUsername = new System.Windows.Forms.Label();
+            this.labelConnections = new System.Windows.Forms.Label();
             this.groupBoxLogIn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxViewPassword)).BeginInit();
             this.SuspendLayout();
@@ -110,15 +111,25 @@
             this.labelUsername.TabIndex = 0;
             this.labelUsername.Text = "Username";
             // 
+            // labelConnections
+            // 
+            this.labelConnections.AutoSize = true;
+            this.labelConnections.Location = new System.Drawing.Point(12, 139);
+            this.labelConnections.Name = "labelConnections";
+            this.labelConnections.Size = new System.Drawing.Size(118, 13);
+            this.labelConnections.TabIndex = 2;
+            this.labelConnections.Text = "Connections Available :";
+            // 
             // LogInScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 146);
+            this.ClientSize = new System.Drawing.Size(254, 161);
+            this.Controls.Add(this.labelConnections);
             this.Controls.Add(this.groupBoxLogIn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(270, 185);
-            this.MinimumSize = new System.Drawing.Size(270, 185);
+            this.MaximumSize = new System.Drawing.Size(270, 200);
+            this.MinimumSize = new System.Drawing.Size(270, 200);
             this.Name = "LogInScreen";
             this.Text = "LogInScreen";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LogInScreen_FormClosed);
@@ -127,6 +138,7 @@
             this.groupBoxLogIn.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxViewPassword)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
     }
 
@@ -139,5 +151,6 @@
     private System.Windows.Forms.TextBox textBoxUsername;
     private System.Windows.Forms.Label labelPassword;
     private System.Windows.Forms.PictureBox pictureBoxViewPassword;
+    private System.Windows.Forms.Label labelConnections;
   }
 }

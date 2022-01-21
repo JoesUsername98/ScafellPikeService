@@ -9,6 +9,8 @@ namespace ScaffelPikeContracts
     [DataMember]
     public Guid Guid { get; set; }
     [DataMember]
+    public DateTime SentAt { get; set; }
+    [DataMember]
     public TimeSpan Interval { get; set; }
     [DataMember]
     public HeartbeatType HeartbeatType { get; set; }
