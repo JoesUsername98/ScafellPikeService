@@ -1,4 +1,6 @@
-﻿using System.ServiceModel.Channels;
+﻿using System;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using Autofac;
 using ScaffelPikeContracts;
 using ScaffelPikeLogger;
@@ -11,9 +13,20 @@ namespace ScaffelPikeClient
     {
       using (var container = Bootstrapper.RegisterContainerBuilder().Build())
       {
-        ClientReferences.Configure(container.Resolve<ILogger>(), container.Resolve<IScaffelPikeService>());
-        var f = new LogInScreen();
-        f.ShowDialog();
+        try
+        {
+          ClientReferences.Configure(container.Resolve<ILogger>(), container.Resolve<IScaffelPikeService>());
+          var f = new LogInScreen();
+          f.ShowDialog();
+        }
+        catch (Exception ex)
+        {
+          container.Resolve<ChannelFactory<IScaffelPikeService>>().Abort();
+        }
+        finally
+        {
+          container.Resolve<ChannelFactory<IScaffelPikeService>>().Close();
+        }
       }
     }
   }
