@@ -23,6 +23,7 @@ namespace ScaffelPikeServices
     private static void InitializeTimer()
     {
       CleanUpTask = new Task(() => CleanUpConnections());
+      CleanUpTask.Start();
     }
 
     private static void CleanUpConnections()
