@@ -27,13 +27,21 @@ namespace ScaffelPikeClient
       ClientGuid = Guid.NewGuid();
       ClientStarTime = DateTime.Now;
       ScaffelPikeChannel = scaffelPikeChannel;
+      
     }
 
     internal static void RegisterUser(LogInResponse user)
     {
+      if (User != null)
+      {
+        Logger.Error("RegisterUser", "User already registerd!");
+        throw new InvalidOperationException("Cannot register user more than once");
+      }
+
+      User = new UserModel();
       User.Admin = user.Admin;
       User.FirstName = user.FirstName;
-      user.Surname = user.Surname;
+      User.Surname = user.Surname;
     }
   }
 }

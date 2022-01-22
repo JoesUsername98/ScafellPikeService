@@ -1,3 +1,4 @@
+using Autofac.Extras.Moq;
 using Moq;
 using ScaffelPikeContracts;
 using ScaffelPikeDataAccess.Data;
@@ -11,41 +12,61 @@ namespace ScaffelPikeTests
 {
   public class DBTests
   {
-    //TODO: Change to Use Moq and Mocking
-
     [Fact]
     public async void GetUsers_ValidCall()
     {
-      //Automock doesn't like tasks
-      //using (var mock = AutoMock.GetLoose())
-      //{
-      //  mock.Mock<ISqlDataAccess>()
-      //    .Setup(x => x.LoadData<UserModel, dynamic>("dbo.spUser_GetAll", new { }, "Default"))
-      //    .Returns(GetSampleUsersTask());
-
-      //  var moqUserData = mock.Create<UserData>();
-
-      //  var expected = GetSampleUsers();
-
-      //  var actualTask = await moqUserData.GetUsers();
-
-      //  Assert.True(actualTask != null);
-      //  Assert.Equal(expected.Count(), actualTask.Count());
-      //}
-
-      var mockUserData = new Mock<ISqlDataAccess>(MockBehavior.Loose);
-      mockUserData
-        .Setup(m => m.LoadData<UserModel, dynamic>("dbo.spUser_GetAll", new { }, "Default"))
-        .Returns(GetSampleUsersTask());
-      var service = new UserData(mockUserData.Object);
-
-      var expected = GetSampleUsers();
-      var actual =  await service.GetUsers();
-
-      Assert.True(actual != null);
-      Assert.Equal(expected.Count(), actual.Count());
+      //ARRANGE
+      int id = 0;
+      var moqUserData = new Mock<IUserData>();
+      moqUserData.Setup(x => x.GetUsers()).Returns(Task.FromResult(GetSampleUsers()));
+      moqUserData.Setup(x => x.GetUser(id)).Returns(Task.FromResult(GetSampleUsers().FirstOrDefault(u => u.Id == id)));
+      var moqInstanceUserData = moqUserData.Object;
+      //ACT
+      var actual = await moqInstanceUserData.GetUsers();
+      var expected = await Task.FromResult(GetSampleUsers());
+      //ASSERT
+      Assert.NotNull(expected);
+      foreach (var user in expected)
+      {
+        Assert.True(user.Equals(actual.First(a => a.FirstName == user.FirstName)));
+      }
     }
 
+    [Fact]
+    public async void GetUser_ValidCall()
+    {
+      //ARRANGE
+      foreach (var id in GetSampleUsers().Select(u => u.Id))
+      {
+        var moqUserData = new Mock<IUserData>();
+        moqUserData.Setup(x => x.GetUsers()).Returns(Task.FromResult(GetSampleUsers()));
+        moqUserData.Setup(x => x.GetUser(id)).Returns(Task.FromResult(GetSampleUsers().FirstOrDefault(u => u.Id == id)));
+        var moqInstanceUserData = moqUserData.Object;
+        //ACT
+        var actual = await moqInstanceUserData.GetUser(id);
+        var expected = await Task.FromResult(GetSampleUsers().FirstOrDefault(u => u.Id == id));
+        //ASSERT
+        Assert.NotNull(expected);
+        Assert.True(expected.Equals(actual));
+      }
+    }
+
+    [Fact]
+    public async void GetUser_InValidCall()
+    {
+      //ARRANGE
+      int id = -1;
+      var moqUserData = new Mock<IUserData>();
+      moqUserData.Setup(x => x.GetUsers()).Returns(Task.FromResult(GetSampleUsers()));
+      moqUserData.Setup(x => x.GetUser(id)).Returns(Task.FromResult(GetSampleUsers().FirstOrDefault(u => u.Id == id)));
+      var moqInstanceUserData = moqUserData.Object;
+      //ACT
+      var actual = await moqInstanceUserData.GetUser(id);
+      var expected = await Task.FromResult(GetSampleUsers().FirstOrDefault(u => u.Id == id));
+      //ASSERT
+      Assert.Null(expected);
+      Assert.Null(actual);
+    }
 
     private IEnumerable<UserModel> GetSampleUsers()
     {
@@ -54,6 +75,7 @@ namespace ScaffelPikeTests
         Surname = "Osborne",
         Username = "JoesUsername",
         Password = "Ozzy1",
+        Id = 10,
         Admin = true
       };
 
@@ -62,6 +84,7 @@ namespace ScaffelPikeTests
         Surname = "Zucc",
         Username = "LizardMan",
         Password = "MetaIsCool",
+        Id = 9,
         Admin = false
       };
 
@@ -70,6 +93,7 @@ namespace ScaffelPikeTests
         Surname = "Stark",
         Username = "TonyS",
         Password = "Peppa",
+        Id = 11,
         Admin = false
       };
 
@@ -78,96 +102,12 @@ namespace ScaffelPikeTests
         Surname = "Musk",
         Username = "ElonM",
         Password = "MelonUsk",
+        Id = 12,
         Admin = false
       };
 
-      var sampleUsers =  new List<UserModel>() { user1, user2, user3, user4};
+      var sampleUsers = new List<UserModel>() { user1, user2, user3, user4 };
       return sampleUsers;
     }
-    private Task<IEnumerable<UserModel>> GetSampleUsersTask() 
-    {
-      var task = new Task<IEnumerable<UserModel>>( () => GetSampleUsers());
-      task.RunSynchronously();
-      return task;
-    }
-
-    //[Fact]
-    //public void GetOneUser()
-    //{
-    //  CleanseDb();
-
-    //  var allClientsRequest = new UserData().GetUsers();
-    //  allClientsRequest.Wait();
-    //  var allClients = allClientsRequest.Result;
-
-    //  bool pass = true;
-    //  foreach (var client in allClients)
-    //  {
-    //    var oneClientRequest = new UserData().GetUser(client.Id);
-    //    oneClientRequest.Wait();
-    //    pass = pass && oneClientRequest.Result.Equals(client);
-    //  }
-
-    //  Assert.True(pass);
-    //}
-    //[Fact]
-    //public void UpdateUser()
-    //{
-    //  CleanseDb();
-
-    //  var AllClientRequest = new UserData().GetUsers();
-    //  AllClientRequest.Wait();
-    //  var clientToUpdate = AllClientRequest.Result.First();
-
-    //  clientToUpdate.Password = "Password123";
-
-    //  new UserData().UpdateUser(clientToUpdate);
-    //  var oneClientRequest = new UserData().GetUser(clientToUpdate.Id);
-    //  oneClientRequest.Wait();
-    //  clientToUpdate = oneClientRequest.Result;
-
-    //  Assert.Equal("Password123", clientToUpdate.Password);
-    //}
-    //[Fact]
-    //public void DeleteUser()
-    //{
-    //  CleanseDb();
-
-    //  new UserData().DeleteUser(1);
-
-    //  var oneClientRequest = new UserData().GetUser(1);
-    //  oneClientRequest.Wait();
-    //  var clientToCompare = oneClientRequest.Result;
-
-    //  Assert.Null(clientToCompare);
-    //}
-    //[Fact]
-    //public void InsertUser()
-    //{
-    //  CleanseDb();
-
-    //  var clientsRequest = new UserData().GetUsers();
-    //  clientsRequest.Wait();
-    //  var allUsersBefore = clientsRequest.Result;
-
-    //  UserModel userToAdd = new UserModel() {
-    //    FirstName = "New",
-    //    Surname = "User",
-    //    Username = "NewUser",
-    //    Password = "fido"
-    //  };
-
-    //  new UserData().InsertUser(userToAdd);
-
-    //  clientsRequest = new UserData().GetUsers();
-    //  clientsRequest.Wait();
-    //  var allUsersAfter = clientsRequest.Result;
-
-    //  var addedUser = allUsersAfter.FirstOrDefault(u => u.Username == userToAdd.Username);
-    //  var nullUser = allUsersBefore.FirstOrDefault(u => u.Username == userToAdd.Username);
-
-    //  Assert.NotNull(addedUser);
-    //  Assert.Null(nullUser);
-    //}
   }
 }

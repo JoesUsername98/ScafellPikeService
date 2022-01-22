@@ -31,11 +31,20 @@ namespace ScaffelPikeClient
 
     private void buttonLogIn_ClickAsync(object sender, EventArgs e)
     {
+      if(ClientReferences.User != null)
+      {
+        ClientReferences.Logger.Information("buttonLogIn_ClickAsync",
+          $"Client already logged int as {ClientReferences.User.FirstName} {ClientReferences.User.Surname}");
+        MessageBox.Show($"You are already logged in as {ClientReferences.User.FirstName} {ClientReferences.User.Surname}",
+          "Log In Fault", MessageBoxButtons.OK);
+        return;
+      }
+
       var response = LogInRequester.RequestLogIn(textBoxUsername.Text, textBoxPassword.Text);
 
       if (response == null)
       {
-        MessageBox.Show("Unable to connect to server", "Connection Fault", MessageBoxButtons.OK);
+        MessageBox.Show("Unable to log in to server", "Log In Fault", MessageBoxButtons.OK);
         return;
       }
 
