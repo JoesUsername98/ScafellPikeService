@@ -26,6 +26,9 @@ namespace ScaffelPikeClient
 
         ClientReferences.Logger.Information("RequestLogIn", $"Log In Attempt Successful {logInResponse.SuccesfulRequest}");
 
+        if (logInResponse.SuccesfulRequest)
+          ClientReferences.RegisterUser(logInResponse);
+
         return logInResponse;
       }
       catch(Exception ex)
