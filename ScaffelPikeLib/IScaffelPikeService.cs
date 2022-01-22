@@ -8,7 +8,7 @@ namespace ScaffelPikeContracts
   public interface IScaffelPikeService
   {
     [OperationContract]
-    Task<PasswordDto> LogIn(string username, string password);
+    Task<LogInResponse> LogIn(LogInRequest request);
 
     [OperationContract]
     Task<HeartbeatDto> Heartbeat(HeartbeatDto heartbeat);

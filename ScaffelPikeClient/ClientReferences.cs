@@ -18,6 +18,7 @@ namespace ScaffelPikeClient
     public static Guid ClientGuid { get; private set; }
     public static DateTime ClientStarTime { get; private set; }
     public static IScaffelPikeService ScaffelPikeChannel { get; private set; }
+    public static UserModel User { get; private set; }
 
     internal static void Configure(ILogger logger,IScaffelPikeService scaffelPikeChannel)
     {
@@ -26,6 +27,13 @@ namespace ScaffelPikeClient
       ClientGuid = Guid.NewGuid();
       ClientStarTime = DateTime.Now;
       ScaffelPikeChannel = scaffelPikeChannel;
+    }
+
+    internal static void RegisterUser(LogInResponse user)
+    {
+      User.Admin = user.Admin;
+      User.FirstName = user.FirstName;
+      user.Surname = user.Surname;
     }
   }
 }

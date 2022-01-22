@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="HeartbeatManagerClientSide.cs" />
+    <Compile Include="LogInRequester.cs" />
     <Compile Include="LogInScreen.cs">
       <SubType>Form</SubType>
     </Compile>

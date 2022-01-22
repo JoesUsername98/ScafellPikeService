@@ -18,12 +18,9 @@ namespace ScaffelPikeServices
       ServiceReferences.Logger.Information("InitService", $"Initialise ScaffelPikeService - Start - env:{ServiceReferences.Env}");
       ServiceReferences.Logger.Information("InitService", "Initialise ScaffelPikeService - End");
     }
-    public async Task<PasswordDto> LogIn(string username, string password)
+    public async Task<LogInResponse> LogIn(LogInRequest logInRequest)
     {
-      return await Task<PasswordDto>.Factory.StartNew(() => 
-      {
-        return LogInManager.ProcessLogInRequest(username, password);
-      });
+        return await LogInManager.ProcessLogInRequestAsync(logInRequest);
     }
 
     public Task<HeartbeatDto> Heartbeat(HeartbeatDto incomingHeartbeat)

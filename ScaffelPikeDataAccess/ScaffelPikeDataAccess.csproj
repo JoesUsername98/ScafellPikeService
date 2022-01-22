@@ -80,13 +80,17 @@
     <Compile Include="Data\UserData.cs" />
     <Compile Include="DbAccess\ISqlDataAccess.cs" />
     <Compile Include="DbAccess\SqlDataAccess.cs" />
-    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ScaffelPikeLib\ScaffelPikeContracts.csproj">
+      <Project>{c4b3289f-ac1c-4cd0-9f95-b10d7cd33fe7}</Project>
+      <Name>ScaffelPikeContracts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

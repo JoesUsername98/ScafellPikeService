@@ -1,28 +1,43 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using ScaffelPikeContracts;
 
 namespace ScaffelPikeServices
 {
   public static class LogInManager
   {
-    public static PasswordDto ProcessLogInRequest(string username, string password)
+    public static async Task<LogInResponse> ProcessLogInRequestAsync(LogInRequest logInRequest)
     {
-      ServiceReferences.Logger.Information("ProcessLogInRequest", "Entered ProcessLogInRequest");
 
-      Console.WriteLine($"Recieved Log In Request with Username: {username}, Password: {password}");
-      var clientsRequest = ServiceReferences.UserDA.GetUsers();
-      clientsRequest.Wait();
-      var client = clientsRequest.Result.FirstOrDefault(c => c.Username == username && c.Password == password);
+      ServiceReferences.Logger.Information("ProcessLogInRequest",
+        $"Log In Request with Username: {logInRequest.Username}, Client: {logInRequest.ClientGuid}");
+      
+      var allClients = await ServiceReferences.UserDA.GetUsers();
+      var client = allClients.FirstOrDefault(c => c.Username == logInRequest.Username && c.Password == logInRequest.Password);
 
       if (client != null)
       {
-        Console.WriteLine("Successful");
-        return new PasswordDto() { Success = true, OtherData = client.FirstName + client.Surname };
+        ServiceReferences.Logger.Information("ProcessLogInRequest",
+          $"Log In Request with Username: {logInRequest.Username}, Client: {logInRequest.ClientGuid} was succefull");
+        return new LogInResponse() 
+        { 
+          SuccesfulRequest = true,
+          FirstName = client.FirstName,
+          Surname = client.Surname,
+          Admin = client.Admin,
+          ServerGuid = ServiceReferences.ServerGuid
+        };
       }
 
-      Console.WriteLine("Failed");
-      return new PasswordDto() { Success = false, OtherData = "" };
+      ServiceReferences.Logger.Information("ProcessLogInRequest",
+          $"Log In Request with Username: {logInRequest.Username}, Client: {logInRequest.ClientGuid} was unsuccefull");
+
+      return new LogInResponse() 
+      {
+        SuccesfulRequest = false,
+        ServerGuid = ServiceReferences.ServerGuid
+      };
     }
   }
 }

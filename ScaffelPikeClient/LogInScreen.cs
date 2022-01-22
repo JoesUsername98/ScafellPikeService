@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ScaffelPikeContracts;
 
 namespace ScaffelPikeClient
 {
@@ -28,24 +29,22 @@ namespace ScaffelPikeClient
         labelConnections.Text = $"Connections Available : {HeartbeatManagerClientSide.Connections.Count}";
     }
 
-    private void buttonLogIn_Click(object sender, EventArgs e)
+    private void buttonLogIn_ClickAsync(object sender, EventArgs e)
     {
-      var username = textBoxUsername.Text;
-      var password = textBoxPassword.Text;
+      var response = LogInRequester.RequestLogIn(textBoxUsername.Text, textBoxPassword.Text);
 
-      ClientReferences.Logger.Information("buttonLogIn_Click", $"Log In Attempt with Username [{username}] Passsword [{password}]");
-      
-      //clean up with awiat and seperate in MVC fashion
-      var outputTask = ClientReferences.ScaffelPikeChannel.LogIn(username, password);
-      outputTask.Wait();
-      var output = outputTask.Result;
+      if (response == null)
+      {
+        MessageBox.Show("Unable to connect to server", "Connection Fault", MessageBoxButtons.OK);
+        return;
+      }
 
-      ClientReferences.Logger.Information("buttonLogIn_Click", $"Log In Attempt Successful {output.Success}");
+      var adminMessage = Environment.NewLine + $"You{((response.Admin)?"":" do not")} have admin privileges";
 
-      if (output.Success)
-        MessageBox.Show($"Welcome {output.OtherData}", "Log in Success", MessageBoxButtons.OK);
+      if (response.SuccesfulRequest)
+        MessageBox.Show($"Welcome {response.FirstName} {response.Surname}"+ adminMessage, "Log in Success", MessageBoxButtons.OK);
       else
-        MessageBox.Show($"Who do you think you are?", "Log in Failed", MessageBoxButtons.OK);
+        MessageBox.Show($"Incorrect Username or Password", "Log in Failed", MessageBoxButtons.OK);
     }
 
     private void pictureBoxViewPassword_MouseHover(object sender, EventArgs e)
@@ -65,7 +64,7 @@ namespace ScaffelPikeClient
 
     private void LogInScreen_Load(object sender, EventArgs e)
     {
-
+      ClientReferences.Logger.Information("LogInScreen_Load", "Opening form");
     }
   }
 }

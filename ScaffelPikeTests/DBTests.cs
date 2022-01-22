@@ -1,9 +1,7 @@
-
-using Autofac.Extras.Moq;
 using Moq;
+using ScaffelPikeContracts;
 using ScaffelPikeDataAccess.Data;
 using ScaffelPikeDataAccess.DbAccess;
-using ScaffelPikeDataAccess.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,6 +45,7 @@ namespace ScaffelPikeTests
       Assert.True(actual != null);
       Assert.Equal(expected.Count(), actual.Count());
     }
+
 
     private IEnumerable<UserModel> GetSampleUsers()
     {

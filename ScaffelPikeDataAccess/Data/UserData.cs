@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ScaffelPikeContracts;
 using ScaffelPikeDataAccess.DbAccess;
-using ScaffelPikeDataAccess.Models;
 
 namespace ScaffelPikeDataAccess.Data
 {
