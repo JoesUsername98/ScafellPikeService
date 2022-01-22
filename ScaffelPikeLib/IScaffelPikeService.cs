@@ -13,5 +13,7 @@ namespace ScaffelPikeContracts
     [OperationContract]
     Task<HeartbeatDto> Heartbeat(HeartbeatDto heartbeat);
 
+    [OperationContract]
+    Task QuandlModel();
   }
 }

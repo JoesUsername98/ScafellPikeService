@@ -1,4 +1,5 @@
 ﻿using System;
+using ScaffelPikeContracts;
 using ScaffelPikeDataAccess.Data;
 using ScaffelPikeLogger;
 
@@ -18,13 +19,16 @@ namespace ScaffelPikeServices
     public static Guid ServerGuid { get; private set; }
     public static DateTime ServerStarTime { get; private set; }
 
-    internal static void Configure(ILogger logger, IUserData userDA, string env)
+    public static ApiKeys ApiKeys { get; private set; } 
+
+    internal static void Configure(ILogger logger, IUserData userDA, string env, ApiKeys apiKeys)
     {
       Logger = logger;
       UserDA = userDA;
       Env = env;
       ServerGuid = Guid.NewGuid();
       ServerStarTime = DateTime.Now;
+      ApiKeys = apiKeys;
     }
   }
 }

@@ -51,8 +51,11 @@ namespace ScaffelPikeClient
       var adminMessage = Environment.NewLine + $"You{((response.Admin)?"":" do not")} have admin privileges";
 
       if (response.SuccesfulRequest)
-        //TODO. Open next form here
-        MessageBox.Show($"Welcome {response.FirstName} {response.Surname}" + adminMessage, "Log in Success", MessageBoxButtons.OK);
+      {
+        this.Hide();
+        MainForm mainForm = new MainForm();
+        mainForm.ShowDialog();
+      }
       else
         MessageBox.Show($"Incorrect Username or Password", "Log in Failed", MessageBoxButtons.OK);
     }

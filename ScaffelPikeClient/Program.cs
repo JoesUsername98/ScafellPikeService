@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Threading;
 using Autofac;
 using ScaffelPikeContracts;
 using ScaffelPikeLogger;

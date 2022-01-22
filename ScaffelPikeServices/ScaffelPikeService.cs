@@ -8,9 +8,9 @@ namespace ScaffelPikeServices
 {
   public class ScaffelPikeService : IScaffelPikeService
   {
-    public ScaffelPikeService(ILogger logger, IUserData userDA, string env)
+    public ScaffelPikeService(ILogger logger, IUserData userDA, string env, ApiKeys keys)
     {
-      ServiceReferences.Configure(logger, userDA, env);
+      ServiceReferences.Configure(logger, userDA, env, keys);
       InitService();
     }
     private void InitService()
@@ -29,7 +29,11 @@ namespace ScaffelPikeServices
       { 
         return HeartbeatManagerServerSide.Echo(incomingHeartbeat);
       });
-  
+    }
+
+    public async Task QuandlModel()
+    {
+      var api = ServiceReferences.ApiKeys.Quandl;
     }
   }
 }

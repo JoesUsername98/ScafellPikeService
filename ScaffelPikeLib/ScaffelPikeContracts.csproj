@@ -55,6 +55,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiKeys.cs" />
     <Compile Include="HeartbeatType.cs" />
     <Compile Include="HeartbeatDto.cs" />
     <Compile Include="IScaffelPikeService.cs" />
