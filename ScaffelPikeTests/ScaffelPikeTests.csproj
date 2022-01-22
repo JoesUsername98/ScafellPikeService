@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ScaffelPikeDataAccess\ScaffelPikeDataAccess.csproj" />
+    <ProjectReference Include="..\ScaffelPikeServices\ScaffelPikeServices.csproj" />
   </ItemGroup>
 
 </Project>
