@@ -2,15 +2,14 @@
 using ScaffelPikeDataAccess.Data;
 using ScaffelPikeLogger;
 using ScaffelPikeContracts;
-using System;
 
 namespace ScaffelPikeServices
 {
   public class ScaffelPikeService : IScaffelPikeService
   {
-    public ScaffelPikeService(ILogger logger, IUserData userDA, string env, ApiKeys keys)
+    public ScaffelPikeService(ILogger logger, IUserData userDA, string env)
     {
-      ServiceReferences.Configure(logger, userDA, env, keys);
+      ServiceReferences.Configure(logger, userDA, env);
       InitService();
     }
     private void InitService()
@@ -31,9 +30,13 @@ namespace ScaffelPikeServices
       });
     }
 
+    /// <summary>
+    /// Just for testing. Will need to 
+    /// </summary>
+    /// <returns></returns>
     public async Task QuandlModel()
     {
-      var api = ServiceReferences.ApiKeys.Quandl;
+      QuandlManager.Quandl();
     }
   }
 }
