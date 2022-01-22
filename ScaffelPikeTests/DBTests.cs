@@ -12,6 +12,31 @@ namespace ScaffelPikeTests
 {
   public class DBTests
   {
+    //[Fact]
+    //public async void GetUsers_ValidCallAutoMock()
+    //{
+    //  //ARRANGE
+    //  using (var mock = AutoMock.GetLoose())
+    //  {
+    //    mock.Mock<ISqlDataAccess>()
+    //      .Setup(x => x.LoadData<UserModel, dynamic>("dbo.spUser_GetAll", new { }, "Default"))
+    //      .Returns(Task.FromResult(GetSampleUsers()));
+    //    //mock.Mock<IEnumerable<dynamic>>()
+    //    // .Setup(m => m.Count).Returns(() => items.Count);
+
+    //    var moqUserModel = mock.Create<UserData>();
+    //    var expected = GetSampleUsers();
+    //    //ACT
+    //    var actual = await moqUserModel.GetUsers();
+    //    //ASSERT
+    //    Assert.NotNull(expected);
+    //    foreach (var user in expected)
+    //    {
+    //      Assert.True(user.Equals(actual.First(a => a.FirstName == user.FirstName)));
+    //    }
+    //  }
+    //}
+
     [Fact]
     public async void GetUsers_ValidCall()
     {
