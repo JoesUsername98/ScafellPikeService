@@ -11,29 +11,29 @@ namespace ScaffelPikeClient
   {
     internal static LogInResponse RequestLogIn(string username, string password)
     {
-      ClientReferences.Logger.Information("RequestLogIn", $"Log In Attempt with Username [{username}] Passsword [{password}]");
+      ClientRefs.Log.Information("RequestLogIn", $"Log In Attempt with Username [{username}] Passsword [{password}]");
 
       var request = new LogInRequest {
-        ClientGuid = ClientReferences.ClientGuid,
+        ClientGuid = ClientRefs.ClientGuid,
         Username = username,
         Password = password
       };
       try
       {
-        var response = ClientReferences.ScaffelPikeChannel.LogIn(request);
+        var response = ClientRefs.ScaffelPikeChannel.LogIn(request);
         response.Wait();
         LogInResponse logInResponse = response.Result;
 
-        ClientReferences.Logger.Information("RequestLogIn", $"Log In Attempt Successful {logInResponse.SuccesfulRequest}");
+        ClientRefs.Log.Information("RequestLogIn", $"Log In Attempt Successful {logInResponse.SuccesfulRequest}");
 
         if (logInResponse.SuccesfulRequest)
-          ClientReferences.RegisterUser(logInResponse);
+          ClientRefs.RegisterUser(logInResponse);
 
         return logInResponse;
       }
       catch(Exception ex)
       {
-        ClientReferences.Logger.Error($"RequestLogIn", ex);
+        ClientRefs.Log.Error($"RequestLogIn", ex);
         return null;
       }
     }

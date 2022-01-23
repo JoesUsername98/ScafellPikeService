@@ -11,9 +11,9 @@ namespace ScaffelPikeClient
   /// <summary>
   /// Used to hold DI objects in the future
   /// </summary>
-  public static class ClientReferences
+  public static class ClientRefs
   {
-    public static ILogger Logger { get; private set; }
+    public static ILogger Log { get; private set; }
     public static string Env { get; private set; }
     public static Guid ClientGuid { get; private set; }
     public static DateTime ClientStarTime { get; private set; }
@@ -22,7 +22,7 @@ namespace ScaffelPikeClient
 
     internal static void Configure(ILogger logger,IScaffelPikeService scaffelPikeChannel)
     {
-      Logger = logger;
+      Log = logger;
       Env = ConfigurationManager.AppSettings["Environment"];
       ClientGuid = Guid.NewGuid();
       ClientStarTime = DateTime.Now;
@@ -34,7 +34,7 @@ namespace ScaffelPikeClient
     {
       if (User != null)
       {
-        Logger.Error("RegisterUser", "User already registerd!");
+        Log.Error("RegisterUser", "User already registerd!");
         throw new InvalidOperationException("Cannot register user more than once");
       }
 

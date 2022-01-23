@@ -12,7 +12,7 @@ namespace ScaffelPikeClient
     {
       InitializeComponent();
       InitializeTiner();
-      ClientReferences.Logger.Information("LogInScreen", "Initialized Logger");
+      ClientRefs.Log.Information("LogInScreen", "Initialized Logger");
       HeartbeatManagerClientSide.TryEstablishConnectionAsync();
     }
 
@@ -31,11 +31,11 @@ namespace ScaffelPikeClient
 
     private void buttonLogIn_ClickAsync(object sender, EventArgs e)
     {
-      if(ClientReferences.User != null)
+      if(ClientRefs.User != null)
       {
-        ClientReferences.Logger.Information("buttonLogIn_ClickAsync",
-          $"Client already logged int as {ClientReferences.User.FirstName} {ClientReferences.User.Surname}");
-        MessageBox.Show($"You are already logged in as {ClientReferences.User.FirstName} {ClientReferences.User.Surname}",
+        ClientRefs.Log.Information("buttonLogIn_ClickAsync",
+          $"Client already logged int as {ClientRefs.User.FirstName} {ClientRefs.User.Surname}");
+        MessageBox.Show($"You are already logged in as {ClientRefs.User.FirstName} {ClientRefs.User.Surname}",
           "Log In Fault", MessageBoxButtons.OK);
         return;
       }
@@ -72,12 +72,12 @@ namespace ScaffelPikeClient
 
     private void LogInScreen_FormClosed(object sender, FormClosedEventArgs e)
     {
-      ClientReferences.Logger.Information("LogInScreen_FormClosed", "Closing form");
+      ClientRefs.Log.Information("LogInScreen_FormClosed", "Closing form");
     }
 
     private void LogInScreen_Load(object sender, EventArgs e)
     {
-      ClientReferences.Logger.Information("LogInScreen_Load", "Opening form");
+      ClientRefs.Log.Information("LogInScreen_Load", "Opening form");
     }
   }
 }

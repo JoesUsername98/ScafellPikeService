@@ -19,7 +19,7 @@ namespace ScaffelPikeClient
 
     private void MainForm_Load(object sender, EventArgs e)
     {
-      ClientReferences.ScaffelPikeChannel.QuandlModel();
+      ClientRefs.ScaffelPikeChannel.QuandlModel();
     }
   }
 }

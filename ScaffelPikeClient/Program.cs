@@ -16,7 +16,7 @@ namespace ScaffelPikeClient
       {
         try
         {
-          ClientReferences.Configure(container.Resolve<ILogger>(), container.Resolve<IScaffelPikeService>());
+          ClientRefs.Configure(container.Resolve<ILogger>(), container.Resolve<IScaffelPikeService>());
           var f = new LogInScreen();
           f.ShowDialog();
         }

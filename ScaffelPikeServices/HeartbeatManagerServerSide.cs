@@ -34,7 +34,7 @@ namespace ScaffelPikeServices
         foreach (var connection in Connections.Values.ToList())
           if (DateTime.Now - connection.SentAt > GraceInterval)
           {
-            ServiceReferences.Logger.Warning("HeartbeatManagerClientSide",
+            ServiceRefs.Log.Warning("HeartbeatManagerClientSide",
               $"Server has not replied since {connection.SentAt}");
             Connections.Remove(connection.Guid);
           }
@@ -47,12 +47,12 @@ namespace ScaffelPikeServices
         case HeartbeatType.Start:
           if (!Connections.ContainsKey(incomingHeartbeat.Guid))
           {
-            ServiceReferences.Logger.Information("HeartbeatManagerServerSide", $"Initial Connection With {incomingHeartbeat.Guid}");
+            ServiceRefs.Log.Information("HeartbeatManagerServerSide", $"Initial Connection With {incomingHeartbeat.Guid}");
             Connections.Add(incomingHeartbeat.Guid, incomingHeartbeat);
           }
           else
           {
-            ServiceReferences.Logger.Warning("HeartbeatManagerServerSide", $"Existing Connection Sent Start Heartbeat - Updating {incomingHeartbeat.Guid}");
+            ServiceRefs.Log.Warning("HeartbeatManagerServerSide", $"Existing Connection Sent Start Heartbeat - Updating {incomingHeartbeat.Guid}");
             Connections[incomingHeartbeat.Guid] = incomingHeartbeat;
           }
           break;
@@ -60,13 +60,13 @@ namespace ScaffelPikeServices
         case HeartbeatType.Continue:
           if (!Connections.ContainsKey(incomingHeartbeat.Guid))
           {
-            ServiceReferences.Logger.Warning("HeartbeatManagerServerSide", $"Unidentified Connection Sent Continue Heartbeat - Adding {incomingHeartbeat.Guid}");
+            ServiceRefs.Log.Warning("HeartbeatManagerServerSide", $"Unidentified Connection Sent Continue Heartbeat - Adding {incomingHeartbeat.Guid}");
             Connections.Add(incomingHeartbeat.Guid, incomingHeartbeat);
           }
           else
           {
             var responseInterval = DateTime.Now - Connections[incomingHeartbeat.Guid].SentAt;
-            ServiceReferences.Logger.Information("HeartbeatManagerServerSide", $"Connection With {incomingHeartbeat.Guid} took {responseInterval.TotalMilliseconds}s");
+            ServiceRefs.Log.Information("HeartbeatManagerServerSide", $"Connection With {incomingHeartbeat.Guid} took {responseInterval.TotalMilliseconds}s");
             Connections[incomingHeartbeat.Guid] = incomingHeartbeat;
           }
           break;
@@ -74,22 +74,22 @@ namespace ScaffelPikeServices
         case HeartbeatType.Stop:
           if (!Connections.ContainsKey(incomingHeartbeat.Guid))
           {
-            ServiceReferences.Logger.Warning("HeartbeatManagerServerSide", $"Unidentified Connection Sent Stop Heartbeat {incomingHeartbeat.Guid}");
+            ServiceRefs.Log.Warning("HeartbeatManagerServerSide", $"Unidentified Connection Sent Stop Heartbeat {incomingHeartbeat.Guid}");
           }
           else
           {
-            ServiceReferences.Logger.Information("HeartbeatManagerServerSide", $"Final Connection With {incomingHeartbeat.Guid}");
+            ServiceRefs.Log.Information("HeartbeatManagerServerSide", $"Final Connection With {incomingHeartbeat.Guid}");
             Connections.Remove(incomingHeartbeat.Guid);
           }
           break;
 
         case HeartbeatType.Echo:
-          ServiceReferences.Logger.Error("HeartbeatManagerServerSide", $"Recieved Erroneous Echo From {incomingHeartbeat.Guid}");
+          ServiceRefs.Log.Error("HeartbeatManagerServerSide", $"Recieved Erroneous Echo From {incomingHeartbeat.Guid}");
           break;
       }
 
       return new HeartbeatDto() {
-        Guid = ServiceReferences.ServerGuid,
+        Guid = ServiceRefs.ServerGuid,
         SentAt = DateTime.Now,
         Interval = incomingHeartbeat.Interval,
         HeartbeatType = HeartbeatType.Echo
@@ -103,7 +103,7 @@ namespace ScaffelPikeServices
         var responseExpectedAt = client.Value.SentAt + client.Value.Interval + GraceInterval;
         if (responseExpectedAt > DateTime.Now)
         {
-          ServiceReferences.Logger.Warning("HeartbeatManagerServerSide", $"Expected Echo From {client.Key} at {responseExpectedAt}");
+          ServiceRefs.Log.Warning("HeartbeatManagerServerSide", $"Expected Echo From {client.Key} at {responseExpectedAt}");
         }
       }
     }

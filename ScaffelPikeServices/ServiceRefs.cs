@@ -11,9 +11,9 @@ namespace ScaffelPikeServices
   /// <summary>
   /// Used to hold DI objects in the future
   /// </summary>
-  public static class ServiceReferences
+  public static class ServiceRefs
   {
-    public static ILogger Logger { get; private set; }
+    public static ILogger Log { get; private set; }
     public static IUserData UserDA { get; private set; }
     public static string Env { get; private set; }
     public static Guid ServerGuid { get; private set; }
@@ -21,7 +21,7 @@ namespace ScaffelPikeServices
 
     internal static void Configure(ILogger logger, IUserData userDA, string env)
     {
-      Logger = logger;
+      Log = logger;
       UserDA = userDA;
       Env = env;
       ServerGuid = Guid.NewGuid();

@@ -2,6 +2,7 @@
 using ScaffelPikeDataAccess.Data;
 using ScaffelPikeLogger;
 using ScaffelPikeContracts;
+using System.Linq;
 
 namespace ScaffelPikeServices
 {
@@ -9,13 +10,13 @@ namespace ScaffelPikeServices
   {
     public ScaffelPikeService(ILogger logger, IUserData userDA, string env)
     {
-      ServiceReferences.Configure(logger, userDA, env);
+      ServiceRefs.Configure(logger, userDA, env);
       InitService();
     }
     private void InitService()
     {
-      ServiceReferences.Logger.Information("InitService", $"Initialise ScaffelPikeService - Start - env:{ServiceReferences.Env}");
-      ServiceReferences.Logger.Information("InitService", "Initialise ScaffelPikeService - End");
+      ServiceRefs.Log.Information("InitService", $"Initialise ScaffelPikeService - Start - env:{ServiceRefs.Env}");
+      ServiceRefs.Log.Information("InitService", "Initialise ScaffelPikeService - End");
     }
     public async Task<LogInResponse> LogIn(LogInRequest logInRequest)
     {
@@ -36,7 +37,11 @@ namespace ScaffelPikeServices
     /// <returns></returns>
     public async Task QuandlModel()
     {
-      QuandlManager.Quandl();
+      var databases = await QuandlManager.QuandlGetDbs();
+      var plebDbs = databases.Values.Where(db => !db.premium);
+      var datasets = await QuandlManager.QuandlGetDataSets("BITFINEX");
+      var cryptoSet = datasets.FirstOrDefault(ds => ds.name.Contains("BTC") && ds.name.Contains("ETH")).dataset_code;
+      var timeseries = await QuandlManager.QuandlGetTimeSeriesData("BITFINEX", cryptoSet);
     }
   }
 }

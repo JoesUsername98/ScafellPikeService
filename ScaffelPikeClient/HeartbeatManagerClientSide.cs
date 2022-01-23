@@ -40,7 +40,7 @@ namespace ScaffelPikeClient
         foreach (var connection in Connections.Values.ToList())
           if (DateTime.Now - connection.SentAt > AllowableResponseInterval)
           {
-            ClientReferences.Logger.Warning("HeartbeatManagerClientSide",
+            ClientRefs.Log.Warning("HeartbeatManagerClientSide",
               $"Server has not replied since {connection.SentAt}");
             Connections.Remove(connection.Guid);
           }
@@ -53,13 +53,13 @@ namespace ScaffelPikeClient
     public static async Task TryEstablishConnectionAsync() // add a cancellation token?
     {
       HeartbeatDto initialHeartbeat = new HeartbeatDto() {
-        Guid = ClientReferences.ClientGuid,
+        Guid = ClientRefs.ClientGuid,
         Interval = SendingInterval,
         HeartbeatType = HeartbeatType.Start
       };
 
       HeartbeatDto continuationHeartbeat = new HeartbeatDto() {
-        Guid = ClientReferences.ClientGuid,
+        Guid = ClientRefs.ClientGuid,
         Interval = SendingInterval,
         HeartbeatType = HeartbeatType.Continue
       };
@@ -72,30 +72,30 @@ namespace ScaffelPikeClient
         {
           var heartbeatToSend = (Connections.Count < 1) ? initialHeartbeat : continuationHeartbeat;
           heartbeatToSend.SentAt = DateTime.Now;
-          var response = await ClientReferences.ScaffelPikeChannel.Heartbeat(heartbeatToSend);
+          var response = await ClientRefs.ScaffelPikeChannel.Heartbeat(heartbeatToSend);
 
           if (response == null)
           {
-            ClientReferences.Logger.Warning("HeartbeatManagerClientSide",
+            ClientRefs.Log.Warning("HeartbeatManagerClientSide",
               $"Recieved empty heartbeat");
             continue;
           }
 
           if (!Connections.ContainsKey(response.Guid))
           {
-            ClientReferences.Logger.Information("HeartbeatManagerClientSide", $"Connection Established With {response.Guid}");
+            ClientRefs.Log.Information("HeartbeatManagerClientSide", $"Connection Established With {response.Guid}");
             Connections.Add(response.Guid, response);
           }
           else if (DateTime.Now - Connections[response.Guid].SentAt > AllowableResponseInterval)
           {
-            ClientReferences.Logger.Warning("HeartbeatManagerClientSide",
+            ClientRefs.Log.Warning("HeartbeatManagerClientSide",
               $"Connection With {response.Guid} took {(DateTime.Now - Connections[response.Guid].SentAt).TotalSeconds.ToString()}s." +
               $" Acceptable {AllowableResponseInterval.TotalSeconds}s");
             Connections[response.Guid] = response;
           }
           else 
           { 
-            ClientReferences.Logger.Debug("HeartbeatManagerClientSide",
+            ClientRefs.Log.Debug("HeartbeatManagerClientSide",
               $"Connection With {response.Guid} took {(DateTime.Now - Connections[response.Guid].SentAt).TotalSeconds}s");
             Connections[response.Guid] = response;
           }
@@ -105,11 +105,11 @@ namespace ScaffelPikeClient
           // TODO Restablishing connections 
           // https://stackoverflow.com/questions/2763592/the-communication-object-system-servicemodel-channels-servicechannel-cannot-be
           //
-          ClientReferences.Logger.Error("No Servers Available", ex);
+          ClientRefs.Log.Error("No Servers Available", ex);
         }
         catch(Exception ex)
         {
-          ClientReferences.Logger.Error("Unknown Error", ex);
+          ClientRefs.Log.Error("Unknown Error", ex);
         }
       }
     }
@@ -119,10 +119,10 @@ namespace ScaffelPikeClient
     /// </summary>
     public static async Task TerminateConnectionAsync(Guid terminee) // add a cancellation token?
     {
-      ClientReferences.Logger.Information("HeartbeatManagerClientSide", $"Removing Connection With {terminee}");
+      ClientRefs.Log.Information("HeartbeatManagerClientSide", $"Removing Connection With {terminee}");
 
       HeartbeatDto finalHeartbeat = new HeartbeatDto() {
-        Guid = ClientReferences.ClientGuid,
+        Guid = ClientRefs.ClientGuid,
         Interval = SendingInterval,
         HeartbeatType = HeartbeatType.Stop
       };
@@ -133,18 +133,18 @@ namespace ScaffelPikeClient
 
         try
         {
-          var response = await ClientReferences.ScaffelPikeChannel.Heartbeat(finalHeartbeat);
+          var response = await ClientRefs.ScaffelPikeChannel.Heartbeat(finalHeartbeat);
           if (response != null)
             break;
         }
         catch (CommunicationException ex)
         {
-          ClientReferences.Logger.Error("No Servers Available", ex);
+          ClientRefs.Log.Error("No Servers Available", ex);
         }
 
       }
       Connections.Remove(terminee);
-      ClientReferences.Logger.Information("HeartbeatManagerClientSide", $"Removing Connection With {terminee}");
+      ClientRefs.Log.Information("HeartbeatManagerClientSide", $"Removing Connection With {terminee}");
     }
   }
 }
