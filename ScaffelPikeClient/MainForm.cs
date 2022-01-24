@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ScaffelPikeClient
@@ -17,9 +11,14 @@ namespace ScaffelPikeClient
       InitializeComponent();
     }
 
-    private void MainForm_Load(object sender, EventArgs e)
+    private async void MainForm_Load(object sender, EventArgs e)
     {
-      ClientRefs.ScaffelPikeChannel.QuandlModel();
+      var databases = await ClientRefs.ScaffelPikeChannel.GetQuandlDbs();
+      var dbToUse = databases.First(db => db.Code.Contains("BITFINEX"));
+      var datasets = await ClientRefs.ScaffelPikeChannel.GetQuandlDataSets(dbToUse.Code);
+      var dsToUse = datasets.First(ds => ds.Code.Contains("BTC") && ds.Code.Contains("ETH"));
+      var timeseries = await ClientRefs.ScaffelPikeChannel.GetQuandlTimeseries(dbToUse.Code, dsToUse.Code);  // ~0.5mb 
     }
   }
 }
+ 

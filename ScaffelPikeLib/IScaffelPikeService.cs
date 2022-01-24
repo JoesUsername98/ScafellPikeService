@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
+using Quandl.NET.Model.Response;
 
 namespace ScaffelPikeContracts
 {
@@ -14,6 +16,12 @@ namespace ScaffelPikeContracts
     Task<HeartbeatDto> Heartbeat(HeartbeatDto heartbeat);
 
     [OperationContract]
-    Task QuandlModel();
+    Task<List<DatabaseResponse>> GetQuandlDbs();
+
+    [OperationContract]
+    Task<List<DatasetResponse>> GetQuandlDataSets(string dbCode);
+
+    [OperationContract]
+    Task<MyTimeseriesDataResponse> GetQuandlTimeseries(string dbCode , string dsCode);
   }
 }

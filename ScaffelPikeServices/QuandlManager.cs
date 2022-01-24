@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Quandl.NET;
+using Quandl.NET.Model.Response;
 using QuandlAPIExt;
 using QuandlAPIExt.TransferObjects;
 using ScaffelPikeContracts;
@@ -31,7 +32,6 @@ namespace ScaffelPikeServices
       DSCodeMap = new Dictionary<string, DatasetQuandlModel>();
     }
 
-    //TODO Modify the arguement and return types be Request and Response Dtos
     internal async static Task<List<DatabaseResponse>> QuandlGetDbs()
     {
       ServiceRefs.Log.Information("QuandlGetDbs", $"Start method");
@@ -60,8 +60,7 @@ namespace ScaffelPikeServices
       return output;
     }
 
-    //TODO Modify the arguement and return types be Request and Response Dtos
-    internal async static Task<List<DatasetQuandlModel>> QuandlGetDataSets(string dbCode)
+    internal async static Task<List<DatasetResponse>> QuandlGetDataSets(string dbCode)
     {
       ServiceRefs.Log.Information("QuandlGetDataSets", $"Start method dbCode [{dbCode}]");
 
@@ -78,18 +77,21 @@ namespace ScaffelPikeServices
         var dataSets = await client.GetInitialDataSetsInDb(dbCode);
 
         ServiceRefs.Log.Information("QuandlGetDataSets", $"Finish API Request for DataSet");
-        DBtoDSMap[dbCode] = dataSets;
+        DBtoDSMap[dbCode] = dataSets.FindAll(d => !d.premium);//where not premium
       }
 
-      foreach (var ds in DBtoDSMap[dbCode].Where(d => !d.premium)) //where not premium
+      foreach (var ds in DBtoDSMap[dbCode]) 
         if (!DSCodeMap.ContainsKey(ds.dataset_code))
           DSCodeMap.Add(ds.dataset_code, ds);
 
+      List<DatasetResponse> response = new List<DatasetResponse>();
+      foreach(var ds in DBtoDSMap[dbCode]) { response.Add(DatasetApiToWfcDto(ds)); }
+
       ServiceRefs.Log.Information("QuandlGetDataSets", $"End method dbCode [{dbCode}]");
-      return DBtoDSMap[dbCode];
+      return response;
     }
     //TODO Modify the arguement and return types be Request and Response Dtos
-    internal async static Task<object> QuandlGetTimeSeriesData(string dbCode, string dsCode)
+    internal async static Task<MyTimeseriesDataResponse> QuandlGetTimeSeriesData(string dbCode, string dsCode)
     {
       ServiceRefs.Log.Information("QuandlGetTimeSeriesData", $"Start method dbCode [{dbCode}] dsCode [{dsCode}]");
 
@@ -105,7 +107,9 @@ namespace ScaffelPikeServices
       ServiceRefs.Log.Information("QuandlGetDataSets", $"Finish API Request for TimeseriesData  on dbCode [{dbCode}] dsCode [{dsCode}]");
 
       ServiceRefs.Log.Information("QuandlGetTimeSeriesData", $"End method dbCode [{dbCode}] dsCode [{dsCode}]");
-      return dataSets;
+
+      
+      return new MyTimeseriesDataResponse(dataSets.DatasetData);
     }
 
     private static DatabaseResponse DatabaseApiToWfcDto(DatabaseQuandlModel input)

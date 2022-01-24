@@ -3,6 +3,8 @@ using ScaffelPikeDataAccess.Data;
 using ScaffelPikeLogger;
 using ScaffelPikeContracts;
 using System.Linq;
+using System.Collections.Generic;
+using Quandl.NET.Model.Response;
 
 namespace ScaffelPikeServices
 {
@@ -32,16 +34,31 @@ namespace ScaffelPikeServices
     }
 
     /// <summary>
-    /// Just for testing. Will need to 
+    /// Returns a list of non premium dbs
     /// </summary>
     /// <returns></returns>
-    public async Task QuandlModel()
+    public async Task<List<DatabaseResponse>> GetQuandlDbs()
     {
-      var databases = await QuandlManager.QuandlGetDbs();
-      var plebDbs = databases.Values.Where(db => !db.premium);
-      var datasets = await QuandlManager.QuandlGetDataSets("BITFINEX");
-      var cryptoSet = datasets.FirstOrDefault(ds => ds.name.Contains("BTC") && ds.name.Contains("ETH")).dataset_code;
-      var timeseries = await QuandlManager.QuandlGetTimeSeriesData("BITFINEX", cryptoSet);
+      return await QuandlManager.QuandlGetDbs();
+    }
+    /// <summary>
+    /// Returns a list of non premium datasets
+    /// </summary>
+    /// <param name="dbCode"></param>
+    /// <returns></returns>
+    public async Task<List<DatasetResponse>> GetQuandlDataSets(string dbCode)
+    {
+      return await QuandlManager.QuandlGetDataSets(dbCode);
+    }
+    /// <summary>
+    /// Returns a list of non Premium timeseries data
+    /// </summary>
+    /// <param name="dbCode"></param>
+    /// <param name="dsCode"></param>
+    /// <returns></returns>
+    public async Task<MyTimeseriesDataResponse> GetQuandlTimeseries(string dbCode, string dsCode)
+    {
+      return await QuandlManager.QuandlGetTimeSeriesData(dbCode, dsCode);
     }
   }
 }
