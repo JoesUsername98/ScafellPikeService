@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using ScaffelPikeContracts;
 
 namespace ScaffelPikeClient
@@ -10,7 +12,7 @@ namespace ScaffelPikeClient
   {
     private List<DatabaseResponse> Databases { get; set; }
     private DatabaseResponse DatabaseSelected { get; set; }
-    private List<DatasetResponse> Datasets{ get; set; }
+    private List<DatasetResponse> Datasets { get; set; }
     private DatasetResponse DatasetSelected { get; set; }
     private MyTimeseriesDataResponse TimeseriesData { get; set; }
 
@@ -39,6 +41,7 @@ namespace ScaffelPikeClient
     {
       comboBoxDataset.Items.Clear();
       comboBoxDataset.ResetText();
+      comboBoxDataset.Enabled = true;
 
       var dbCodeToUse = (string)comboBoxDatabase.SelectedItem;
       DatabaseSelected = Databases.FirstOrDefault(db => db.Code == dbCodeToUse);
@@ -48,7 +51,7 @@ namespace ScaffelPikeClient
         Datasets = await ClientRefs.ScaffelPikeChannel.GetQuandlDataSets(dbCodeToUse);
         comboBoxDataset.Items.AddRange(Datasets.Select(ds => ds.Code).ToArray());
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
         ClientRefs.Log.Error("comboBoxDatabase_SelectedValueChanged", ex);
       }
@@ -63,12 +66,50 @@ namespace ScaffelPikeClient
       try
       {
         TimeseriesData = await ClientRefs.ScaffelPikeChannel.GetQuandlTimeseries(dbCodeToUse, dsCodeToUse);
+        PlotChart();
       }
       catch (Exception ex)
       {
         ClientRefs.Log.Error("comboBoxDataset_SelectedValueChanged", ex);
       }
     }
+
+    private void PlotChart()
+    {
+      chartTimeseries.ChartAreas.Clear();
+      chartTimeseries.Series.Clear();
+      chartTimeseries.Titles.Clear();
+
+      chartTimeseries.Titles.Add(DatasetSelected.Name);
+      chartTimeseries.Titles[0].Visible = true;
+
+      var priceChartArea = chartTimeseries.ChartAreas.Add("Prices");
+      priceChartArea.InnerPlotPosition = new ElementPosition(5, 0, 99, 140);
+      priceChartArea.AxisX.CustomLabels.Add(new CustomLabel());//Hide x axis
+      var volumeChartArea = chartTimeseries.ChartAreas.Add("Volume");
+      volumeChartArea.InnerPlotPosition = new ElementPosition(5, 50, 99, 30);
+
+      for (int i = 1; i < TimeseriesData.Data[0].Length; i++) //For each column
+      {
+        string seriesName = TimeseriesData.ColumnNames[i];
+        var series = new Series(seriesName);
+        series.ChartType = seriesName.ToLower().Equals("volume") ? SeriesChartType.Area : SeriesChartType.Line;
+        series.XValueType = ChartValueType.DateTime;
+        series.YValueType = ChartValueType.Double;
+
+        foreach (var line in TimeseriesData.Data.Where(l => l[0] != null)) //For each row
+        {
+          double yValue =  line[i]== null ? 0 : (double)line[i];
+          series.Points.AddXY(DateTime.Parse((string)line[0]), yValue);
+        }
+
+        series.ChartArea = seriesName.ToLower().Equals("volume") ? volumeChartArea.Name : priceChartArea.Name;
+
+        chartTimeseries.Series.Add(series);
+      }
+      chartTimeseries.Show();
+      foreach (var ca in chartTimeseries.ChartAreas) { ca.BackColor = Color.Transparent; }
+    }
   }
 }
- 
+

@@ -10,6 +10,7 @@ namespace ScaffelPikeClient
 {
   internal class Program
   {
+    [STAThread]
     static void Main(string[] args)
     {
       using (var container = Bootstrapper.RegisterContainerBuilder().Build())
