@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Quandl.NET;
 using Quandl.NET.Model.Response;
-using QuandlAPIExt.TransferObjects;
+using FinDataApiManager.TransferObjects;
 using ScaffelPikeLogger;
 
-namespace QuandlAPIExt
+namespace FinDataApiManager
 {
   public class QuandlClientExt: QuandlClient
   {

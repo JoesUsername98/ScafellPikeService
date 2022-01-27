@@ -24,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeLogger", "Scaffe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeServices", "ScaffelPikeServices\ScaffelPikeServices.csproj", "{39A81D6C-B0DB-4700-AB21-2894C452C825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuandlAPIExt", "QuandlAPIExt\QuandlAPIExt.csproj", "{FB420D39-16EF-415E-A24D-84614C935658}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinDataApiManager", "QuandlAPIExt\FinDataApiManager.csproj", "{FB420D39-16EF-415E-A24D-84614C935658}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

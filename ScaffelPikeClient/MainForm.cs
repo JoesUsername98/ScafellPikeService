@@ -4,17 +4,19 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Newtonsoft.Json;
 using ScaffelPikeContracts;
+using YahooFinanceApi;
 
 namespace ScaffelPikeClient
 {
   public partial class MainForm : Form
   {
-    private List<DatabaseResponse> Databases { get; set; }
-    private DatabaseResponse DatabaseSelected { get; set; }
-    private List<DatasetResponse> Datasets { get; set; }
-    private DatasetResponse DatasetSelected { get; set; }
-    private MyTimeseriesDataResponse TimeseriesData { get; set; }
+    private List<QuandlDatabaseResponse> Databases { get; set; }
+    private QuandlDatabaseResponse DatabaseSelected { get; set; }
+    private List<QuandlDatasetResponse> Datasets { get; set; }
+    private QuandlDatasetResponse DatasetSelected { get; set; }
+    private MyQuandlTimeseriesDataResponse TimeseriesData { get; set; }
 
     public MainForm()
     {
@@ -109,6 +111,12 @@ namespace ScaffelPikeClient
       }
       chartTimeseries.Show();
       foreach (var ca in chartTimeseries.ChartAreas) { ca.BackColor = Color.Transparent; }
+    }
+
+    private async void chart1_Click_1(object sender, EventArgs e)
+    {
+      await ClientRefs.ScaffelPikeChannel.GetYahoo("APPL");
+      //var data = serializedData.DeserializeSecurity();
     }
   }
 }

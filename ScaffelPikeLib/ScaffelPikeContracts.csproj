@@ -77,19 +77,23 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="YahooFinanceApi, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YahooFinanceApi.2.1.2\lib\netstandard2.0\YahooFinanceApi.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiKeys.cs" />
-    <Compile Include="DatabaseResponse.cs" />
-    <Compile Include="DatasetResponse.cs" />
+    <Compile Include="QuandlDatabaseResponse.cs" />
+    <Compile Include="QuandlDatasetResponse.cs" />
     <Compile Include="HeartbeatType.cs" />
     <Compile Include="HeartbeatDto.cs" />
     <Compile Include="IScaffelPikeService.cs" />
     <Compile Include="LogInRequest.cs" />
     <Compile Include="LogInResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MyTimeseriesDataResponse.cs" />
+    <Compile Include="MyQuandlTimeseriesDataResponse.cs" />
     <Compile Include="UserModel.cs" />
+    <Compile Include="YahooSecurityResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

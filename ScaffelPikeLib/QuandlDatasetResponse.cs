@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ScaffelPikeContracts
 {
   [DataContract]
-  public class DatasetResponse
+  public class QuandlDatasetResponse
   {
     [DataMember]
     public int Id { get; set; }

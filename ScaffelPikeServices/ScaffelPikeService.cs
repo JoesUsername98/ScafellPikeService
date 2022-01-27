@@ -5,6 +5,7 @@ using ScaffelPikeContracts;
 using System.Linq;
 using System.Collections.Generic;
 using Quandl.NET.Model.Response;
+using YahooFinanceApi;
 
 namespace ScaffelPikeServices
 {
@@ -37,28 +38,38 @@ namespace ScaffelPikeServices
     /// Returns a list of non premium dbs
     /// </summary>
     /// <returns></returns>
-    public async Task<List<DatabaseResponse>> GetQuandlDbs()
+    public async Task<List<QuandlDatabaseResponse>> GetQuandlDbs()
     {
-      return await QuandlManager.QuandlGetDbs();
+      return await APIManager.QuandlGetDbs();
     }
     /// <summary>
     /// Returns a list of non premium datasets
     /// </summary>
     /// <param name="dbCode"></param>
     /// <returns></returns>
-    public async Task<List<DatasetResponse>> GetQuandlDataSets(string dbCode)
+    public async Task<List<QuandlDatasetResponse>> GetQuandlDataSets(string dbCode)
     {
-      return await QuandlManager.QuandlGetDataSets(dbCode);
+      return await APIManager.QuandlGetDataSets(dbCode);
     }
     /// <summary>
-    /// Returns a list of non Premium timeseries data
+    /// 
     /// </summary>
     /// <param name="dbCode"></param>
     /// <param name="dsCode"></param>
-    /// <returns></returns>
-    public async Task<MyTimeseriesDataResponse> GetQuandlTimeseries(string dbCode, string dsCode)
+    /// <returns>Returns a list of non Premium timeseries data</returns>
+    public async Task<MyQuandlTimeseriesDataResponse> GetQuandlTimeseries(string dbCode, string dsCode)
     {
-      return await QuandlManager.QuandlGetTimeSeriesData(dbCode, dsCode);
+      return await APIManager.QuandlGetTimeSeriesData(dbCode, dsCode);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="tickers"></param>
+    /// <returns>A seriealized object of security data</returns>
+    public async Task GetYahoo(params string[] tickers)
+    {
+      await APIManager.YahooGetSecurityData(tickers);
     }
   }
 }

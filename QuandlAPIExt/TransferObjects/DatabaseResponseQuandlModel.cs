@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuandlAPIExt.TransferObjects
+namespace FinDataApiManager.TransferObjects
 {
   public class DatabaseResponseQuandlModel
   {

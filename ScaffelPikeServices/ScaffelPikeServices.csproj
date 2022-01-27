@@ -96,12 +96,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
+    <Reference Include="YahooFinanceApi, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YahooFinanceApi.2.1.2\lib\netstandard2.0\YahooFinanceApi.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HeartbeatManagerServerSide.cs" />
     <Compile Include="LogInManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QuandlManager.cs" />
+    <Compile Include="APIManager.cs" />
     <Compile Include="ScaffelPikeService.cs" />
     <Compile Include="ServiceRefs.cs" />
   </ItemGroup>
@@ -110,9 +113,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\QuandlAPIExt\QuandlAPIExt.csproj">
-      <Project>{FB420D39-16EF-415E-A24D-84614C935658}</Project>
-      <Name>QuandlAPIExt</Name>
+    <ProjectReference Include="..\QuandlAPIExt\FinDataApiManager.csproj">
+      <Project>{fb420d39-16ef-415e-a24d-84614c935658}</Project>
+      <Name>FinDataApiManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScaffelPikeDataAccess\ScaffelPikeDataAccess.csproj">
       <Project>{c55eaf43-4518-44f1-be81-54463cbe14f6}</Project>

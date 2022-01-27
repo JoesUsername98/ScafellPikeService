@@ -9,9 +9,9 @@ using Quandl.NET;
 namespace ScaffelPikeContracts
 {
   [DataContract]
-  public class MyTimeseriesDataResponse
+  public class MyQuandlTimeseriesDataResponse
   {
-    public MyTimeseriesDataResponse(Quandl.NET.Model.TimeseriesData data)
+    public MyQuandlTimeseriesDataResponse(Quandl.NET.Model.TimeseriesData data)
     {
       Limit = data.Limit;
       Transform = data.Transform; 
