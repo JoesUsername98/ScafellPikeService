@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ScaffelPikeContracts
+namespace ScaffelPikeContracts.Quandl
 {
   [DataContract]
   public class QuandlDatasetResponse

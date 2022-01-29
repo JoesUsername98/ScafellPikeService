@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using FinDataApiManager;
 using FinDataApiManager.TransferObjects;
 using ScaffelPikeContracts;
+using ScaffelPikeContracts.Quandl;
+using ScaffelPikeContracts.Yahoo;
 using YahooFinanceApi;
 
 namespace ScaffelPikeServices
@@ -145,9 +147,9 @@ namespace ScaffelPikeServices
     #endregion
 
     #region YahooMethods
-    internal async static Task<YahooSecurityResponse> YahooGetSecurityData(params string[] tickers)
+    internal async static Task<YahooSecurityResponse> YahooQuery(Field[] fields, params string[] tickers)
     {
-      return new YahooSecurityResponse(await YahooClient.GetSecurityData(tickers));
+      return new YahooSecurityResponse(await YahooClient.YahooQuery(fields, tickers));
     }
     #endregion
   }

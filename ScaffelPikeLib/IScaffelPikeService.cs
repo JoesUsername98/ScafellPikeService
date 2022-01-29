@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using Quandl.NET.Model.Response;
+using ScaffelPikeContracts.Heartbeat;
+using ScaffelPikeContracts.LogIn;
+using ScaffelPikeContracts.Quandl;
+using ScaffelPikeContracts.Yahoo;
 using YahooFinanceApi;
 
 namespace ScaffelPikeContracts
@@ -25,6 +27,6 @@ namespace ScaffelPikeContracts
     [OperationContract]
     Task<QuandlTimeseriesDataResponse> GetQuandlTimeseries(string dbCode , string dsCode);
     [OperationContract]
-    Task<YahooSecurityResponse> GetYahoo(params string[] tickers);
+    Task<YahooSecurityResponse> QueryYahoo(Field[] fields, params string[] tickers);
   }
 }

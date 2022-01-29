@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using Quandl.NET;
+using Quandl.NET.Model;
 
-namespace ScaffelPikeContracts
+namespace ScaffelPikeContracts.Quandl
 {
   [DataContract]
   public class QuandlTimeseriesDataResponse
   {
-    public QuandlTimeseriesDataResponse(Quandl.NET.Model.TimeseriesData data)
+    public QuandlTimeseriesDataResponse(TimeseriesData data)
     {
       Limit = data.Limit;
       Transform = data.Transform; 

@@ -37,7 +37,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.comboBoxDatabase = new System.Windows.Forms.ComboBox();
             this.comboBoxDataset = new System.Windows.Forms.ComboBox();
-            this.chartTimeseries = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartQuandl = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBoxQuandlGraphInputs = new System.Windows.Forms.GroupBox();
             this.labelDataset = new System.Windows.Forms.Label();
             this.labelDatabase = new System.Windows.Forms.Label();
@@ -49,14 +49,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            ((System.ComponentModel.ISupportInitialize)(this.chartTimeseries)).BeginInit();
+            this.chartYahoo = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.chartQuandl)).BeginInit();
             this.groupBoxQuandlGraphInputs.SuspendLayout();
             this.tabControlDataSourceProviders.SuspendLayout();
             this.tabPageQuandl.SuspendLayout();
             this.tabPageYahoo.SuspendLayout();
             this.groupBoxYahooGraphInputs.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartYahoo)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxDatabase
@@ -89,28 +89,28 @@
             this.comboBoxDataset.TabIndex = 1;
             this.comboBoxDataset.SelectedValueChanged += new System.EventHandler(this.comboBoxDataset_SelectedValueChanged);
             // 
-            // chartTimeseries
+            // chartQuandl
             // 
-            this.chartTimeseries.BackColor = System.Drawing.Color.Transparent;
-            this.chartTimeseries.BorderlineColor = System.Drawing.Color.Black;
+            this.chartQuandl.BackColor = System.Drawing.Color.Transparent;
+            this.chartQuandl.BorderlineColor = System.Drawing.Color.Black;
             chartArea1.BackColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
-            this.chartTimeseries.ChartAreas.Add(chartArea1);
-            this.chartTimeseries.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.chartQuandl.ChartAreas.Add(chartArea1);
+            this.chartQuandl.Dock = System.Windows.Forms.DockStyle.Bottom;
             legend1.BackColor = System.Drawing.Color.Transparent;
             legend1.Name = "Legend1";
-            this.chartTimeseries.Legends.Add(legend1);
-            this.chartTimeseries.Location = new System.Drawing.Point(3, 44);
-            this.chartTimeseries.Name = "chartTimeseries";
-            this.chartTimeseries.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
+            this.chartQuandl.Legends.Add(legend1);
+            this.chartQuandl.Location = new System.Drawing.Point(3, 44);
+            this.chartQuandl.Name = "chartQuandl";
+            this.chartQuandl.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
-            this.chartTimeseries.Series.Add(series1);
-            this.chartTimeseries.Size = new System.Drawing.Size(759, 392);
-            this.chartTimeseries.TabIndex = 2;
-            this.chartTimeseries.Text = "chartQuandl";
-            this.chartTimeseries.Click += new System.EventHandler(this.chart1_Click);
+            this.chartQuandl.Series.Add(series1);
+            this.chartQuandl.Size = new System.Drawing.Size(759, 392);
+            this.chartQuandl.TabIndex = 2;
+            this.chartQuandl.Text = "chartQuandl";
+            this.chartQuandl.Click += new System.EventHandler(this.chart1_Click);
             // 
             // groupBoxQuandlGraphInputs
             // 
@@ -162,7 +162,7 @@
             // tabPageQuandl
             // 
             this.tabPageQuandl.Controls.Add(this.groupBoxQuandlGraphInputs);
-            this.tabPageQuandl.Controls.Add(this.chartTimeseries);
+            this.tabPageQuandl.Controls.Add(this.chartQuandl);
             this.tabPageQuandl.Location = new System.Drawing.Point(4, 22);
             this.tabPageQuandl.Name = "tabPageQuandl";
             this.tabPageQuandl.Padding = new System.Windows.Forms.Padding(3);
@@ -174,7 +174,7 @@
             // tabPageYahoo
             // 
             this.tabPageYahoo.Controls.Add(this.groupBoxYahooGraphInputs);
-            this.tabPageYahoo.Controls.Add(this.chart1);
+            this.tabPageYahoo.Controls.Add(this.chartYahoo);
             this.tabPageYahoo.Location = new System.Drawing.Point(4, 22);
             this.tabPageYahoo.Name = "tabPageYahoo";
             this.tabPageYahoo.Padding = new System.Windows.Forms.Padding(3);
@@ -247,28 +247,28 @@
             this.comboBox2.Size = new System.Drawing.Size(137, 21);
             this.comboBox2.TabIndex = 1;
             // 
-            // chart1
+            // chartYahoo
             // 
-            this.chart1.BackColor = System.Drawing.Color.Transparent;
-            this.chart1.BorderlineColor = System.Drawing.Color.Black;
+            this.chartYahoo.BackColor = System.Drawing.Color.Transparent;
+            this.chartYahoo.BorderlineColor = System.Drawing.Color.Black;
             chartArea2.BackColor = System.Drawing.Color.Transparent;
             chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            this.chart1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.chartYahoo.ChartAreas.Add(chartArea2);
+            this.chartYahoo.Dock = System.Windows.Forms.DockStyle.Bottom;
             legend2.BackColor = System.Drawing.Color.Transparent;
             legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(3, 44);
-            this.chart1.Name = "chart1";
-            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
+            this.chartYahoo.Legends.Add(legend2);
+            this.chartYahoo.Location = new System.Drawing.Point(3, 44);
+            this.chartYahoo.Name = "chartYahoo";
+            this.chartYahoo.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
             series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(759, 392);
-            this.chart1.TabIndex = 5;
-            this.chart1.Text = "chartYahoo";
-            this.chart1.Click += new System.EventHandler(this.chart1_Click_1);
+            this.chartYahoo.Series.Add(series2);
+            this.chartYahoo.Size = new System.Drawing.Size(759, 392);
+            this.chartYahoo.TabIndex = 5;
+            this.chartYahoo.Text = "chartYahoo";
+            this.chartYahoo.Click += new System.EventHandler(this.chartYahoo_Click);
             // 
             // MainForm
             // 
@@ -280,7 +280,7 @@
             this.Name = "MainForm";
             this.Text = "Timeseries Charts";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.chartTimeseries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartQuandl)).EndInit();
             this.groupBoxQuandlGraphInputs.ResumeLayout(false);
             this.groupBoxQuandlGraphInputs.PerformLayout();
             this.tabControlDataSourceProviders.ResumeLayout(false);
@@ -290,7 +290,7 @@
             this.tabPageYahoo.PerformLayout();
             this.groupBoxYahooGraphInputs.ResumeLayout(false);
             this.groupBoxYahooGraphInputs.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartYahoo)).EndInit();
             this.ResumeLayout(false);
 
     }
@@ -299,14 +299,14 @@
 
     private System.Windows.Forms.ComboBox comboBoxDatabase;
     private System.Windows.Forms.ComboBox comboBoxDataset;
-    private System.Windows.Forms.DataVisualization.Charting.Chart chartTimeseries;
+    private System.Windows.Forms.DataVisualization.Charting.Chart chartQuandl;
     private System.Windows.Forms.GroupBox groupBoxQuandlGraphInputs;
     private System.Windows.Forms.Label labelDataset;
     private System.Windows.Forms.Label labelDatabase;
     private System.Windows.Forms.TabControl tabControlDataSourceProviders;
     private System.Windows.Forms.TabPage tabPageQuandl;
     private System.Windows.Forms.TabPage tabPageYahoo;
-    private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+    private System.Windows.Forms.DataVisualization.Charting.Chart chartYahoo;
     private System.Windows.Forms.GroupBox groupBoxYahooGraphInputs;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Label label2;

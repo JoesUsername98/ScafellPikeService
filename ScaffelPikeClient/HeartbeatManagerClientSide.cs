@@ -4,8 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using ScaffelPikeContracts;
+using ScaffelPikeContracts.Heartbeat;
 
 namespace ScaffelPikeClient
 {

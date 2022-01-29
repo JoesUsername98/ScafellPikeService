@@ -16,8 +16,9 @@ namespace FinDataApiManager
     {
       _logger = logger;
     }
-    public async Task<IReadOnlyDictionary<string,Security>> GetSecurityData(params string[] tickers)
+    public async Task<IReadOnlyDictionary<string, Security>> YahooQuery(Field[] fields = null, params string[] tickers)
     {
+      fields = fields ?? new Field[] { Field.Symbol, Field.RegularMarketPrice, Field.FiftyTwoWeekHigh };
       _logger.Information("GetSecurityData", $"API call start");
       try
       {

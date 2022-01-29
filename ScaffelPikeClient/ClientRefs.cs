@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using ScaffelPikeContracts;
+using ScaffelPikeContracts.LogIn;
 using ScaffelPikeLogger;
 
 namespace ScaffelPikeClient

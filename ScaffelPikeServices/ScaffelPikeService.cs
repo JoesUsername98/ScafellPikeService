@@ -2,11 +2,12 @@
 using ScaffelPikeDataAccess.Data;
 using ScaffelPikeLogger;
 using ScaffelPikeContracts;
-using System.Linq;
 using System.Collections.Generic;
-using Quandl.NET.Model.Response;
+using ScaffelPikeContracts.LogIn;
+using ScaffelPikeContracts.Heartbeat;
+using ScaffelPikeContracts.Quandl;
+using ScaffelPikeContracts.Yahoo;
 using YahooFinanceApi;
-using Newtonsoft.Json;
 
 namespace ScaffelPikeServices
 {
@@ -68,9 +69,9 @@ namespace ScaffelPikeServices
     /// </summary>
     /// <param name="tickers"></param>
     /// <returns>A dictionar of security data from yahoo</returns>
-    public async Task<YahooSecurityResponse> GetYahoo(params string[] tickers)
+    public async Task<YahooSecurityResponse> QueryYahoo(Field[] fields, params string[] tickers)
     {
-      return await APIManager.YahooGetSecurityData(tickers);
+      return await APIManager.YahooQuery(fields, tickers);
     }
   }
 }
