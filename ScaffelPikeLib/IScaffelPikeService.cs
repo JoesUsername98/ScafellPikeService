@@ -23,8 +23,8 @@ namespace ScaffelPikeContracts
     Task<List<QuandlDatasetResponse>> GetQuandlDataSets(string dbCode);
 
     [OperationContract]
-    Task<MyQuandlTimeseriesDataResponse> GetQuandlTimeseries(string dbCode , string dsCode);
+    Task<QuandlTimeseriesDataResponse> GetQuandlTimeseries(string dbCode , string dsCode);
     [OperationContract]
-    Task GetYahoo(params string[] tickers);
+    Task<string> GetYahoo(params string[] tickers);
   }
 }

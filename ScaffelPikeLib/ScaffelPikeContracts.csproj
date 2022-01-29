@@ -55,8 +55,8 @@
       <HintPath>..\packages\Flurl.Http.2.4.0\lib\net46\Flurl.Http.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Quandl.NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Quandl.NET.1.2.1\lib\netstandard2.0\Quandl.NET.dll</HintPath>
@@ -91,8 +91,9 @@
     <Compile Include="LogInRequest.cs" />
     <Compile Include="LogInResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MyQuandlTimeseriesDataResponse.cs" />
+    <Compile Include="QuandlTimeseriesDataResponse.cs" />
     <Compile Include="UserModel.cs" />
+    <Compile Include="YahooSecuritySurrogate.cs" />
     <Compile Include="YahooSecurityResponse.cs" />
   </ItemGroup>
   <ItemGroup>

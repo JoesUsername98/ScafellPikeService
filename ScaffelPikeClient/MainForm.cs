@@ -16,7 +16,7 @@ namespace ScaffelPikeClient
     private QuandlDatabaseResponse DatabaseSelected { get; set; }
     private List<QuandlDatasetResponse> Datasets { get; set; }
     private QuandlDatasetResponse DatasetSelected { get; set; }
-    private MyQuandlTimeseriesDataResponse TimeseriesData { get; set; }
+    private QuandlTimeseriesDataResponse TimeseriesData { get; set; }
 
     public MainForm()
     {
@@ -115,8 +115,15 @@ namespace ScaffelPikeClient
 
     private async void chart1_Click_1(object sender, EventArgs e)
     {
-      await ClientRefs.ScaffelPikeChannel.GetYahoo("APPL");
-      //var data = serializedData.DeserializeSecurity();
+      try
+      {
+        var a = await ClientRefs.ScaffelPikeChannel.GetYahoo("APPL");
+        var b = JsonConvert.DeserializeObject<YahooSecurityResponse>(a);
+      }
+      catch(Exception ex)
+      {
+        ClientRefs.Log.Error("chart1_Click_1", ex);
+      }
     }
   }
 }

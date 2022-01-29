@@ -14,9 +14,9 @@ namespace ScaffelPikeServices
   {
     public static ApiKeys ApiKeys { get; private set; }
     #region Quandl Properties and Fields
-    public static Dictionary<string, DatabaseQuandlModel> QuandlDBCodeMap { get; private set; }
-    public static Dictionary<string, DatasetQuandlModel> QuandlDSCodeMap { get; private set; }
-    public static Dictionary<string, List<DatasetQuandlModel>> QuandlDBtoDSMap { get; private set; }
+    public static Dictionary<string, QuandlDatabaseSurrogate> QuandlDBCodeMap { get; private set; }
+    public static Dictionary<string, QuandlDatasetSurrogate> QuandlDSCodeMap { get; private set; }
+    public static Dictionary<string, List<QuandlDatasetSurrogate>> QuandlDBtoDSMap { get; private set; }
     private static readonly QuandlClientExt QuandClient;
     #endregion
     #region Yahoo Properties and Fields
@@ -32,9 +32,9 @@ namespace ScaffelPikeServices
       }
       #region Quandl Inits
       QuandClient = new QuandlClientExt(ServiceRefs.Log, ApiKeys.Quandl);
-      QuandlDBtoDSMap = new Dictionary<string, List<DatasetQuandlModel>>();
-      QuandlDBCodeMap = new Dictionary<string, DatabaseQuandlModel>();
-      QuandlDSCodeMap = new Dictionary<string, DatasetQuandlModel>();
+      QuandlDBtoDSMap = new Dictionary<string, List<QuandlDatasetSurrogate>>();
+      QuandlDBCodeMap = new Dictionary<string, QuandlDatabaseSurrogate>();
+      QuandlDSCodeMap = new Dictionary<string, QuandlDatasetSurrogate>();
       #endregion
       #region Yahoo Inits
       YahooClient = new YahooClient(ServiceRefs.Log);
@@ -99,7 +99,7 @@ namespace ScaffelPikeServices
       ServiceRefs.Log.Information("QuandlGetDataSets", $"End method dbCode [{dbCode}]");
       return response;
     }
-    internal async static Task<MyQuandlTimeseriesDataResponse> QuandlGetTimeSeriesData(string dbCode, string dsCode)
+    internal async static Task<QuandlTimeseriesDataResponse> QuandlGetTimeSeriesData(string dbCode, string dsCode)
     {
       ServiceRefs.Log.Information("QuandlGetTimeSeriesData", $"Start method dbCode [{dbCode}] dsCode [{dsCode}]");
 
@@ -117,9 +117,9 @@ namespace ScaffelPikeServices
       ServiceRefs.Log.Information("QuandlGetTimeSeriesData", $"End method dbCode [{dbCode}] dsCode [{dsCode}]");
 
 
-      return new MyQuandlTimeseriesDataResponse(dataSets.DatasetData);
+      return new QuandlTimeseriesDataResponse(dataSets.DatasetData);
     }
-    private static QuandlDatabaseResponse QuandlDatabaseApiToWfcDto(DatabaseQuandlModel input)
+    private static QuandlDatabaseResponse QuandlDatabaseApiToWfcDto(QuandlDatabaseSurrogate input)
     {
       return new QuandlDatabaseResponse() {
         Id = input.id,
@@ -129,7 +129,7 @@ namespace ScaffelPikeServices
         Name = input.name,
       };
     }
-    private static QuandlDatasetResponse QuandlDatasetApiToWfcDto(DatasetQuandlModel input)
+    private static QuandlDatasetResponse QuandlDatasetApiToWfcDto(QuandlDatasetSurrogate input)
     {
       return new QuandlDatasetResponse() {
         Id = input.id,
@@ -147,9 +147,7 @@ namespace ScaffelPikeServices
     #region YahooMethods
     internal async static Task<YahooSecurityResponse> YahooGetSecurityData(params string[] tickers)
     {
-      var data = await YahooClient.GetSecurityData(tickers);
-      var serializedData = new  YahooSecurityResponse(data);
-      return serializedData;
+      return new YahooSecurityResponse(await YahooClient.GetSecurityData(tickers));
     }
     #endregion
   }

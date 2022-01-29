@@ -6,6 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Quandl.NET.Model.Response;
 using YahooFinanceApi;
+using Newtonsoft.Json;
 
 namespace ScaffelPikeServices
 {
@@ -57,7 +58,7 @@ namespace ScaffelPikeServices
     /// <param name="dbCode"></param>
     /// <param name="dsCode"></param>
     /// <returns>Returns a list of non Premium timeseries data</returns>
-    public async Task<MyQuandlTimeseriesDataResponse> GetQuandlTimeseries(string dbCode, string dsCode)
+    public async Task<QuandlTimeseriesDataResponse> GetQuandlTimeseries(string dbCode, string dsCode)
     {
       return await APIManager.QuandlGetTimeSeriesData(dbCode, dsCode);
     }
@@ -67,9 +68,11 @@ namespace ScaffelPikeServices
     /// </summary>
     /// <param name="tickers"></param>
     /// <returns>A seriealized object of security data</returns>
-    public async Task GetYahoo(params string[] tickers)
+    public async Task<string> GetYahoo(params string[] tickers)
     {
-      await APIManager.YahooGetSecurityData(tickers);
+      var a = await APIManager.YahooGetSecurityData(tickers);
+      var b = JsonConvert.SerializeObject(a);
+      return b;
     }
   }
 }

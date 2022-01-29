@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinDataApiManager.TransferObjects
 {
-  public class MetaInformationQuandlModel
+  public class QuandlMetaInformationSurrogate
   {
     public int current_page { get; set; }
     public int per_page { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinDataApiManager.TransferObjects
 {
-  public class DatasetQuandlModel
+  public class QuandlDatasetSurrogate
   {
     public int id { get; set; }
     public string dataset_code { get; set; } 

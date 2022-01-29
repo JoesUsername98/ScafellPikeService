@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FinDataApiManager.TransferObjects
 {
-  public class DatabaseResponseQuandlModel
+  public class QuandlDatabaseResponseSurrogate
   {
-    public List<DatabaseQuandlModel> databases { get; set; }
-    public MetaInformationQuandlModel meta { get; set; }
+    public List<QuandlDatabaseSurrogate> databases { get; set; }
+    public QuandlMetaInformationSurrogate meta { get; set; }
   }
 }

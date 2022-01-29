@@ -22,10 +22,10 @@ namespace FinDataApiManager
       _apiKey = apiKey;
     }
     #region Datasets
-    public async Task<List<DatasetQuandlModel>> GetInitialDataSetsInDb(string dbcode)
+    public async Task<List<QuandlDatasetSurrogate>> GetInitialDataSetsInDb(string dbcode)
     {
       _logger.Information("GetInitialDataSetsInDb", $"API call start {dbcode}");
-      List<DatasetQuandlModel> DatsetResponses = new List<DatasetQuandlModel>();
+      List<QuandlDatasetSurrogate> DatsetResponses = new List<QuandlDatasetSurrogate>();
       try
       {
         string request = $"https://www.quandl.com/api/v3/datasets.json?database_code={dbcode}&api_key={_apiKey}";
@@ -34,7 +34,7 @@ namespace FinDataApiManager
         {
           _logger.Information("GetInitialDataSetsInDb", "API call successfull");
           string content = await response.Content.ReadAsStringAsync();
-          var dataset = JsonConvert.DeserializeObject<DatasetResponseQuandlModel>(content);
+          var dataset = JsonConvert.DeserializeObject<QuandlDatasetResponseSurrogate>(content);
           DatsetResponses.AddRange(dataset.datasets);
           _logger.Information("GetInitialDataSetsInDb", "API content serialized");
         }
@@ -54,11 +54,11 @@ namespace FinDataApiManager
     /// <param name="startPage"></param>
     /// <param name="endpage"></param>
     /// <returns></returns>
-    public async Task<List<DatasetQuandlModel>> GetDataSetsInDbByMultiplePages(string dbcode, int pagesize = 100, int startPage=1, int endpage = 20)
+    public async Task<List<QuandlDatasetSurrogate>> GetDataSetsInDbByMultiplePages(string dbcode, int pagesize = 100, int startPage=1, int endpage = 20)
     {
        
       _logger.Information("GetAllDataSetsInDb", $"API call start {dbcode}");
-      List<DatasetQuandlModel> DatsetResponses = new List<DatasetQuandlModel>();
+      List<QuandlDatasetSurrogate> DatsetResponses = new List<QuandlDatasetSurrogate>();
 
       try
       {
@@ -81,10 +81,10 @@ namespace FinDataApiManager
       return DatsetResponses;
     }
 
-    public async Task<DatasetResponseQuandlModel> GetDataSetsInDbByPage(string dbcode, int page, int perPage)
+    public async Task<QuandlDatasetResponseSurrogate> GetDataSetsInDbByPage(string dbcode, int page, int perPage)
     {
       _logger.Information("GetDataSetsInDbByPage", $"API call start {dbcode}, page {page}, perPage {perPage}");
-      DatasetResponseQuandlModel DatsetResponse = new DatasetResponseQuandlModel();
+      QuandlDatasetResponseSurrogate DatsetResponse = new QuandlDatasetResponseSurrogate();
 
       try
       {
@@ -95,7 +95,7 @@ namespace FinDataApiManager
         {
           _logger.Information("GetDataSetsInDbByPage", "API call successfull");
           string content = await response.Content.ReadAsStringAsync();
-          DatsetResponse = JsonConvert.DeserializeObject<DatasetResponseQuandlModel>(content);
+          DatsetResponse = JsonConvert.DeserializeObject<QuandlDatasetResponseSurrogate>(content);
           _logger.Information("GetDataSetsInDbByPage", "API content serialized");
         }
         else
@@ -109,10 +109,10 @@ namespace FinDataApiManager
     }
     #endregion
     #region Databases
-    public async Task<List<DatabaseQuandlModel>> GetDatabases()
+    public async Task<List<QuandlDatabaseSurrogate>> GetDatabases()
     {
       _logger.Information("GetDatabases", $"API call start");
-      List<DatabaseQuandlModel> DatabaseResponses = new List<DatabaseQuandlModel>();
+      List<QuandlDatabaseSurrogate> DatabaseResponses = new List<QuandlDatabaseSurrogate>();
       try
       {
         string request = $"https://www.quandl.com/api/v3/databases.json?databases?api_key={_apiKey}";
@@ -121,7 +121,7 @@ namespace FinDataApiManager
         {
           _logger.Information("GetDatabases", "API call successfull");
           string content = await response.Content.ReadAsStringAsync();
-          var databases = JsonConvert.DeserializeObject<DatabaseResponseQuandlModel>(content);
+          var databases = JsonConvert.DeserializeObject<QuandlDatabaseResponseSurrogate>(content);
           DatabaseResponses = databases.databases;
           _logger.Information("GetDatabases", "API content serialized");
         }

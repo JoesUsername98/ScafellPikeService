@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FinDataApiManager.TransferObjects
 {
-  public class DatasetResponseQuandlModel
+  public class QuandlDatasetResponseSurrogate
   {
-    public List<DatasetQuandlModel> datasets {get; set;}
-    public MetaInformationQuandlModel meta {get; set;}
+    public List<QuandlDatasetSurrogate> datasets {get; set;}
+    public QuandlMetaInformationSurrogate meta {get; set;}
   }
 }

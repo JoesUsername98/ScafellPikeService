@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinDataApiManager.TransferObjects
 {
-  public class DatabaseQuandlModel
+  public class QuandlDatabaseSurrogate
   {
     public int id { get; set; }
     public string name { get; set; }
