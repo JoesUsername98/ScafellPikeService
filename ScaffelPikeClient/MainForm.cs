@@ -4,9 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using Newtonsoft.Json;
 using ScaffelPikeContracts;
-using YahooFinanceApi;
 
 namespace ScaffelPikeClient
 {
@@ -118,7 +116,6 @@ namespace ScaffelPikeClient
       try
       {
         var a = await ClientRefs.ScaffelPikeChannel.GetYahoo("APPL");
-        var b = JsonConvert.DeserializeObject<YahooSecurityResponse>(a);
       }
       catch(Exception ex)
       {

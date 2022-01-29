@@ -67,12 +67,10 @@ namespace ScaffelPikeServices
     /// 
     /// </summary>
     /// <param name="tickers"></param>
-    /// <returns>A seriealized object of security data</returns>
-    public async Task<string> GetYahoo(params string[] tickers)
+    /// <returns>A dictionar of security data from yahoo</returns>
+    public async Task<YahooSecurityResponse> GetYahoo(params string[] tickers)
     {
-      var a = await APIManager.YahooGetSecurityData(tickers);
-      var b = JsonConvert.SerializeObject(a);
-      return b;
+      return await APIManager.YahooGetSecurityData(tickers);
     }
   }
 }
