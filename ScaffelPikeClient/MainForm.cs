@@ -110,7 +110,7 @@ namespace ScaffelPikeClient
     {
       try
       {
-        //var a = await ClientRefs.ScaffelPikeChannel.QueryYahoo(null,"APPL");
+        var a = await ClientRefs.ScaffelPikeChannel.QueryYahoo(null,"APPL");
       }
       catch(Exception ex)
       {
