@@ -9,6 +9,7 @@ using ScaffelPikeContracts;
 using ScaffelPikeContracts.Quandl;
 using ScaffelPikeContracts.Yahoo;
 using YahooFinanceApi;
+using System;
 
 namespace ScaffelPikeServices
 {
@@ -149,7 +150,32 @@ namespace ScaffelPikeServices
     #region YahooMethods
     internal async static Task<YahooSecurityResponse> YahooQuery(Field[] fields, params string[] tickers)
     {
-      return new YahooSecurityResponse(await YahooClient.YahooQuery(fields, tickers));
+      var query = await YahooClient.YahooQuery(fields, tickers);
+      if (query == null)
+        return null; 
+
+      return new YahooSecurityResponse(query);
+    }
+    internal static List<string> GetYahooTickers()
+    {
+      return YahooClient.Tickers;
+    }
+    internal async static Task<List<YahooCandleResponse>> GetYahooHistoricalData(string symbol, DateTime? startTime, DateTime? endTime, Period period)
+    {
+      var listToReturn = new List<YahooCandleResponse>();
+      try
+      {
+        var data = await YahooClient.GetYahooHistoricalData(symbol, startTime, endTime, period);
+
+        if(data != null)
+          foreach (var candle in data) 
+            listToReturn.Add(new YahooCandleResponse(candle)); 
+      }
+      catch(Exception ex)
+      {
+        ServiceRefs.Log.Error("GetYahooHistoricalData", ex);
+      }
+      return listToReturn;
     }
     #endregion
   }

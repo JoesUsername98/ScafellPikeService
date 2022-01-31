@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using ScaffelPikeContracts.Heartbeat;
@@ -28,5 +29,9 @@ namespace ScaffelPikeContracts
     Task<QuandlTimeseriesDataResponse> GetQuandlTimeseries(string dbCode , string dsCode);
     [OperationContract]
     Task<YahooSecurityResponse> QueryYahoo(Field[] fields, params string[] tickers);
+    [OperationContract]
+    Task<List<string>> GetYahooTickers();
+    [OperationContract]
+    Task<List<YahooCandleResponse>> GetYahooHistoricalData(string symbol, DateTime? startTime = null, DateTime? endTime = null, Period period = Period.Daily);
   }
 }

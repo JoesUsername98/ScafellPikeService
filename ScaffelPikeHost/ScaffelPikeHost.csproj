@@ -95,6 +95,9 @@
     <None Include="secrets.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="YahooTickers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScaffelPikeDataAccess\ScaffelPikeDataAccess.csproj">

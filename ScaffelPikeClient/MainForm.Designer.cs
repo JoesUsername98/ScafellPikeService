@@ -44,11 +44,20 @@
             this.tabControlDataSourceProviders = new System.Windows.Forms.TabControl();
             this.tabPageQuandl = new System.Windows.Forms.TabPage();
             this.tabPageYahoo = new System.Windows.Forms.TabPage();
+            this.listViewYahoo = new System.Windows.Forms.ListView();
+            this.columnHeaderDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderHigh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderLow = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderOpen = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderClose = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderAdjClose = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBoxYahooGraphInputs = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.dateTimePickerYahooEndDate = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerYahooStartDate = new System.Windows.Forms.DateTimePicker();
+            this.labelYahooEndDate = new System.Windows.Forms.Label();
+            this.labelYahooStartDate = new System.Windows.Forms.Label();
+            this.labelTicker = new System.Windows.Forms.Label();
+            this.comboBoxTicker = new System.Windows.Forms.ComboBox();
             this.chartYahoo = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.chartQuandl)).BeginInit();
             this.groupBoxQuandlGraphInputs.SuspendLayout();
@@ -92,11 +101,10 @@
             // chartQuandl
             // 
             this.chartQuandl.BackColor = System.Drawing.Color.Transparent;
-            this.chartQuandl.BorderlineColor = System.Drawing.Color.Black;
+            this.chartQuandl.BorderlineColor = System.Drawing.Color.BlueViolet;
             chartArea1.BackColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
             this.chartQuandl.ChartAreas.Add(chartArea1);
-            this.chartQuandl.Dock = System.Windows.Forms.DockStyle.Bottom;
             legend1.BackColor = System.Drawing.Color.Transparent;
             legend1.Name = "Legend1";
             this.chartQuandl.Legends.Add(legend1);
@@ -110,7 +118,6 @@
             this.chartQuandl.Size = new System.Drawing.Size(759, 392);
             this.chartQuandl.TabIndex = 2;
             this.chartQuandl.Text = "chartQuandl";
-            this.chartQuandl.Click += new System.EventHandler(this.chart1_Click);
             // 
             // groupBoxQuandlGraphInputs
             // 
@@ -156,7 +163,7 @@
             this.tabControlDataSourceProviders.Location = new System.Drawing.Point(0, 0);
             this.tabControlDataSourceProviders.Name = "tabControlDataSourceProviders";
             this.tabControlDataSourceProviders.SelectedIndex = 0;
-            this.tabControlDataSourceProviders.Size = new System.Drawing.Size(773, 465);
+            this.tabControlDataSourceProviders.Size = new System.Drawing.Size(758, 616);
             this.tabControlDataSourceProviders.TabIndex = 4;
             // 
             // tabPageQuandl
@@ -166,86 +173,157 @@
             this.tabPageQuandl.Location = new System.Drawing.Point(4, 22);
             this.tabPageQuandl.Name = "tabPageQuandl";
             this.tabPageQuandl.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageQuandl.Size = new System.Drawing.Size(765, 439);
+            this.tabPageQuandl.Size = new System.Drawing.Size(750, 590);
             this.tabPageQuandl.TabIndex = 0;
             this.tabPageQuandl.Text = "Quandl";
             this.tabPageQuandl.UseVisualStyleBackColor = true;
             // 
             // tabPageYahoo
             // 
+            this.tabPageYahoo.Controls.Add(this.listViewYahoo);
             this.tabPageYahoo.Controls.Add(this.groupBoxYahooGraphInputs);
             this.tabPageYahoo.Controls.Add(this.chartYahoo);
             this.tabPageYahoo.Location = new System.Drawing.Point(4, 22);
             this.tabPageYahoo.Name = "tabPageYahoo";
             this.tabPageYahoo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageYahoo.Size = new System.Drawing.Size(765, 439);
+            this.tabPageYahoo.Size = new System.Drawing.Size(750, 590);
             this.tabPageYahoo.TabIndex = 1;
             this.tabPageYahoo.Text = "Yahoo";
             this.tabPageYahoo.UseVisualStyleBackColor = true;
+            // 
+            // listViewYahoo
+            // 
+            this.listViewYahoo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderDate,
+            this.columnHeaderHigh,
+            this.columnHeaderLow,
+            this.columnHeaderOpen,
+            this.columnHeaderClose,
+            this.columnHeaderAdjClose});
+            this.listViewYahoo.HideSelection = false;
+            this.listViewYahoo.Location = new System.Drawing.Point(145, 471);
+            this.listViewYahoo.Name = "listViewYahoo";
+            this.listViewYahoo.Size = new System.Drawing.Size(510, 97);
+            this.listViewYahoo.TabIndex = 7;
+            this.listViewYahoo.UseCompatibleStateImageBehavior = false;
+            this.listViewYahoo.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeaderDate
+            // 
+            this.columnHeaderDate.Text = "Date";
+            this.columnHeaderDate.Width = 122;
+            // 
+            // columnHeaderHigh
+            // 
+            this.columnHeaderHigh.Text = "High";
+            this.columnHeaderHigh.Width = 83;
+            // 
+            // columnHeaderLow
+            // 
+            this.columnHeaderLow.Text = "Low";
+            this.columnHeaderLow.Width = 71;
+            // 
+            // columnHeaderOpen
+            // 
+            this.columnHeaderOpen.Text = "Open";
+            this.columnHeaderOpen.Width = 68;
+            // 
+            // columnHeaderClose
+            // 
+            this.columnHeaderClose.Text = "Close";
+            this.columnHeaderClose.Width = 74;
+            // 
+            // columnHeaderAdjClose
+            // 
+            this.columnHeaderAdjClose.Text = "Adj.Close";
+            this.columnHeaderAdjClose.Width = 87;
             // 
             // groupBoxYahooGraphInputs
             // 
             this.groupBoxYahooGraphInputs.AutoSize = true;
             this.groupBoxYahooGraphInputs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBoxYahooGraphInputs.Controls.Add(this.label1);
-            this.groupBoxYahooGraphInputs.Controls.Add(this.label2);
-            this.groupBoxYahooGraphInputs.Controls.Add(this.comboBox1);
-            this.groupBoxYahooGraphInputs.Controls.Add(this.comboBox2);
-            this.groupBoxYahooGraphInputs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxYahooGraphInputs.Controls.Add(this.dateTimePickerYahooEndDate);
+            this.groupBoxYahooGraphInputs.Controls.Add(this.dateTimePickerYahooStartDate);
+            this.groupBoxYahooGraphInputs.Controls.Add(this.labelYahooEndDate);
+            this.groupBoxYahooGraphInputs.Controls.Add(this.labelYahooStartDate);
+            this.groupBoxYahooGraphInputs.Controls.Add(this.labelTicker);
+            this.groupBoxYahooGraphInputs.Controls.Add(this.comboBoxTicker);
             this.groupBoxYahooGraphInputs.Location = new System.Drawing.Point(3, 3);
-            this.groupBoxYahooGraphInputs.MaximumSize = new System.Drawing.Size(400, 45);
-            this.groupBoxYahooGraphInputs.MinimumSize = new System.Drawing.Size(400, 45);
+            this.groupBoxYahooGraphInputs.MaximumSize = new System.Drawing.Size(160, 45);
+            this.groupBoxYahooGraphInputs.MinimumSize = new System.Drawing.Size(670, 45);
             this.groupBoxYahooGraphInputs.Name = "groupBoxYahooGraphInputs";
-            this.groupBoxYahooGraphInputs.Size = new System.Drawing.Size(400, 45);
+            this.groupBoxYahooGraphInputs.Size = new System.Drawing.Size(670, 45);
             this.groupBoxYahooGraphInputs.TabIndex = 6;
             this.groupBoxYahooGraphInputs.TabStop = false;
             this.groupBoxYahooGraphInputs.Text = "Data Source";
             // 
-            // label1
+            // dateTimePickerYahooEndDate
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(207, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Dataset";
+            this.dateTimePickerYahooEndDate.AllowDrop = true;
+            this.dateTimePickerYahooEndDate.CustomFormat = "\"ddd dd MMM yyyy\"";
+            this.dateTimePickerYahooEndDate.Location = new System.Drawing.Point(477, 19);
+            this.dateTimePickerYahooEndDate.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
+            this.dateTimePickerYahooEndDate.MinDate = new System.DateTime(1980, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerYahooEndDate.Name = "dateTimePickerYahooEndDate";
+            this.dateTimePickerYahooEndDate.Size = new System.Drawing.Size(179, 20);
+            this.dateTimePickerYahooEndDate.TabIndex = 9;
+            this.dateTimePickerYahooEndDate.ValueChanged += new System.EventHandler(this.dateTimePickerYahooEndDate_ValueChanged);
             // 
-            // label2
+            // dateTimePickerYahooStartDate
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 21);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Database";
+            this.dateTimePickerYahooStartDate.AllowDrop = true;
+            this.dateTimePickerYahooStartDate.CustomFormat = "\"ddd dd MMM yyyy\"";
+            this.dateTimePickerYahooStartDate.Location = new System.Drawing.Point(239, 19);
+            this.dateTimePickerYahooStartDate.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
+            this.dateTimePickerYahooStartDate.MinDate = new System.DateTime(1980, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerYahooStartDate.Name = "dateTimePickerYahooStartDate";
+            this.dateTimePickerYahooStartDate.Size = new System.Drawing.Size(179, 20);
+            this.dateTimePickerYahooStartDate.TabIndex = 8;
+            this.dateTimePickerYahooStartDate.Value = new System.DateTime(2021, 1, 31, 20, 27, 0, 0);
+            this.dateTimePickerYahooStartDate.ValueChanged += new System.EventHandler(this.dateTimePickerYahooStartDate_ValueChanged);
             // 
-            // comboBox1
+            // labelYahooEndDate
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.labelYahooEndDate.AutoSize = true;
+            this.labelYahooEndDate.Location = new System.Drawing.Point(424, 21);
+            this.labelYahooEndDate.Name = "labelYahooEndDate";
+            this.labelYahooEndDate.Size = new System.Drawing.Size(52, 13);
+            this.labelYahooEndDate.TabIndex = 4;
+            this.labelYahooEndDate.Text = "End Date";
+            // 
+            // labelYahooStartDate
+            // 
+            this.labelYahooStartDate.AutoSize = true;
+            this.labelYahooStartDate.Location = new System.Drawing.Point(181, 21);
+            this.labelYahooStartDate.Name = "labelYahooStartDate";
+            this.labelYahooStartDate.Size = new System.Drawing.Size(55, 13);
+            this.labelYahooStartDate.TabIndex = 3;
+            this.labelYahooStartDate.Text = "Start Date";
+            // 
+            // labelTicker
+            // 
+            this.labelTicker.AutoSize = true;
+            this.labelTicker.Location = new System.Drawing.Point(6, 21);
+            this.labelTicker.Name = "labelTicker";
+            this.labelTicker.Size = new System.Drawing.Size(37, 13);
+            this.labelTicker.TabIndex = 2;
+            this.labelTicker.Text = "Ticker";
+            // 
+            // comboBoxTicker
+            // 
+            this.comboBoxTicker.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(65, 18);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(136, 21);
-            this.comboBox1.TabIndex = 0;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox2.Enabled = false;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(257, 18);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(137, 21);
-            this.comboBox2.TabIndex = 1;
+            this.comboBoxTicker.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxTicker.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxTicker.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBoxTicker.FormattingEnabled = true;
+            this.comboBoxTicker.Location = new System.Drawing.Point(49, 18);
+            this.comboBoxTicker.Name = "comboBoxTicker";
+            this.comboBoxTicker.Size = new System.Drawing.Size(126, 21);
+            this.comboBoxTicker.TabIndex = 0;
+            this.comboBoxTicker.TextUpdate += new System.EventHandler(this.comboBoxTicker_TextUpdate);
+            this.comboBoxTicker.SelectedValueChanged += new System.EventHandler(this.comboBoxTicker_SelectedValueChanged);
             // 
             // chartYahoo
             // 
@@ -254,27 +332,25 @@
             chartArea2.BackColor = System.Drawing.Color.Transparent;
             chartArea2.Name = "ChartArea1";
             this.chartYahoo.ChartAreas.Add(chartArea2);
-            this.chartYahoo.Dock = System.Windows.Forms.DockStyle.Bottom;
             legend2.BackColor = System.Drawing.Color.Transparent;
             legend2.Name = "Legend1";
             this.chartYahoo.Legends.Add(legend2);
-            this.chartYahoo.Location = new System.Drawing.Point(3, 44);
+            this.chartYahoo.Location = new System.Drawing.Point(3, 89);
             this.chartYahoo.Name = "chartYahoo";
             this.chartYahoo.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chartYahoo.Series.Add(series2);
-            this.chartYahoo.Size = new System.Drawing.Size(759, 392);
+            this.chartYahoo.Size = new System.Drawing.Size(744, 392);
             this.chartYahoo.TabIndex = 5;
             this.chartYahoo.Text = "chartYahoo";
-            this.chartYahoo.Click += new System.EventHandler(this.chartYahoo_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(773, 465);
+            this.ClientSize = new System.Drawing.Size(758, 616);
             this.Controls.Add(this.tabControlDataSourceProviders);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
@@ -308,9 +384,18 @@
     private System.Windows.Forms.TabPage tabPageYahoo;
     private System.Windows.Forms.DataVisualization.Charting.Chart chartYahoo;
     private System.Windows.Forms.GroupBox groupBoxYahooGraphInputs;
-    private System.Windows.Forms.Label label1;
-    private System.Windows.Forms.Label label2;
-    private System.Windows.Forms.ComboBox comboBox1;
-    private System.Windows.Forms.ComboBox comboBox2;
+    private System.Windows.Forms.Label labelTicker;
+    private System.Windows.Forms.ComboBox comboBoxTicker;
+    private System.Windows.Forms.ListView listViewYahoo;
+    private System.Windows.Forms.ColumnHeader columnHeaderDate;
+    private System.Windows.Forms.ColumnHeader columnHeaderHigh;
+    private System.Windows.Forms.ColumnHeader columnHeaderLow;
+    private System.Windows.Forms.ColumnHeader columnHeaderOpen;
+    private System.Windows.Forms.ColumnHeader columnHeaderClose;
+    private System.Windows.Forms.ColumnHeader columnHeaderAdjClose;
+    private System.Windows.Forms.DateTimePicker dateTimePickerYahooEndDate;
+    private System.Windows.Forms.DateTimePicker dateTimePickerYahooStartDate;
+    private System.Windows.Forms.Label labelYahooEndDate;
+    private System.Windows.Forms.Label labelYahooStartDate;
   }
 }

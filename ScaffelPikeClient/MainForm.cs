@@ -5,17 +5,27 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using ScaffelPikeContracts.Quandl;
+using ScaffelPikeContracts.Yahoo;
+using static System.Windows.Forms.ListViewItem;
 
 namespace ScaffelPikeClient
 {
   public partial class MainForm : Form
   {
-    private List<QuandlDatabaseResponse> Databases { get; set; }
-    private QuandlDatabaseResponse DatabaseSelected { get; set; }
-    private List<QuandlDatasetResponse> Datasets { get; set; }
-    private QuandlDatasetResponse DatasetSelected { get; set; }
-    private QuandlTimeseriesDataResponse TimeseriesData { get; set; }
-
+    #region Quandl Properties
+    private List<QuandlDatabaseResponse> QuandlDatabases { get; set; }
+    private QuandlDatabaseResponse QuandlDatabaseSelected { get; set; }
+    private List<QuandlDatasetResponse> QuandlDatasets { get; set; }
+    private QuandlDatasetResponse QuandlDatasetSelected { get; set; }
+    private QuandlTimeseriesDataResponse QuandlTimeseriesData { get; set; }
+    #endregion
+    #region Yahoo Properties
+    private List<string> YahooTickers { get; set; }
+    private YahooSecurityResponse YahooSecurityMeta { get; set; }
+    private List<YahooCandleResponse> YahooCandlesData { get; set; }
+    private bool Updating { get; set; }
+    private string TickerName { get; set; }
+    #endregion
     public MainForm()
     {
       InitializeComponent();
@@ -23,15 +33,25 @@ namespace ScaffelPikeClient
 
     private async void MainForm_Load(object sender, EventArgs e)
     {
-      Databases = await ClientRefs.ScaffelPikeChannel.GetQuandlDbs();
-      comboBoxDatabase.Items.AddRange(Databases.Select(db => db.Code).ToArray());
+      Updating = true;
+      try
+      {
+        QuandlDatabases = await ClientRefs.ScaffelPikeChannel.GetQuandlDbs();
+        YahooTickers = await ClientRefs.ScaffelPikeChannel.GetYahooTickers();
+        comboBoxDatabase.Items.AddRange(QuandlDatabases.Select(db => db.Code).ToArray());
+        comboBoxTicker.Items.AddRange(YahooTickers.ToArray());
+      }
+      catch (Exception ex)
+      {
+        ClientRefs.Log.Error("MainForm_Load", ex);
+      }
+
+      dateTimePickerYahooStartDate.Value = DateTime.Now.AddYears(-1);
+      dateTimePickerYahooEndDate.Value = DateTime.Now;
+      Updating = false;
     }
 
-    private void chart1_Click(object sender, EventArgs e)
-    {
-
-    }
-
+    #region Quandl
     private async void comboBoxDatabase_SelectedValueChanged(object sender, EventArgs e)
     {
       comboBoxDataset.Items.Clear();
@@ -39,12 +59,12 @@ namespace ScaffelPikeClient
       comboBoxDataset.Enabled = true;
 
       var dbCodeToUse = (string)comboBoxDatabase.SelectedItem;
-      DatabaseSelected = Databases.FirstOrDefault(db => db.Code == dbCodeToUse);
+      QuandlDatabaseSelected = QuandlDatabases.FirstOrDefault(db => db.Code == dbCodeToUse);
 
       try
       {
-        Datasets = await ClientRefs.ScaffelPikeChannel.GetQuandlDataSets(dbCodeToUse);
-        comboBoxDataset.Items.AddRange(Datasets.Select(ds => ds.Code).ToArray());
+        QuandlDatasets = await ClientRefs.ScaffelPikeChannel.GetQuandlDataSets(dbCodeToUse);
+        comboBoxDataset.Items.AddRange(QuandlDatasets.Select(ds => ds.Code).ToArray());
       }
       catch (Exception ex)
       {
@@ -56,12 +76,12 @@ namespace ScaffelPikeClient
     {
       var dbCodeToUse = (string)comboBoxDatabase.SelectedItem;
       var dsCodeToUse = (string)comboBoxDataset.SelectedItem;
-      DatasetSelected = Datasets.FirstOrDefault(ds => ds.Code == dsCodeToUse);
+      QuandlDatasetSelected = QuandlDatasets.FirstOrDefault(ds => ds.Code == dsCodeToUse);
 
       try
       {
-        TimeseriesData = await ClientRefs.ScaffelPikeChannel.GetQuandlTimeseries(dbCodeToUse, dsCodeToUse);
-        PlotChart();
+        QuandlTimeseriesData = await ClientRefs.ScaffelPikeChannel.GetQuandlTimeseries(dbCodeToUse, dsCodeToUse);
+        PlotChartQuandl();
       }
       catch (Exception ex)
       {
@@ -69,13 +89,13 @@ namespace ScaffelPikeClient
       }
     }
 
-    private void PlotChart()
+    private void PlotChartQuandl()
     {
       chartQuandl.ChartAreas.Clear();
       chartQuandl.Series.Clear();
       chartQuandl.Titles.Clear();
 
-      chartQuandl.Titles.Add(DatasetSelected.Name);
+      chartQuandl.Titles.Add(QuandlDatasetSelected.Name);
       chartQuandl.Titles[0].Visible = true;
 
       var priceChartArea = chartQuandl.ChartAreas.Add("Prices");
@@ -84,17 +104,17 @@ namespace ScaffelPikeClient
       var volumeChartArea = chartQuandl.ChartAreas.Add("Volume");
       volumeChartArea.InnerPlotPosition = new ElementPosition(5, 50, 99, 30);
 
-      for (int i = 1; i < TimeseriesData.Data[0].Length; i++) //For each column
+      for (int i = 1; i < QuandlTimeseriesData.Data[0].Length; i++) //For each column
       {
-        string seriesName = TimeseriesData.ColumnNames[i];
+        string seriesName = QuandlTimeseriesData.ColumnNames[i];
         var series = new Series(seriesName);
         series.ChartType = seriesName.ToLower().Equals("volume") ? SeriesChartType.Area : SeriesChartType.Line;
         series.XValueType = ChartValueType.DateTime;
         series.YValueType = ChartValueType.Double;
 
-        foreach (var line in TimeseriesData.Data.Where(l => l[0] != null)) //For each row
+        foreach (var line in QuandlTimeseriesData.Data.Where(l => l[0] != null)) //For each row
         {
-          double yValue =  line[i]== null ? 0 : (double)line[i];
+          double yValue = line[i] == null ? 0 : (double)line[i];
           series.Points.AddXY(DateTime.Parse((string)line[0]), yValue);
         }
 
@@ -106,17 +126,138 @@ namespace ScaffelPikeClient
       foreach (var ca in chartQuandl.ChartAreas) { ca.BackColor = Color.Transparent; }
     }
 
-    private async void chartYahoo_Click(object sender, EventArgs e)
+    #endregion
+
+    #region Yahoo
+    private void comboBoxTicker_SelectedValueChanged(object sender, EventArgs e)
     {
+      UpdateYahooData();
+    }
+    private void comboBoxTicker_TextUpdate(object sender, EventArgs e)
+    {
+      UpdateYahooData();
+    }
+    private void dateTimePickerYahooEndDate_ValueChanged(object sender, EventArgs e)
+    {
+      UpdateYahooData();
+    }
+    private void dateTimePickerYahooStartDate_ValueChanged(object sender, EventArgs e)
+    {
+      UpdateYahooData();
+    }
+    private async void UpdateYahooData()
+    {
+      if (Updating) 
+        return;
+
+      var ticker = comboBoxTicker.Text.ToUpper();
+      var startTime = dateTimePickerYahooStartDate.Value;
+      var endTime = dateTimePickerYahooEndDate.Value;
       try
       {
-        var a = await ClientRefs.ScaffelPikeChannel.QueryYahoo(null,"APPL");
+        YahooSecurityMeta = await ClientRefs.ScaffelPikeChannel.QueryYahoo(null, ticker);
+
+        if(YahooSecurityMeta != null)
+          TickerName = YahooSecurityMeta.SecurityData.First().Key ?? "";
+
+        YahooCandlesData = await ClientRefs.ScaffelPikeChannel.GetYahooHistoricalData(ticker, startTime, endTime);
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
-        ClientRefs.Log.Error("chart1_Click_1", ex);
+        ClientRefs.Log.Error("chartYahoo_Click", ex);
+        MessageBox.Show(ex.Message);
       }
+      PlotChartYahoo();
+      FillListViewYahoo();
     }
+    private void FillListViewYahoo()
+    {
+      if (YahooCandlesData.Count == 0) return;
+
+      var round = 2;
+      foreach (var candle in YahooCandlesData)
+      {
+        ListViewItem row = new ListViewItem();
+        row.Tag = candle;
+        row.Text = candle.DateTime.ToString("dd/MM/yyyy");
+        row.SubItems.Add(new ListViewSubItem() {
+          Tag = Math.Round(candle.High, round),
+          Text = Math.Round(candle.High, round).ToString()
+        });
+        row.SubItems.Add(new ListViewSubItem() {
+          Tag = Math.Round(candle.Low, round),
+          Text = Math.Round(candle.Low, round).ToString()
+        });
+        row.SubItems.Add(new ListViewSubItem() {
+          Tag = Math.Round(candle.Open, round),
+          Text = Math.Round(candle.Open, round).ToString()
+        });
+        row.SubItems.Add(new ListViewSubItem() {
+          Tag = Math.Round(candle.Close, round),
+          Text = Math.Round(candle.Close, round).ToString()
+        });
+        row.SubItems.Add(new ListViewSubItem() {
+          Tag = Math.Round(candle.AdjustedClose, round),
+          Text = Math.Round(candle.AdjustedClose, round).ToString()
+        });
+        listViewYahoo.Items.Add(row);
+      }
+      listViewYahoo.Show();
+    }
+    private void PlotChartYahoo()
+    {
+      if (YahooCandlesData.Count == 0) return;
+
+      chartYahoo.ChartAreas.Clear();
+      chartYahoo.Series.Clear();
+      chartYahoo.Titles.Clear();
+
+      chartYahoo.Titles.Add(TickerName);
+      chartYahoo.Titles[0].Visible = true;
+
+      var candleChartArea = chartYahoo.ChartAreas.Add("Prices");
+      candleChartArea.InnerPlotPosition = new ElementPosition(5, 0, 99, 130);
+      candleChartArea.AxisX.CustomLabels.Add(new CustomLabel());//Hide x axis
+      var volumeChartArea = chartYahoo.ChartAreas.Add("Volume");
+      volumeChartArea.InnerPlotPosition = new ElementPosition(5, 50, 99, 30);
+
+      var candleSeries = new Series("Candlestick");
+      candleSeries.ChartType = SeriesChartType.Stock;
+      candleSeries.ChartArea = candleChartArea.Name;
+      candleSeries["OpenCloseStyle"] = "Triangle";
+      candleSeries["ShowOpenClose"] = "Both";
+      candleSeries["PointWidth"] = "0.9";
+      candleSeries["PriceUpColor"] = "Green";
+      candleSeries["PriceDownColor"] = "Red";
+      candleSeries.XValueMember = "Time";
+      candleSeries.YValueMembers = "High,Low,Open,Close";
+      candleSeries.XValueType = ChartValueType.DateTime;
+      candleSeries.YValueType = ChartValueType.Double;
+
+      var volumeSeries = new Series("Volume");
+      volumeSeries.ChartType = SeriesChartType.Area;
+      volumeSeries.ChartArea = volumeChartArea.Name;
+      volumeSeries.XValueType = ChartValueType.DateTime;
+      volumeSeries.YValueType = ChartValueType.Int64;
+
+      foreach (var candle in YahooCandlesData) //For each row
+      {
+        //candleSeries.Points.AddXY(candle.DateTime, candle.High, candle.Low, candle.Open, candle.Close);
+        candleSeries.Points.AddXY(candle.DateTime, candle.High);
+        //candleSeries.Points.AddXY(candle.DateTime, candle.Low);
+        //candleSeries.Points.AddXY(candle.DateTime, candle.Open);
+        //candleSeries.Points.AddXY(candle.DateTime, candle.Close);
+
+        volumeSeries.Points.AddXY(candle.DateTime, candle.Volume);
+      }
+
+      chartYahoo.Series.Add(candleSeries);
+      chartYahoo.Series.Add(volumeSeries);
+
+      chartYahoo.Show();
+      foreach (var ca in chartYahoo.ChartAreas) { ca.BackColor = Color.Transparent; }
+    }
+    #endregion
   }
 }
 

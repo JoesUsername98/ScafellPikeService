@@ -93,6 +93,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quandl\QuandlTimeseriesDataResponse.cs" />
     <Compile Include="UserModel.cs" />
+    <Compile Include="Yahoo\YahooCandleResponse.cs" />
     <Compile Include="Yahoo\YahooSecuritySurrogate.cs" />
     <Compile Include="Yahoo\YahooSecurityResponse.cs" />
   </ItemGroup>

@@ -8,6 +8,7 @@ using ScaffelPikeContracts.Heartbeat;
 using ScaffelPikeContracts.Quandl;
 using ScaffelPikeContracts.Yahoo;
 using YahooFinanceApi;
+using System;
 
 namespace ScaffelPikeServices
 {
@@ -25,13 +26,12 @@ namespace ScaffelPikeServices
     }
     public async Task<LogInResponse> LogIn(LogInRequest logInRequest)
     {
-        return await LogInManager.ProcessLogInRequestAsync(logInRequest);
+      return await LogInManager.ProcessLogInRequestAsync(logInRequest);
     }
 
     public Task<HeartbeatDto> Heartbeat(HeartbeatDto incomingHeartbeat)
     {
-      return Task<HeartbeatDto>.Factory.StartNew(() => 
-      { 
+      return Task<HeartbeatDto>.Factory.StartNew(() => {
         return HeartbeatManagerServerSide.Echo(incomingHeartbeat);
       });
     }
@@ -72,6 +72,18 @@ namespace ScaffelPikeServices
     public async Task<YahooSecurityResponse> QueryYahoo(Field[] fields, params string[] tickers)
     {
       return await APIManager.YahooQuery(fields, tickers);
+    }
+
+    public Task<List<string>> GetYahooTickers()
+    {
+      return Task<List<string>>.Factory.StartNew(() => {
+        return APIManager.GetYahooTickers();
+      });
+    }
+
+    public async Task<List<YahooCandleResponse>> GetYahooHistoricalData(string symbol, DateTime? startTime = null, DateTime? endTime = null, Period period = Period.Daily)
+    {
+      return await APIManager.GetYahooHistoricalData(symbol, startTime, endTime, period);
     }
   }
 }
