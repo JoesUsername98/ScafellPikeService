@@ -339,12 +339,15 @@
             this.chartYahoo.Name = "chartYahoo";
             this.chartYahoo.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
             series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Stock;
             series2.Legend = "Legend1";
             series2.Name = "Series1";
+            series2.YValuesPerPoint = 4;
             this.chartYahoo.Series.Add(series2);
             this.chartYahoo.Size = new System.Drawing.Size(744, 392);
             this.chartYahoo.TabIndex = 5;
             this.chartYahoo.Text = "chartYahoo";
+            this.chartYahoo.PostPaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.chartYahoo_PostPaint);
             // 
             // MainForm
             // 

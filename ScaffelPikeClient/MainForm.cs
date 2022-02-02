@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -172,6 +173,7 @@ namespace ScaffelPikeClient
     }
     private void FillListViewYahoo()
     {
+      if (YahooCandlesData == null) return;
       if (YahooCandlesData.Count == 0) return;
 
       var round = 2;
@@ -206,6 +208,7 @@ namespace ScaffelPikeClient
     }
     private void PlotChartYahoo()
     {
+      if (YahooCandlesData == null) return; 
       if (YahooCandlesData.Count == 0) return;
 
       chartYahoo.ChartAreas.Clear();
@@ -221,35 +224,39 @@ namespace ScaffelPikeClient
       var volumeChartArea = chartYahoo.ChartAreas.Add("Volume");
       volumeChartArea.InnerPlotPosition = new ElementPosition(5, 50, 99, 30);
 
-      var candleSeries = new Series("Candlestick");
+      var candleSeries = new Series("Stock");
       candleSeries.ChartType = SeriesChartType.Stock;
       candleSeries.ChartArea = candleChartArea.Name;
-      candleSeries["OpenCloseStyle"] = "Triangle";
-      candleSeries["ShowOpenClose"] = "Both";
-      candleSeries["PointWidth"] = "0.9";
+      candleSeries["OpenCloseStyle"] = "Candlestick";
+      candleSeries["ShowOpenClose"] = "Open";
+      candleSeries["PointWidth"] = "0.8";
       candleSeries["PriceUpColor"] = "Green";
       candleSeries["PriceDownColor"] = "Red";
-      candleSeries.XValueMember = "Time";
+      candleSeries.XValueMember = "Day";
       candleSeries.YValueMembers = "High,Low,Open,Close";
+      candleSeries.YValuesPerPoint = 4;
       candleSeries.XValueType = ChartValueType.DateTime;
       candleSeries.YValueType = ChartValueType.Double;
 
+      var YMin = YahooCandlesData.Select(candle => (double)candle.Low).ToList().Min();
+      var YMax = YahooCandlesData.Select(candle => (double)candle.High).ToList().Max();
+      var YRange = YMax - YMin;
+      candleChartArea.AxisY.Minimum = Math.Floor(YMin  -  0.1 * YRange);
+      candleChartArea.AxisY.Maximum = Math.Ceiling(YMax + 0.1 * YRange);
+
       var volumeSeries = new Series("Volume");
-      volumeSeries.ChartType = SeriesChartType.Area;
+      volumeSeries.ChartType = SeriesChartType.Column;
       volumeSeries.ChartArea = volumeChartArea.Name;
       volumeSeries.XValueType = ChartValueType.DateTime;
       volumeSeries.YValueType = ChartValueType.Int64;
 
+      //Add data
       foreach (var candle in YahooCandlesData) //For each row
       {
-        //candleSeries.Points.AddXY(candle.DateTime, candle.High, candle.Low, candle.Open, candle.Close);
-        candleSeries.Points.AddXY(candle.DateTime, candle.High);
-        //candleSeries.Points.AddXY(candle.DateTime, candle.Low);
-        //candleSeries.Points.AddXY(candle.DateTime, candle.Open);
-        //candleSeries.Points.AddXY(candle.DateTime, candle.Close);
-
+        candleSeries.Points.AddXY(candle.DateTime, candle.High, candle.Low, candle.Open, candle.Close);
         volumeSeries.Points.AddXY(candle.DateTime, candle.Volume);
       }
+
 
       chartYahoo.Series.Add(candleSeries);
       chartYahoo.Series.Add(volumeSeries);
@@ -258,6 +265,29 @@ namespace ScaffelPikeClient
       foreach (var ca in chartYahoo.ChartAreas) { ca.BackColor = Color.Transparent; }
     }
     #endregion
+
+    private void chartYahoo_PostPaint(object sender, ChartPaintEventArgs e)
+    {
+      ChartArea ca = chartYahoo.ChartAreas[0];
+      Series s = chartYahoo.Series[0];
+      Pen hiPen = new Pen(Color.Black,2);
+      Pen loPen = new Pen(Color.Black,2);
+
+
+      if (e.ChartElement == s)
+        foreach (DataPoint dp in s.Points)
+        {
+          float x = (float)ca.AxisX.ValueToPixelPosition(dp.XValue);
+          float y_hi = (float)ca.AxisY.ValueToPixelPosition(dp.YValues[0]);
+          float y_low = (float)ca.AxisY.ValueToPixelPosition(dp.YValues[1]);
+          float y_open = (float)ca.AxisY.ValueToPixelPosition(dp.YValues[2]);
+          float y_close = (float)ca.AxisY.ValueToPixelPosition(dp.YValues[3]);
+
+          e.ChartGraphics.Graphics.DrawLine(loPen, x, y_low, x, Math.Max(y_close, y_open));
+          e.ChartGraphics.Graphics.DrawLine(hiPen, x, y_hi, x, Math.Min(y_close, y_open));
+        }
+    }
+    
   }
 }
 
