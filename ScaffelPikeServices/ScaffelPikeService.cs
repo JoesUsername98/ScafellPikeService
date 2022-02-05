@@ -14,9 +14,9 @@ namespace ScaffelPikeServices
 {
   public class ScaffelPikeService : IScaffelPikeService
   {
-    public ScaffelPikeService(ILogger logger, IUserData userDA, string env)
+    public ScaffelPikeService(ILogger logger, IUserData userDA, string env, Guid serverGuid)
     {
-      ServiceRefs.Configure(logger, userDA, env);
+      ServiceRefs.Configure(logger, userDA, env, serverGuid);
       InitService();
     }
     private void InitService()

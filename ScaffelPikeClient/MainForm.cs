@@ -40,7 +40,9 @@ namespace ScaffelPikeClient
         QuandlDatabases = await ClientRefs.ScaffelPikeChannel.GetQuandlDbs();
         YahooTickers = await ClientRefs.ScaffelPikeChannel.GetYahooTickers();
         comboBoxDatabase.Items.AddRange(QuandlDatabases.Select(db => db.Code).ToArray());
-        comboBoxTicker.Items.AddRange(YahooTickers.ToArray());
+        var autocompleteTickers = new AutoCompleteStringCollection();
+        autocompleteTickers.AddRange(YahooTickers.ToArray());
+        textBoxTickerYahoo.AutoCompleteCustomSource = autocompleteTickers;
       }
       catch (Exception ex)
       {
@@ -130,10 +132,6 @@ namespace ScaffelPikeClient
     #endregion
 
     #region Yahoo
-    private void comboBoxTicker_SelectedValueChanged(object sender, EventArgs e)
-    {
-      UpdateYahooData();
-    }
     private void comboBoxTicker_TextUpdate(object sender, EventArgs e)
     {
       UpdateYahooData();
@@ -151,7 +149,7 @@ namespace ScaffelPikeClient
       if (Updating) 
         return;
 
-      var ticker = comboBoxTicker.Text.ToUpper();
+      var ticker = textBoxTickerYahoo.Text.ToUpper();
       var startTime = dateTimePickerYahooStartDate.Value;
       var endTime = dateTimePickerYahooEndDate.Value;
       try
@@ -264,8 +262,6 @@ namespace ScaffelPikeClient
       chartYahoo.Show();
       foreach (var ca in chartYahoo.ChartAreas) { ca.BackColor = Color.Transparent; }
     }
-    #endregion
-
     private void chartYahoo_PostPaint(object sender, ChartPaintEventArgs e)
     {
       ChartArea ca = chartYahoo.ChartAreas[0];
@@ -287,7 +283,11 @@ namespace ScaffelPikeClient
           e.ChartGraphics.Graphics.DrawLine(hiPen, x, y_hi, x, Math.Min(y_close, y_open));
         }
     }
-    
+    private void buttonGetDataYahoo_Click(object sender, EventArgs e)
+    {
+      UpdateYahooData();
+    }
+    #endregion
   }
 }
 

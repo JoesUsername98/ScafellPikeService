@@ -45,8 +45,6 @@ namespace ScaffelPikeClient
         return;
       }
 
-      var adminMessage = Environment.NewLine + $"You{((response.Admin)?"":" do not")} have admin privileges";
-
       if (response.SuccesfulRequest)
       {
         this.Hide();

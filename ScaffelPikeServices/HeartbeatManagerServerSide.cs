@@ -30,10 +30,11 @@ namespace ScaffelPikeServices
     {
       while (!CleanUpTask.IsCanceled)
       {
-        CleanUpTask.Wait(GraceInterval);
+        CleanUpTask.Wait(GraceInterval- new TimeSpan(0,0,1));
         foreach (var connection in Connections.Values.ToList())
           if (DateTime.Now - connection.SentAt > GraceInterval)
           {
+            var timeNow = DateTime.Now;
             ServiceRefs.Log.Warning("HeartbeatManagerClientSide",
               $"Server has not replied since {connection.SentAt}");
             Connections.Remove(connection.Guid);
