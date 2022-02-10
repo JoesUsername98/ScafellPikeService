@@ -28,7 +28,6 @@ namespace ScaffelPikeClient
       ClientGuid = Guid.NewGuid();
       ClientStarTime = DateTime.Now;
       ScaffelPikeChannel = scaffelPikeChannel;
-      
     }
 
     internal static void RegisterUser(LogInResponse user)
