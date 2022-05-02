@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ScaffelPikeClient
+namespace ScaffelPikeClient.View
 {
   public partial class LogInView : Form
   {
