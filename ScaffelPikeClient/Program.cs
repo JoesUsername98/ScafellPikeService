@@ -16,7 +16,7 @@ namespace ScaffelPikeClient
         try
         {
           ClientRefs.Configure(container.Resolve<ILogger>(), container.Resolve<IScaffelPikeService>());
-          var f = new LogInScreen();
+          var f = new LogInView();
           f.ShowDialog();
         }
         catch (Exception ex)

@@ -118,11 +118,11 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="HeartbeatManagerClientSide.cs" />
     <Compile Include="LogInRequester.cs" />
-    <Compile Include="LogInScreen.cs">
+    <Compile Include="LogInView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogInScreen.Designer.cs">
-      <DependentUpon>LogInScreen.cs</DependentUpon>
+    <Compile Include="LogInView.Designer.cs">
+      <DependentUpon>LogInView.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -158,8 +158,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="LogInScreen.resx">
-      <DependentUpon>LogInScreen.cs</DependentUpon>
+    <EmbeddedResource Include="LogInView.resx">
+      <DependentUpon>LogInView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

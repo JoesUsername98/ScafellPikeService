@@ -1,6 +1,6 @@
 ﻿namespace ScaffelPikeClient
 {
-  partial class MainForm
+  partial class MainView
   {
     /// <summary>
     /// Required designer variable.
@@ -34,7 +34,7 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.comboBoxDatabase = new System.Windows.Forms.ComboBox();
             this.comboBoxDataset = new System.Windows.Forms.ComboBox();
             this.chartQuandl = new System.Windows.Forms.DataVisualization.Charting.Chart();

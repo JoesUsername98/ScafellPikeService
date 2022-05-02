@@ -3,17 +3,15 @@ using System.Windows.Forms;
 
 namespace ScaffelPikeClient
 {
-  public partial class LogInScreen : Form
+  public partial class LogInView : Form
   {
-    public LogInScreen()
+    public LogInView()
     {
       InitializeComponent();
-      InitializeTiner();
-      ClientRefs.Log.Information("LogInScreen", "Initialized Logger");
-      HeartbeatManagerClientSide.TryEstablishConnectionAsync();
+
     }
 
-    private void InitializeTiner()
+    private void InitializeTimer()
     {
       Timer t1 = new Timer();
       t1.Interval = 5000;
@@ -48,7 +46,7 @@ namespace ScaffelPikeClient
       if (response.SuccesfulRequest)
       {
         this.Hide();
-        MainForm mainForm = new MainForm();
+        MainView mainForm = new MainView();
         mainForm.ShowDialog();
       }
       else
@@ -73,6 +71,8 @@ namespace ScaffelPikeClient
     private void LogInScreen_Load(object sender, EventArgs e)
     {
       ClientRefs.Log.Information("LogInScreen_Load", "Opening form");
+      InitializeTimer();
+      HeartbeatManagerClientSide.TryEstablishConnectionAsync();
     }
   }
 }

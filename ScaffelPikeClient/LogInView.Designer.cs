@@ -1,6 +1,6 @@
 ﻿namespace ScaffelPikeClient
 {
-  partial class LogInScreen
+  partial class LogInView
   {
     /// <summary>
     /// Required designer variable.
@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInScreen));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInView));
             this.groupBoxLogIn = new System.Windows.Forms.GroupBox();
             this.pictureBoxViewPassword = new System.Windows.Forms.PictureBox();
             this.buttonLogIn = new System.Windows.Forms.Button();
