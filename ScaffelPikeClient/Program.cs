@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 using Autofac;
+using ScaffelPikeClient.View;
 using ScaffelPikeContracts;
 using ScaffelPikeLogger;
 
