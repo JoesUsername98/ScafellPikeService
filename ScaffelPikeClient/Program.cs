@@ -1,6 +1,9 @@
 ﻿using System;
 using System.ServiceModel;
 using Autofac;
+using ScaffelPikeClient.Controller;
+using ScaffelPikeClient.Models;
+using ScaffelPikeClient.View;
 using ScaffelPikeContracts;
 using ScaffelPikeLogger;
 
@@ -16,8 +19,10 @@ namespace ScaffelPikeClient
         try
         {
           ClientRefs.Configure(container.Resolve<ILogger>(), container.Resolve<IScaffelPikeService>());
-          var f = new LogInScreen();
-          f.ShowDialog();
+          var view = new LogInView();
+          var model = new LogInModel() { Username = "", Password = "", Connections = 0 };
+          var controller = new LogInController(view, model);
+          view.ShowDialog();
         }
         catch (Exception ex)
         {

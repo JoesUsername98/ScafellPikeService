@@ -1,6 +1,6 @@
 ﻿namespace ScaffelPikeClient
 {
-  partial class MainForm
+  partial class GraphView
   {
     /// <summary>
     /// Required designer variable.
@@ -34,7 +34,7 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GraphView));
             this.comboBoxDatabase = new System.Windows.Forms.ComboBox();
             this.comboBoxDataset = new System.Windows.Forms.ComboBox();
             this.chartQuandl = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -353,14 +353,14 @@
             this.chartYahoo.Text = "chartYahoo";
             this.chartYahoo.PostPaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.chartYahoo_PostPaint);
             // 
-            // MainForm
+            // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(758, 616);
             this.Controls.Add(this.tabControlDataSourceProviders);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MainForm";
+            this.Name = "MainView";
             this.Text = "Timeseries Charts";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartQuandl)).EndInit();

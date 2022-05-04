@@ -1,6 +1,6 @@
-﻿namespace ScaffelPikeClient
+﻿namespace ScaffelPikeClient.View
 {
-  partial class LogInScreen
+  partial class LogInView
   {
     /// <summary>
     /// Required designer variable.
@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInScreen));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInView));
             this.groupBoxLogIn = new System.Windows.Forms.GroupBox();
             this.pictureBoxViewPassword = new System.Windows.Forms.PictureBox();
             this.buttonLogIn = new System.Windows.Forms.Button();
@@ -120,7 +120,7 @@
             this.labelConnections.TabIndex = 2;
             this.labelConnections.Text = "Connections Available :";
             // 
-            // LogInScreen
+            // LogInView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -130,7 +130,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(270, 200);
             this.MinimumSize = new System.Drawing.Size(270, 200);
-            this.Name = "LogInScreen";
+            this.Name = "LogInView";
             this.Text = "LogInScreen";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LogInScreen_FormClosed);
             this.Load += new System.EventHandler(this.LogInScreen_Load);

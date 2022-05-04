@@ -11,7 +11,10 @@ using static System.Windows.Forms.ListViewItem;
 
 namespace ScaffelPikeClient
 {
-  public partial class MainForm : Form
+  /// <summary>
+  /// Will be considered depreciated until I decide the direction of my project
+  /// </summary>
+  public partial class GraphView : Form
   {
     #region Quandl Properties
     private List<QuandlDatabaseResponse> QuandlDatabases { get; set; }
@@ -27,7 +30,7 @@ namespace ScaffelPikeClient
     private bool Updating { get; set; }
     private string TickerName { get; set; }
     #endregion
-    public MainForm()
+    public GraphView()
     {
       InitializeComponent();
     }
