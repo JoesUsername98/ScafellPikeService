@@ -12,6 +12,11 @@ using Xunit;
 
 namespace ScaffelPikeTests
 {
+  /// <summary>
+  /// Given -> Namespace
+  /// When -> Class
+  /// Then -> Test/Function
+  /// </summary>
   public class LogInManagerTests
   {
     [Fact]

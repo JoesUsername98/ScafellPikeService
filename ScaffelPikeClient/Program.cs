@@ -20,7 +20,7 @@ namespace ScaffelPikeClient
         {
           ClientRefs.Configure(container.Resolve<ILogger>(), container.Resolve<IScaffelPikeService>());
           var view = new LogInView();
-          var model = new LogInModel() { Username = "", Password = "", Connections = 0 };
+          var model = new LogInModel();
           var controller = new LogInController(view, model);
           view.ShowDialog();
         }

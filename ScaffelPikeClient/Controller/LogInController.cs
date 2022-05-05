@@ -19,7 +19,7 @@ namespace ScaffelPikeClient.Controller
       view.SetController(this);
     }
 
-    public void ViewOpened()
+    internal void ViewOpened()
     {
       ClientRefs.Log.Information(_view.GetType().Name, "Opening form");
       InitializeTimer();
@@ -36,25 +36,20 @@ namespace ScaffelPikeClient.Controller
     {
       UpdateConnectionCount();
     }
-    public void ViewClosed()
+    internal void ViewClosed()
     {
       ClientRefs.Log.Information(_view.GetType().Name, "Closing form");
     }
-    public void UpdateConnectionCount()
+    internal void UpdateConnectionCount()
     {
       LoadViewIntoModel();
       _view.Connections = $"Connections Available: {_model.Connections}";
     }
     private void LoadViewIntoModel()
     {
-      _model = new LogInModel() 
-      {
-        Username = _view.Username,
-        Password = _view.Password,
-        Connections = HeartbeatManagerClientSide.Connections.Count
-      };
+      _model = new LogInModel(_view.Username, _view.Password, HeartbeatManagerClientSide.Connections.Count);
     }
-    public void LogIn()
+    internal void LogIn()
     {
       LoadViewIntoModel();
 

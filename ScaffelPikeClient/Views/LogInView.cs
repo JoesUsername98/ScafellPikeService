@@ -10,11 +10,6 @@ namespace ScaffelPikeClient.View
 
     LogInController _controller;
 
-    public string Username { get => textBoxUsername.Text; set => textBoxUsername.Text= value; }
-    public string Password { get => textBoxPassword.Text; set => textBoxPassword.Text = value; }
-    public string Connections { get => labelConnections.Text; set => labelConnections.Text = value; }
-    public bool PasswordVisible { get => !textBoxPassword.UseSystemPasswordChar; set => textBoxPassword.UseSystemPasswordChar = !value; }
-
     public LogInView()
     {
       InitializeComponent();
@@ -43,11 +38,14 @@ namespace ScaffelPikeClient.View
     }
     #endregion
     #region ILogInView Implementation
+    public string Username { get => textBoxUsername.Text; set => textBoxUsername.Text = value; }
+    public string Password { get => textBoxPassword.Text; set => textBoxPassword.Text = value; }
+    public string Connections { get => labelConnections.Text; set => labelConnections.Text = value; }
+    public bool PasswordVisible { get => !textBoxPassword.UseSystemPasswordChar; set => textBoxPassword.UseSystemPasswordChar = !value; }
     public void SetController(LogInController controller)
     {
       _controller = controller;
     }
-
     public void HideView()
     {
       Hide();

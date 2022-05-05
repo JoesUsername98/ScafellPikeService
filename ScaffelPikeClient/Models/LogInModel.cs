@@ -8,6 +8,18 @@ namespace ScaffelPikeClient.Models
 {
   public class LogInModel
   {
+    public LogInModel()
+    {
+      Username = "";
+      Password = "";
+      Connections = 0;
+    }
+    public LogInModel(string username, string password, int connections)
+    {
+      Username = username;
+      Password = password;
+      Connections = connections;
+    }
     private string _Username;
     public string Username 
     { 
