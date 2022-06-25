@@ -15,7 +15,6 @@ namespace ScaffelPikeDerivatives.Objects
       _root = null;
       Count = 0;
     }
-
     public void Insert(Node<T> newItem)
     {
       if (_root == null)
@@ -40,7 +39,6 @@ namespace ScaffelPikeDerivatives.Objects
 
       InsertRec(newNode, nextNode);
     }
-
     public Node<T> GetAt(bool[] path)
     {
       if(path.Length == 0)
@@ -65,6 +63,15 @@ namespace ScaffelPikeDerivatives.Objects
         return nextNode;
 
       return GetAtRec(nextNode, path);
+    }
+    public void Remove(Node<T> node)
+    {
+      if (node.Path.Last())
+        node.Previous.Heads = null;
+      else
+        node.Previous.Tails = null;
+
+      node.Previous = null;
     }
   } 
 }
