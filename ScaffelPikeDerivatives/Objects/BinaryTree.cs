@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace ScaffelPikeDerivatives.Objects
 {
-  public class BinaryTree<T>
+  public class BinaryTree<T> : ICloneable
   {
     private Node<T> _root;
     public int Count;
     public BinaryTree()
     {
       _root = null;
+      Count = 0;
+    }
+    public BinaryTree(Node<T> root)
+    {
+      _root = root;
       Count = 0;
     }
     public void Insert(Node<T> newItem)
@@ -72,6 +77,11 @@ namespace ScaffelPikeDerivatives.Objects
         node.Previous.Tails = null;
 
       node.Previous = null;
+    }
+
+    public object Clone()
+    {
+      return new BinaryTree<T>(_root) { Count = this.Count };
     }
   } 
 }
