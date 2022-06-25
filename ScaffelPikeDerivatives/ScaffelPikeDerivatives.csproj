@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Objects\BinaryTree.cs" />
+    <Compile Include="IBinaryTree.cs" />
     <Compile Include="Objects\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
