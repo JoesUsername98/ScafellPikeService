@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Configuration;
+using Autofac;
+using Autofac.Integration.Wcf;
 using ScaffelPikeContracts;
 using ScaffelPikeContracts.LogIn;
 using ScaffelPikeLogger;
@@ -14,20 +16,18 @@ namespace ScaffelPikeClient
   /// </summary>
   public static class ClientRefs
   {
-    public static ILogger Log { get; private set; }
+    public static ILogger Log { get { return AutofacHostFactory.Container.Resolve<ILogger>(); } }
+    public static IScaffelPikeService ScaffelPikeChannel { get { return AutofacHostFactory.Container.Resolve<IScaffelPikeService>(); } }
     public static string Env { get; private set; }
     public static Guid ClientGuid { get; private set; }
     public static DateTime ClientStarTime { get; private set; }
-    public static IScaffelPikeService ScaffelPikeChannel { get; private set; }
     public static UserModel User { get; private set; }
 
-    internal static void Configure(ILogger logger,IScaffelPikeService scaffelPikeChannel)
+    internal static void Configure()
     {
-      Log = logger;
       Env = ConfigurationManager.AppSettings["Environment"];
       ClientGuid = Guid.NewGuid();
       ClientStarTime = DateTime.Now;
-      ScaffelPikeChannel = scaffelPikeChannel;
     }
 
     internal static void RegisterUser(LogInResponse user)

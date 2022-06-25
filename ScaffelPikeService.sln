@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeServices", "Scaf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinDataApiManager", "QuandlAPIExt\FinDataApiManager.csproj", "{FB420D39-16EF-415E-A24D-84614C935658}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeDerivatives", "ScaffelPikeDerivatives\ScaffelPikeDerivatives.csproj", "{474BE456-3F5C-49BB-A0B4-D6186704EE1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{FB420D39-16EF-415E-A24D-84614C935658}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB420D39-16EF-415E-A24D-84614C935658}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB420D39-16EF-415E-A24D-84614C935658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{474BE456-3F5C-49BB-A0B4-D6186704EE1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{474BE456-3F5C-49BB-A0B4-D6186704EE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{474BE456-3F5C-49BB-A0B4-D6186704EE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{474BE456-3F5C-49BB-A0B4-D6186704EE1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

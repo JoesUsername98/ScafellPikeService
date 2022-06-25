@@ -1,4 +1,6 @@
 ﻿using System;
+using Autofac;
+using Autofac.Integration.Wcf;
 using ScaffelPikeContracts;
 using ScaffelPikeDataAccess.Data;
 using ScaffelPikeLogger;
@@ -13,16 +15,14 @@ namespace ScaffelPikeServices
   /// </summary>
   public static class ServiceRefs
   {
-    public static ILogger Log { get; private set; }
-    public static IUserData UserDA { get; private set; }
+    public static ILogger Log { get { return AutofacHostFactory.Container.Resolve<ILogger>(); }}
+    public static IUserData UserDA { get { return AutofacHostFactory.Container.Resolve<IUserData>(); } }
     public static string Env { get; private set; }
     public static Guid ServerGuid { get; private set; }
     public static DateTime ServerStarTime { get; private set; }
 
-    internal static void Configure(ILogger logger, IUserData userDA, string env, Guid serverGuid)
+    internal static void Configure(string env, Guid serverGuid)
     {
-      Log = logger;
-      UserDA = userDA;
       Env = env;
       ServerGuid = serverGuid;
       ServerStarTime = DateTime.Now;

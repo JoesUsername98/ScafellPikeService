@@ -9,19 +9,20 @@ using System.Configuration;
 using System.IO;
 using Newtonsoft.Json;
 using System;
+using Autofac.Integration.Wcf;
 
 namespace ScaffelPikeHost
 {
   internal class Bootstrapper
   {
-    public static ContainerBuilder RegisterContainerBuilder()
+    public static void RegisterContainerBuilder()
     {
       ContainerBuilder builder = new ContainerBuilder();
       builder.Register(c => new TextLogger((LoggerConfiguration)ConfigurationManager.GetSection("LoggerConfiguration"))).As<ILogger>();
       builder.Register(c => new SqlDataAccess(ConfigurationManager.ConnectionStrings)).As<ISqlDataAccess>();
       builder.Register(c => new UserData(c.Resolve<ISqlDataAccess>())).As<IUserData>();
-      builder.Register(c => new ScaffelPikeService(c.Resolve<ILogger>(), c.Resolve<IUserData>(), ConfigurationManager.AppSettings["Environment"], new Guid())).As<IScaffelPikeService>();
-      return builder;
+      builder.Register(c => new ScaffelPikeService(ConfigurationManager.AppSettings["Environment"], new Guid())).As<IScaffelPikeService>();
+      AutofacHostFactory.Container = builder.Build();
     }
   }
 }
