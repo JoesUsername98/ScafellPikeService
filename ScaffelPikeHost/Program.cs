@@ -10,55 +10,51 @@ namespace ScaffelPikeHost
 {
   internal class Program
   {
-    static void Main(string[] args)
+    static void Main()
     {
-      using (var container = Bootstrapper.RegisterContainerBuilder().Build())
+      Bootstrapper.RegisterContainerBuilder();
+      ServiceHost selfHost = new ServiceHost(typeof(ScaffelPikeService));
+      try
       {
-        ServiceHost selfHost = new ServiceHost(typeof(ScaffelPikeService));
-        try
+        if (!AutofacHostFactory.Container.ComponentRegistry.TryGetRegistration(new TypedService(typeof(IScaffelPikeService)), out _))
         {
-          IComponentRegistration registration;
-          if (!container.ComponentRegistry.TryGetRegistration
-                   (new TypedService(typeof(IScaffelPikeService)), out registration))
-          {
-            Console.WriteLine("The service contract has not been registered in the container.");
+          Console.WriteLine("The service contract has not been registered in the container.");
 
-            Console.ReadLine();
-            Environment.Exit(-1);
-          }
-
-          selfHost.AddDependencyInjectionBehavior<IScaffelPikeService>(container);
-
-          selfHost.Open();
-          Console.WriteLine("The service is ready." + Environment.NewLine);
-
-          foreach (var endpoint in selfHost.Description.Endpoints)
-            Console.WriteLine(PrintServiceStartMetaData(endpoint));
-
-          Console.WriteLine(Environment.NewLine + "Enter q to terminate the service." + Environment.NewLine);
-          while (true)
-          {
-            var stop = Console.ReadLine();
-            if (stop == "q")
-              break;
-          }
-
-          selfHost.Close();
-        }
-        catch (CommunicationException ce)
-        {
-          Console.WriteLine("An exception occurred: {0}", ce.Message);
-          selfHost.Abort();
           Console.ReadLine();
+          Environment.Exit(-1);
         }
+
+        selfHost.AddDependencyInjectionBehavior<IScaffelPikeService>(AutofacHostFactory.Container);
+
+        selfHost.Open();
+        Console.WriteLine("The service is ready." + Environment.NewLine);
+
+        foreach (var endpoint in selfHost.Description.Endpoints)
+          Console.WriteLine(PrintServiceStartMetaData(endpoint));
+
+        Console.WriteLine(Environment.NewLine + "Enter q to terminate the service." + Environment.NewLine);
+        while (true)
+        {
+          var stop = Console.ReadLine();
+          if (stop == "q")
+            break;
+        }
+
+        selfHost.Close();
+      }
+      catch (CommunicationException ce)
+      {
+        Console.WriteLine("An exception occurred: {0}", ce.Message);
+        selfHost.Abort();
+        Console.ReadLine();
       }
     }
 
     private static string PrintServiceStartMetaData(ServiceEndpoint serviceEndpoint)
     {
-      string equals= "";
+      string equals = "";
       string dash = "";
-      for(int i = 0; i < serviceEndpoint.Address.Uri.AbsoluteUri.Length+15; i++)
+      for (int i = 0; i < serviceEndpoint.Address.Uri.AbsoluteUri.Length + 15; i++)
       {
         equals += "=";
         dash += "-";

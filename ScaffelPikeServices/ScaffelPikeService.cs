@@ -9,16 +9,18 @@ using ScaffelPikeContracts.Quandl;
 using ScaffelPikeContracts.Yahoo;
 using YahooFinanceApi;
 using System;
+using Autofac;
 
 namespace ScaffelPikeServices
 {
   public class ScaffelPikeService : IScaffelPikeService
   {
-    public ScaffelPikeService(ILogger logger, IUserData userDA, string env, Guid serverGuid)
+    public ScaffelPikeService(string env, Guid serverGuid)
     {
-      ServiceRefs.Configure(logger, userDA, env, serverGuid);
+      ServiceRefs.Configure(env, serverGuid);
       InitService();
     }
+
     private void InitService()
     {
       ServiceRefs.Log.Information("InitService", $"Initialise ScaffelPikeService - Start - env:{ServiceRefs.Env}");
