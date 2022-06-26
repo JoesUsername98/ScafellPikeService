@@ -64,7 +64,7 @@ namespace ScaffelPikeDerivatives.Objects
     internal IEnumerable<Node<T>> MinInPath()
     {
       Node<T> Max = this;
-      List<Node<T>> MaxCol = new List<Node<T>>() { Max };
+      IEnumerable<Node<T>> MaxCol = new List<Node<T>>() { Max };
       Node<T> CurrentNode = this;
 
       while (CurrentNode != null)
@@ -76,7 +76,7 @@ namespace ScaffelPikeDerivatives.Objects
         }
         else if (CurrentNode.Data.CompareTo(Max.Data) == 0)
         {
-          MaxCol.Add(CurrentNode);
+          MaxCol.Append(CurrentNode);
         }
 
         CurrentNode = CurrentNode.Previous;

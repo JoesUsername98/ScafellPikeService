@@ -97,16 +97,106 @@ namespace ScaffelPikeDerivatives.Objects
     {
       return new BinaryTree<T>(_root) { Count = this.Count };
     }
-
-    public Node<T> MaxInTree()
+    public BinaryTree<T> DeepClone()
     {
-      //Implement traversal and find max in that.
-      throw new NotImplementedException();
+      throw new NotImplementedException();// REQUIRES TRAVERSAL
     }
-    public Node<T> MinInTree()
+    public IEnumerable<Node<T>> MaxInTree()
     {
-      //Implement traversal and find min in that.
-      throw new NotImplementedException();
+      return MaxInTree(_root);
+    }
+    private IEnumerable<Node<T>> MaxInTree(Node<T> node)
+    {
+      if (node == null)
+      {
+        return new List<Node<T>>() { };
+      }
+      
+      IEnumerable<Node<T>> tailsPath = MaxInTree(node.Tails);
+      IEnumerable<Node<T>> headsPath = MaxInTree(node.Heads);
+
+      IEnumerable<Node<T>> max = new List<Node<T>>() { node };
+      if (tailsPath.Count() == 0 && headsPath.Count() == 0) // LEAF
+      {
+        return max;
+      }
+
+      if (tailsPath.First().Data.CompareTo(max.First().Data) > 0)
+      {
+        max = tailsPath;
+      }
+      else if (tailsPath.First().Data.CompareTo(max.First().Data) == 0)
+      {
+        max.Union(tailsPath);
+      }
+      if (headsPath.First().Data.CompareTo(max.First().Data) > 0)
+      {
+        max = headsPath;
+      }
+      else if (headsPath.First().Data.CompareTo(max.First().Data) == 0)
+      {
+        max.Union(headsPath);
+      }
+      return max;
+    }
+    public IEnumerable<Node<T>> MinInTree()
+    {
+      return MinInTree(_root);
+    }
+    private IEnumerable<Node<T>> MinInTree(Node<T> node)
+    {
+      if (node == null)
+      {
+        return new List<Node<T>>() { };
+      }
+
+      IEnumerable<Node<T>> tailsPath = MaxInTree(node.Tails);
+      IEnumerable<Node<T>> headsPath = MaxInTree(node.Heads);
+
+      IEnumerable<Node<T>> min = new List<Node<T>>() { node };
+      if (tailsPath.Count() == 0 && headsPath.Count() == 0) // LEAF
+      {
+        return min;
+      }
+
+      if (tailsPath.First().Data.CompareTo(min.First().Data) < 0)
+      {
+        min = tailsPath;
+      } 
+      else if(tailsPath.First().Data.CompareTo(min.First().Data) == 0)
+      {
+        min.Union(tailsPath);
+      }
+      if (headsPath.First().Data.CompareTo(min.First().Data) < 0)
+      {
+        min = headsPath;
+      }
+      else if (headsPath.First().Data.CompareTo(min.First().Data) == 0)
+      {
+        min.Union(headsPath);
+      }
+      return min;
+    }
+
+    public void Preorder(Node<T> currentNode)
+    {
+      Console.Write(currentNode.Data + " ");
+      Preorder(currentNode.Tails);
+      Preorder(currentNode.Heads);
+    }
+    public void Inorder(Node<T> currentNode)
+    {
+      if (currentNode == null) return;
+      Inorder(currentNode.Tails);
+      Console.Write(currentNode.Data + " ");
+      Inorder(currentNode.Heads);
+    }
+    public void Postorder(Node<T> currentNode)
+    {
+      if (currentNode == null) return;
+      Postorder(currentNode.Tails);
+      Postorder(currentNode.Heads);
+      Console.Write(currentNode.Data + " ");
     }
   }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ScaffelPikeDerivatives.Objects
 {
@@ -7,8 +8,8 @@ namespace ScaffelPikeDerivatives.Objects
     int Count { get; set; }
     Node<T> GetAt(bool[] path);
     void Insert(Node<T> newItem);
-    Node<T> MaxInTree();
-    Node<T> MinInTree();
+    IEnumerable<Node<T>> MaxInTree();
+    IEnumerable<Node<T>> MinInTree();
     void Remove(Node<T> node);
   }
 }
