@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ScaffelPikeDerivatives.Objects;
 using Xunit;
 
-namespace ScaffelPikeTests.Derivatives
+namespace ScaffelPikeTests.Objects.Derivatives
 {
   public class BinaryTreeTest
   {
@@ -33,8 +33,21 @@ namespace ScaffelPikeTests.Derivatives
       Assert.Equal(2, bt.Time);
     }
 
+    [Fact]
+    public void SetAndGetOverwite()
+    {
+      //TODO
+      Assert.False(true);
+    }
+    [Fact]
+    public void GetAnItemThatDoesntExist()
+    {
+      //TODO
+      Assert.False(true);
+    }
+
     [Theory]
-    [InlineData(1,2,3,4,5,6,7)]
+    [InlineData(1, 2, 3, 4, 5, 6, 7)]
     [InlineData(2, 2, 3, 4, 7, 6, 7)]
     [InlineData(-1, 0, 3, 9, 5, 6, 7)]
     [InlineData(19, 2, 3, 4, 18, 6, 7)]
@@ -55,9 +68,9 @@ namespace ScaffelPikeTests.Derivatives
     }
 
     [Theory]
-    //[InlineData(1, 2, 3, 4, 5, 6, 7)]
-    //[InlineData(2, 2, 3, 4, 7, 6, 7)]
-    //[InlineData(-1, 0, 3, 9, 5, 6, 7)]
+    [InlineData(1, 2, 3, 4, 5, 6, 7)]
+    [InlineData(2, 2, 3, 4, 7, 6, 7)]
+    [InlineData(-1, 0, 3, 9, 5, 6, 7)]
     [InlineData(19, 2, 3, 4, 18, 6, 7)]
     public void TestMinInTree(int data1, int data2, int data3, int data4, int data5, int data6, int data7)
     {
@@ -90,8 +103,10 @@ namespace ScaffelPikeTests.Derivatives
       bt.Remove(theNodeToRemove);
 
       //TODO
+      Assert.False(true);
       Assert.Equal(6, bt.Count);
       Assert.Equal(2, bt.Time);
     }
+
   }
 }

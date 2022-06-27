@@ -26,6 +26,8 @@ namespace ScaffelPikeDerivatives.Objects
 
     internal void AddNext(Node<T> newNode, bool isNextTossIsHeads)
     {
+      newNode.Previous = this;
+
       if (isNextTossIsHeads)
       {
         if (Heads != null) throw new ArgumentException("Cannot overwrite an existing head node");
@@ -37,52 +39,52 @@ namespace ScaffelPikeDerivatives.Objects
       Tails = newNode;
     }
 
-    internal IEnumerable<Node<T>> MaxInPath()
+    public IEnumerable<Node<T>> MaxInPath()
     {
-      Node<T> Max = this;
-      List < Node < T >> MaxCol = new List<Node<T>>() {Max};
-      Node <T> CurrentNode = this;
+      Node<T> max = this;
+      IEnumerable<Node<T>> maxCol = new List<Node<T>>() {max};
+      Node <T> currentNode = this;
 
-      while (CurrentNode != null)
+      while (currentNode != null)
       {
-        if(CurrentNode.Data.CompareTo(Max.Data) > 0)
+        if(currentNode.Data.CompareTo(max.Data) > 0)
         {
-          Max = CurrentNode;
-          MaxCol = new List<Node<T>>() { Max };
+          max = currentNode;
+          maxCol = new List<Node<T>>() { max };
         }
-        else if (CurrentNode.Data.CompareTo(Max.Data) == 0) 
+        else if (currentNode.Data.CompareTo(max.Data) == 0 && currentNode != this) 
         {
-          MaxCol.Add(CurrentNode);
+          maxCol = maxCol.Append(currentNode);
         }
 
-          CurrentNode = CurrentNode.Previous;
+          currentNode = currentNode.Previous;
       }
 
-      return MaxCol;
+      return maxCol;
     }
 
-    internal IEnumerable<Node<T>> MinInPath()
+    public IEnumerable<Node<T>> MinInPath()
     {
-      Node<T> Max = this;
-      IEnumerable<Node<T>> MaxCol = new List<Node<T>>() { Max };
-      Node<T> CurrentNode = this;
+      Node<T> min = this;
+      IEnumerable<Node<T>> minCol = new List<Node<T>>() { min };
+      Node<T> currentNode = this;
 
-      while (CurrentNode != null)
+      while (currentNode != null)
       {
-        if (CurrentNode.Data.CompareTo(Max.Data) > 0)
+        if (currentNode.Data.CompareTo(min.Data) < 0)
         {
-          Max = CurrentNode;
-          MaxCol = new List<Node<T>>() { Max };
+          min = currentNode;
+          minCol = new List<Node<T>>() { min };
         }
-        else if (CurrentNode.Data.CompareTo(Max.Data) == 0)
+        else if (currentNode.Data.CompareTo(min.Data) == 0 && currentNode != this)
         {
-          MaxCol.Append(CurrentNode);
+          minCol = minCol.Append(currentNode);
         }
 
-        CurrentNode = CurrentNode.Previous;
+        currentNode = currentNode.Previous;
       }
 
-      return MaxCol;
+      return minCol;
     }
   }
 }

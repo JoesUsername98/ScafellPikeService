@@ -127,7 +127,7 @@ namespace ScaffelPikeDerivatives.Objects
       }
       else if (tailsPath.First().Data.CompareTo(max.First().Data) == 0)
       {
-        max.Union(tailsPath);
+        max = max.Union(tailsPath);
       }
       if (headsPath.First().Data.CompareTo(max.First().Data) > 0)
       {
@@ -135,7 +135,7 @@ namespace ScaffelPikeDerivatives.Objects
       }
       else if (headsPath.First().Data.CompareTo(max.First().Data) == 0)
       {
-        max.Union(headsPath);
+        max = max.Union(headsPath);
       }
       return max;
     }
@@ -150,8 +150,8 @@ namespace ScaffelPikeDerivatives.Objects
         return new List<Node<T>>() { };
       }
 
-      IEnumerable<Node<T>> tailsPath = MaxInTree(node.Tails);
-      IEnumerable<Node<T>> headsPath = MaxInTree(node.Heads);
+      IEnumerable<Node<T>> tailsPath = MinInTree(node.Tails);
+      IEnumerable<Node<T>> headsPath = MinInTree(node.Heads);
 
       IEnumerable<Node<T>> min = new List<Node<T>>() { node };
       if (tailsPath.Count() == 0 && headsPath.Count() == 0) // LEAF
@@ -165,7 +165,7 @@ namespace ScaffelPikeDerivatives.Objects
       } 
       else if(tailsPath.First().Data.CompareTo(min.First().Data) == 0)
       {
-        min.Union(tailsPath);
+        min = min.Union(tailsPath);
       }
       if (headsPath.First().Data.CompareTo(min.First().Data) < 0)
       {
@@ -173,7 +173,7 @@ namespace ScaffelPikeDerivatives.Objects
       }
       else if (headsPath.First().Data.CompareTo(min.First().Data) == 0)
       {
-        min.Union(headsPath);
+        min = min.Union(headsPath);
       }
       return min;
     }
