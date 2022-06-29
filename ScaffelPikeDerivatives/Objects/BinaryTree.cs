@@ -9,9 +9,9 @@ namespace ScaffelPikeDerivatives.Objects
   public class BinaryTree<T> : ICloneable, IBinaryTree<T> where T : IComparable<T>
   {
     private Node<T> _root;
-    public int Count { get; set; }
+    public int Count { get; private set; }
 
-    public int Time { get; set; }
+    public int Time { get; private set; }
     public BinaryTree()
     {
       _root = null;
@@ -31,9 +31,9 @@ namespace ScaffelPikeDerivatives.Objects
         Time = 0;
         return;
       }
-      InsertRec(newItem, _root);
+      InsertRecursive(newItem, _root);
     }
-    private void InsertRec(Node<T> newNode, Node<T> lastNode)
+    private void InsertRecursive(Node<T> newNode, Node<T> lastNode)
     {
       var isNextTossIsHeads = newNode.Path[lastNode.Path.Length];
       var nextNode = lastNode.GetNext(isNextTossIsHeads);
@@ -46,7 +46,7 @@ namespace ScaffelPikeDerivatives.Objects
         return;
       }
 
-      InsertRec(newNode, nextNode);
+      InsertRecursive(newNode, nextNode);
     }
     public Node<T> GetAt(bool[] path)
     {
@@ -55,13 +55,13 @@ namespace ScaffelPikeDerivatives.Objects
         return _root;
       }
 
-      return GetAtRec(_root, path);
+      return GetAtRecursive(_root, path);
     }
-    private Node<T> GetAtRec(Node<T> currentNode, bool[] path)
+    private Node<T> GetAtRecursive(Node<T> currentNode, bool[] path)
     {
-      var isNextTossIsHeads = path[currentNode.Path.Length];
+      var nextTossIsHeads = path[currentNode.Path.Length];
 
-      var nextNode = currentNode.GetNext(isNextTossIsHeads);
+      var nextNode = currentNode.GetNext(nextTossIsHeads);
 
       if (nextNode == null)
       {
@@ -71,10 +71,20 @@ namespace ScaffelPikeDerivatives.Objects
       if (nextNode.Path.SequenceEqual(path))
         return nextNode;
 
-      return GetAtRec(nextNode, path);
+      return GetAtRecursive(nextNode, path);
     }
     public void Remove(Node<T> node)
     {
+      int nodesInSubtree = node.CountNodesBellow(node);
+
+      if(node == _root)
+      {
+        _root = null;
+        Count = 0;
+        Time = -1;
+        return;
+      }
+
       if (node.Path.Last())
         node.Previous.Heads = null;
       else
@@ -82,24 +92,13 @@ namespace ScaffelPikeDerivatives.Objects
 
       node.Previous = null;
 
-      //MODIFY COUNT 
-      //  Travese leaf nodes and count how many are being removed. 
-      //  Subrtract that from count
+      Count -= nodesInSubtree;
 
-      //MODIFY TIME
-      //  Travese rest tree and recalculate Time.
+      Time = _root.CountTime(_root);
     }
-    /// <summary>
-    /// Shallow Clone
-    /// </summary>
-    /// <returns></returns>
     public object Clone()
     {
-      return new BinaryTree<T>(_root) { Count = this.Count };
-    }
-    public BinaryTree<T> DeepClone()
-    {
-      throw new NotImplementedException();// REQUIRES TRAVERSAL
+      return new BinaryTree<T>((Node<T>)_root.Clone()) { Count = this.Count, Time = this.Time };
     }
     public IEnumerable<Node<T>> MaxInTree()
     {
@@ -111,7 +110,7 @@ namespace ScaffelPikeDerivatives.Objects
       {
         return new List<Node<T>>() { };
       }
-      
+
       IEnumerable<Node<T>> tailsPath = MaxInTree(node.Tails);
       IEnumerable<Node<T>> headsPath = MaxInTree(node.Heads);
 
@@ -162,8 +161,8 @@ namespace ScaffelPikeDerivatives.Objects
       if (tailsPath.First().Data.CompareTo(min.First().Data) < 0)
       {
         min = tailsPath;
-      } 
-      else if(tailsPath.First().Data.CompareTo(min.First().Data) == 0)
+      }
+      else if (tailsPath.First().Data.CompareTo(min.First().Data) == 0)
       {
         min = min.Union(tailsPath);
       }
@@ -176,27 +175,6 @@ namespace ScaffelPikeDerivatives.Objects
         min = min.Union(headsPath);
       }
       return min;
-    }
-
-    public void Preorder(Node<T> currentNode)
-    {
-      Console.Write(currentNode.Data + " ");
-      Preorder(currentNode.Tails);
-      Preorder(currentNode.Heads);
-    }
-    public void Inorder(Node<T> currentNode)
-    {
-      if (currentNode == null) return;
-      Inorder(currentNode.Tails);
-      Console.Write(currentNode.Data + " ");
-      Inorder(currentNode.Heads);
-    }
-    public void Postorder(Node<T> currentNode)
-    {
-      if (currentNode == null) return;
-      Postorder(currentNode.Tails);
-      Postorder(currentNode.Heads);
-      Console.Write(currentNode.Data + " ");
     }
   }
 }

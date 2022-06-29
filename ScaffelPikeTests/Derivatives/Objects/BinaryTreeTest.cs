@@ -42,8 +42,20 @@ namespace ScaffelPikeTests.Objects.Derivatives
     [Fact]
     public void GetAnItemThatDoesntExist()
     {
-      //TODO
-      Assert.False(true);
+      //arange
+      var nonExistentPath = new bool[] { false, true, true };
+      var bt = new BinaryTree<string>();
+      bt.Insert(new Node<string>("root", new bool[] { }));
+      bt.Insert(new Node<string>("h", new bool[] { true }));
+      bt.Insert(new Node<string>("t", new bool[] { false }));
+      bt.Insert(new Node<string>("hh", new bool[] { true, true }));
+      bt.Insert(new Node<string>("ht", new bool[] { true, false }));
+      bt.Insert(new Node<string>("tt", new bool[] { false, false }));
+      bt.Insert(new Node<string>("th", new bool[] { false, true }));
+
+      //act and assert
+      var ex = Assert.Throws<ArgumentException>(() => bt.GetAt(nonExistentPath));
+      Assert.Equal(ex.ParamName, "path");
     }
 
     [Theory]
@@ -89,8 +101,51 @@ namespace ScaffelPikeTests.Objects.Derivatives
     }
 
     [Fact]
-    public void Remove()
+    public void RemoveLeafNodes()
     {
+      //arrange
+      var bt = new BinaryTree<string>();
+      bt.Insert(new Node<string>("root", new bool[] { }));
+      bt.Insert(new Node<string>("h", new bool[] { true }));
+      bt.Insert(new Node<string>("t", new bool[] { false }));
+      bt.Insert(new Node<string>("hh", new bool[] { true, true }));
+      bt.Insert(new Node<string>("ht", new bool[] { true, false }));
+      bt.Insert(new Node<string>("tt", new bool[] { false, false }));
+      bt.Insert(new Node<string>("th", new bool[] { false, true }));
+      
+      //act
+      bt.Remove(bt.GetAt(new bool[] { true,true }));
+      
+      //assert
+      Assert.Equal(6, bt.Count);
+      Assert.Equal(2, bt.Time);
+      
+      //rearrange and react
+      bt.Remove(bt.GetAt(new bool[] { false, false }));
+      
+      //reassert
+      Assert.Equal(5, bt.Count);
+      Assert.Equal(2, bt.Time);
+
+      //rearrange and react
+      bt.Remove(bt.GetAt(new bool[] { false, true }));
+
+      //reassert
+      Assert.Equal(4, bt.Count);
+      Assert.Equal(2, bt.Time);
+
+      //rearrange and react
+      bt.Remove(bt.GetAt(new bool[] { true, false }));
+
+      //reassert
+      Assert.Equal(3, bt.Count);
+      Assert.Equal(1, bt.Time);
+    }
+
+    [Fact]
+    public void RemoveBranchNodes()
+    {
+      //arrange
       var bt = new BinaryTree<string>();
       var theNodeToRemove = new Node<string>("t", new bool[] { false });
       bt.Insert(new Node<string>("root", new bool[] { }));
@@ -100,12 +155,40 @@ namespace ScaffelPikeTests.Objects.Derivatives
       bt.Insert(new Node<string>("ht", new bool[] { true, false }));
       bt.Insert(new Node<string>("tt", new bool[] { false, false }));
       bt.Insert(new Node<string>("th", new bool[] { false, true }));
-      bt.Remove(theNodeToRemove);
+      
+      //act
+      bt.Remove(theNodeToRemove);// also deletes th and tt
 
-      //TODO
-      Assert.False(true);
-      Assert.Equal(6, bt.Count);
+      //assert
+      Assert.Equal(4, bt.Count);
       Assert.Equal(2, bt.Time);
+
+      //rearrange and react
+      bt.Remove(bt.GetAt(new bool[] { true }));// also deletes hh and ht
+
+      //reassert
+      Assert.Equal(1, bt.Count);
+      Assert.Equal(0, bt.Time);
+    }
+    [Fact]
+    public void RemoveRoot()
+    {
+      //arrange
+      var bt = new BinaryTree<string>();
+      bt.Insert(new Node<string>("root", new bool[] { }));
+      bt.Insert(new Node<string>("h", new bool[] { true }));
+      bt.Insert(new Node<string>("t", new bool[] { false }));
+      bt.Insert(new Node<string>("hh", new bool[] { true, true }));
+      bt.Insert(new Node<string>("ht", new bool[] { true, false }));
+      bt.Insert(new Node<string>("tt", new bool[] { false, false }));
+      bt.Insert(new Node<string>("th", new bool[] { false, true }));
+
+      //act
+      bt.Remove(bt.GetAt(new bool[] {}));
+
+      //assert
+      Assert.Equal(0, bt.Count);
+      Assert.Equal(-1, bt.Time);
     }
 
   }

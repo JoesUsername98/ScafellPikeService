@@ -5,7 +5,8 @@ namespace ScaffelPikeDerivatives.Objects
 {
   public interface IBinaryTree<T> where T : IComparable<T>
   {
-    int Count { get; set; }
+    int Count { get; }
+    int Time  { get; }
     Node<T> GetAt(bool[] path);
     void Insert(Node<T> newItem);
     IEnumerable<Node<T>> MaxInTree();
