@@ -191,5 +191,12 @@ namespace ScaffelPikeTests.Objects.Derivatives
       Assert.Equal(-1, bt.Time);
     }
 
+    [Fact]
+    public void Cloning()
+    {
+      //TODO
+      Assert.False(true);
+    }
+
   }
 }
