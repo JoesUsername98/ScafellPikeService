@@ -1,23 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using ScaffelPikeDerivatives.Objects.Interfaces;
 
 namespace ScaffelPikeDerivatives.Objects
 {
-  public class Node<T> : ICloneable where T : IComparable<T>
+  [DataContract]
+  public class Node<T> : INode<T> where T : IComparable<T>
   {
     public Node(T data, bool[] path)
     {
       Data = data;
       Path = path;
     }
+    [DataMember]
     public T Data { get; private set; }
+    [DataMember]
     public bool[] Path { get; private set; }
+    [DataMember]
     public int Time { get { return Path.Length; } }
+    [DataMember]
     public Node<T> Previous { get; set; }
+    [DataMember]
     public Node<T> Heads { get; set; }
+    [DataMember]
     public Node<T> Tails { get; set; }
     public Node<T> GetNext(bool isHeads)
     {
@@ -83,17 +92,17 @@ namespace ScaffelPikeDerivatives.Objects
 
       return minCol;
     }
-    public int CountNodesBellow(Node<T> node)
+    public int CountSubsequentNodes(Node<T> node)
     {
       if (node is null) return 0;
 
-      return CountNodesBellow(node.Tails) + CountNodesBellow(node.Heads) + 1;
+      return CountSubsequentNodes(node.Tails) + CountSubsequentNodes(node.Heads) + 1;
     }
     public int CountTime(Node<T> node)
     {
       if (node == null) return -1;
 
-      return Math.Max(CountTime(node.Tails), CountTime(node.Heads)) +1;
+      return Math.Max(CountTime(node.Tails), CountTime(node.Heads)) + 1;
     }
     public object Clone()
     {

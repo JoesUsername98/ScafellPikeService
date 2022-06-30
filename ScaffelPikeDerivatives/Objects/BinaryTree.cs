@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using ScaffelPikeDerivatives.Objects.Interfaces;
 
 namespace ScaffelPikeDerivatives.Objects
 {
-  public class BinaryTree<T> : ICloneable, IBinaryTree<T> where T : IComparable<T>
+  [DataContract]
+  public class BinaryTree<T> : IBinaryTree<T> where T : IComparable<T>
   {
+    [DataMember]
     private Node<T> _root;
+    [DataMember]
     public int Count { get; private set; }
-
+    [DataMember]
     public int Time { get; private set; }
     public BinaryTree()
     {
@@ -75,7 +80,7 @@ namespace ScaffelPikeDerivatives.Objects
     }
     public void Remove(Node<T> node)
     {
-      int nodesInSubtree = node.CountNodesBellow(node);
+      int nodesInSubtree = node.CountSubsequentNodes(node);
 
       if(node == _root)
       {
