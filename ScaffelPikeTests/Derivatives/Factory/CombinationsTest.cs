@@ -10,11 +10,15 @@ namespace ScaffelPikeTests.Derivatives.Factory
 {
   public class CombinationsTest
   {
-    [Fact]
-    public void CombinationsTestMethod() // 
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    [InlineData(4)]
+    [InlineData(15)]
+    public void GeneratePathCombinationsForTime(int length) 
     {
       //arrange 
-      var length = 3;
       var possibleOutcomesAtTime = new List<List<bool>>();
       var inputParams = Combinations.GenerateParams(new bool[] { true, false }, length);
 

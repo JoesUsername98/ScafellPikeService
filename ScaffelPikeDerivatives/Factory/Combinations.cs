@@ -44,7 +44,7 @@ namespace ScaffelPikeDerivatives.Factory
     private static long Factorial(int number)
     {
       if (number < 0)
-        return -1; //Error
+        throw new ArgumentException("Cannot do a factorial of a negative numbers");
 
       long result = 1;
 
@@ -54,19 +54,14 @@ namespace ScaffelPikeDerivatives.Factory
       return result;
     }
 
-    public static long NCR(int n, int r)
-    {
-      return Factorial(n) / (Factorial(r) * Factorial(n - r));
-    }
+    public static long NCR(int n, int r) => Factorial(n) / (Factorial(r) * Factorial(n - r));
 
-    public static long summedNCR(int r)
-    {
-      long expectedCount = 0;
-      for (int i = 0; i <= r; i++)
-      {
-        expectedCount += NCR(r, i);
-      }
-      return expectedCount;
-    }
+    public static long summedNCR(int r) => Enumerable.Range(0, r+1).Sum(i => NCR(r, i));
+    //long expectedCount = 0;
+    //for (int i = 0; i <= r; i++)
+    //{
+    //  expectedCount += NCR(r, i);
+    //}
+    //return expectedCount;
   }
 }
