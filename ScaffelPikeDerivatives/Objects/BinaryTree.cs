@@ -25,7 +25,7 @@ namespace ScaffelPikeDerivatives.Objects
     public BinaryTree(Node<T> root)
     {
       _root = root;
-      Count = 0;
+      Count = 1;
     }
     public void Insert(Node<T> newItem)
     {

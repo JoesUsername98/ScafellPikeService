@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory\BinaryTreeFactory.cs" />
+    <Compile Include="Factory\Combinations.cs" />
     <Compile Include="Objects\BinaryTree.cs" />
     <Compile Include="Interfaces\IBinaryTree.cs" />
     <Compile Include="Interfaces\INode.cs" />
