@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using ScaffelPikeDerivatives.Objects.Interfaces;
+using ScaffelPikeDerivatives.Objects.Iterators;
 
 namespace ScaffelPikeDerivatives.Objects
 {
@@ -48,49 +50,13 @@ namespace ScaffelPikeDerivatives.Objects
     }
     public IEnumerable<Node<T>> MaxInPath()
     {
-      Node<T> max = this;
-      IEnumerable<Node<T>> maxCol = new List<Node<T>>() { max };
-      Node<T> currentNode = this;
-
-      while (currentNode != null)
-      {
-        if (currentNode.Data.CompareTo(max.Data) > 0)
-        {
-          max = currentNode;
-          maxCol = new List<Node<T>>() { max };
-        }
-        else if (currentNode.Data.CompareTo(max.Data) == 0 && currentNode != this)
-        {
-          maxCol = maxCol.Append(currentNode);
-        }
-
-        currentNode = currentNode.Previous;
-      }
-
-      return maxCol;
+      var maxDataInTree = this.Max(x => x.Data);
+      return this.Where(x => x.Data.CompareTo(maxDataInTree) == 0);
     }
     public IEnumerable<Node<T>> MinInPath()
     {
-      Node<T> min = this;
-      IEnumerable<Node<T>> minCol = new List<Node<T>>() { min };
-      Node<T> currentNode = this;
-
-      while (currentNode != null)
-      {
-        if (currentNode.Data.CompareTo(min.Data) < 0)
-        {
-          min = currentNode;
-          minCol = new List<Node<T>>() { min };
-        }
-        else if (currentNode.Data.CompareTo(min.Data) == 0 && currentNode != this)
-        {
-          minCol = minCol.Append(currentNode);
-        }
-
-        currentNode = currentNode.Previous;
-      }
-
-      return minCol;
+      var minDataInTree = this.Min(x => x.Data);
+      return this.Where(x => x.Data.CompareTo(minDataInTree) == 0);
     }
     public int CountSubsequentNodes(Node<T> node)
     {
@@ -119,5 +85,17 @@ namespace ScaffelPikeDerivatives.Objects
       }
       return copiedNode;
     }
+    /// <summary>
+    /// Returns only the history of the node.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator<Node<T>> GetEnumerator() => new NodeReverseOrderIterator<T>(this);
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    
+    /// <summary>
+    /// Returns the node with foresight. For Tree Traversal
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator<Node<T>> GetForesightEnumerator() => new NodeInOrderIterator<T>(this);
   }
 }

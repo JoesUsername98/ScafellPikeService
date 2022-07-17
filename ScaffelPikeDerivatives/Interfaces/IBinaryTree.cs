@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace ScaffelPikeDerivatives.Objects.Interfaces
 {
-  public interface IBinaryTree<T> : ICloneable where T : IComparable<T>
+  public interface IBinaryTree<T> : ICloneable, IEnumerable<Node<T>> where T : IComparable<T>
   {
     int Count { get; }
     int Time  { get; }

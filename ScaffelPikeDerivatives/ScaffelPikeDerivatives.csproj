@@ -48,6 +48,9 @@
     <Compile Include="Interfaces\IBinaryTree.cs" />
     <Compile Include="Interfaces\INode.cs" />
     <Compile Include="Objects\Node.cs" />
+    <Compile Include="Objects\Iterators\NodeInOrderIterator.cs" />
+    <Compile Include="Objects\Iterators\NodeIteratorState.cs" />
+    <Compile Include="Objects\Iterators\NodeReverseOrderIterator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

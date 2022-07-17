@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -17,6 +18,7 @@ namespace ScaffelPikeDerivatives.Objects
     public int Count { get; private set; }
     [DataMember]
     public int Time { get; private set; }
+
     public BinaryTree()
     {
       _root = null;
@@ -29,6 +31,7 @@ namespace ScaffelPikeDerivatives.Objects
     }
     public void Insert(Node<T> newItem)
     {
+
       if (_root == null)
       {
         _root = newItem;
@@ -82,7 +85,7 @@ namespace ScaffelPikeDerivatives.Objects
     {
       int nodesInSubtree = node.CountSubsequentNodes(node);
 
-      if(node == _root)
+      if (node == _root)
       {
         _root = null;
         Count = 0;
@@ -99,78 +102,28 @@ namespace ScaffelPikeDerivatives.Objects
 
       Count -= nodesInSubtree;
 
-      Time = _root.CountTime(_root);
+      Time = this.Max( x => x.Path.Length);
     }
     public object Clone() => new BinaryTree<T>((Node<T>)_root.Clone()) { Count = this.Count, Time = this.Time };
-    public IEnumerable<Node<T>> MaxInTree() => MaxInTree(_root);
-    private IEnumerable<Node<T>> MaxInTree(Node<T> node)
+    public IEnumerable<Node<T>> MaxInTree()
     {
-      if (node == null)
-      {
-        return new List<Node<T>>() { };
-      }
-
-      IEnumerable<Node<T>> tailsPath = MaxInTree(node.Tails);
-      IEnumerable<Node<T>> headsPath = MaxInTree(node.Heads);
-
-      IEnumerable<Node<T>> max = new List<Node<T>>() { node };
-      if (tailsPath.Count() == 0 && headsPath.Count() == 0) // LEAF
-      {
-        return max;
-      }
-
-      if (tailsPath.First().Data.CompareTo(max.First().Data) > 0)
-      {
-        max = tailsPath;
-      }
-      else if (tailsPath.First().Data.CompareTo(max.First().Data) == 0)
-      {
-        max = max.Union(tailsPath);
-      }
-      if (headsPath.First().Data.CompareTo(max.First().Data) > 0)
-      {
-        max = headsPath;
-      }
-      else if (headsPath.First().Data.CompareTo(max.First().Data) == 0)
-      {
-        max = max.Union(headsPath);
-      }
-      return max;
+      var maxInTree = this.Max(x => x.Data);
+      return this.Where(x => x.Data.CompareTo(maxInTree) == 0);
     }
-    public IEnumerable<Node<T>> MinInTree() => MinInTree(_root);
-    private IEnumerable<Node<T>> MinInTree(Node<T> node)
+    public IEnumerable<Node<T>> MinInTree()
     {
-      if (node == null)
-      {
-        return new List<Node<T>>() { };
-      }
+      var minInTree = this.Min(x => x.Data);
+      return this.Where(x => x.Data.CompareTo(minInTree) == 0);
+    }
 
-      IEnumerable<Node<T>> tailsPath = MinInTree(node.Tails);
-      IEnumerable<Node<T>> headsPath = MinInTree(node.Heads);
+    public IEnumerator<Node<T>> GetEnumerator()
+    {
+      return _root.GetForesightEnumerator();
+    }
 
-      IEnumerable<Node<T>> min = new List<Node<T>>() { node };
-      if (tailsPath.Count() == 0 && headsPath.Count() == 0) // LEAF
-      {
-        return min;
-      }
-
-      if (tailsPath.First().Data.CompareTo(min.First().Data) < 0)
-      {
-        min = tailsPath;
-      }
-      else if (tailsPath.First().Data.CompareTo(min.First().Data) == 0)
-      {
-        min = min.Union(tailsPath);
-      }
-      if (headsPath.First().Data.CompareTo(min.First().Data) < 0)
-      {
-        min = headsPath;
-      }
-      else if (headsPath.First().Data.CompareTo(min.First().Data) == 0)
-      {
-        min = min.Union(headsPath);
-      }
-      return min;
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return GetEnumerator();
     }
   }
 }

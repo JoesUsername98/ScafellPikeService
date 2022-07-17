@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ScaffelPikeDerivatives.Objects.Interfaces
 {
-  public interface INode<T> : ICloneable where T : IComparable<T>
+  public interface INode<T> : ICloneable, IEnumerable<Node<T>> where T : IComparable<T>
   {
     T Data { get; }
     Node<T> Heads { get; set; }

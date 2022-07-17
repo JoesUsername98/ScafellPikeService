@@ -69,5 +69,52 @@ namespace ScaffelPikeTests.Derivatives.Factory
         //handle exceptions here
       }
     }
+
+
+    [Fact]
+    public void BinaryTreeEnumeration()
+    {
+      //arrange 
+      int So = 4;
+      int N = 2;
+      double u = 2;
+      double k = 5;
+      //act 
+      var tree = BinaryTreeFactory.CreateSecurityTree(So, N, u);
+      
+
+      foreach(var node in tree)
+      {
+        var thisPath = node.Path;
+        var thisValue = node.Data;
+      }
+      var maxDataInTree = tree.Max(x => x.Data);
+      var maxDataNodes = tree.Where(x => x.Data == maxDataInTree);
+      var minDataInTree = tree.Min(x => x.Data);
+      var minDataNodes = tree.Where(x => x.Data == minDataInTree);
+    }
+
+    [Fact]
+    public void BinaryTreePathEnumeration()
+    {
+      //arrange 
+      int So = 4;
+      int N = 2;
+      double u = 2;
+      double k = 5;
+      //act 
+      var tree = BinaryTreeFactory.CreateSecurityTree(So, N, u);
+      var heads = tree.GetAt(new bool[] { true,true });
+
+      foreach (var prevNodes in heads)
+      {
+        var thisPath = prevNodes.Path.ToList();
+        var thisValue = prevNodes.Data;
+      }
+      var maxDataInTree = heads.Max(x => x.Data);
+      var maxDataNodes = heads.Where(x => x.Data == maxDataInTree);
+      var minDataInTree = heads.Min(x => x.Data);
+      var minDataNodes = heads.Where(x => x.Data == minDataInTree);
+    }
   }
 }
