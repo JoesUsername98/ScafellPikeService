@@ -18,6 +18,7 @@ namespace ScaffelPikeDerivatives.Objects
     public int Count { get; private set; }
     [DataMember]
     public int Time { get; private set; }
+    public bool IsReadOnly => false;
 
     public BinaryTree()
     {
@@ -27,70 +28,87 @@ namespace ScaffelPikeDerivatives.Objects
     public BinaryTree(Node<T> root)
     {
       _root = root;
-      Count = 1;
+      Count = this.Select(x => x).Count();
     }
-    public void Insert(Node<T> newItem)
+    #region IEnumerable
+    public IEnumerator<Node<T>> GetEnumerator()
     {
+      return _root.GetForesightEnumerator();
+    }
 
-      if (_root == null)
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return GetEnumerator();
+    }
+    #endregion
+    #region ICollection
+    public void Add(Node<T> newItem)
+    {
+      if (newItem.Path.Length == 0)
       {
         _root = newItem;
         Count++;
         Time = 0;
         return;
       }
-      InsertRecursive(newItem, _root);
-    }
-    private void InsertRecursive(Node<T> newNode, Node<T> lastNode)
-    {
-      var isNextTossIsHeads = newNode.Path[lastNode.Path.Length];
-      var nextNode = lastNode.GetNext(isNextTossIsHeads);
+      var parentNodePath = newItem.Path.Take(newItem.Path.Length - 1);
+      var pathStack = new Stack<bool>(parentNodePath.Reverse());
 
-      if (nextNode == null)
+      var parentNode = _root;
+      while (pathStack.Count > 0)
       {
-        lastNode.AddNext(newNode, isNextTossIsHeads);
-        Time = newNode.Path.Length > Time ? newNode.Path.Length : Time;
-        Count++;
-        return;
+        var nextTossIsHeads = pathStack.Pop();
+        parentNode = nextTossIsHeads ? parentNode.Heads : parentNode.Tails;
+        if (parentNode == null)
+        {
+          throw new ArgumentException("Could not find a parent node in this path: " + parentNodePath, "newItem.Path");
+        }
       }
 
-      InsertRecursive(newNode, nextNode);
+      parentNode.AddNext(newItem, newItem.Path.Last());
+      Time = newItem.Path.Length > Time ? newItem.Path.Length : Time;
+      Count++;
     }
-    public Node<T> GetAt(bool[] path)
+    public bool Contains(Node<T> item)
     {
-      if (path.Length == 0)
+      var pathStack = new Stack<bool>(item.Path.Reverse());
+      var currNode = _root;
+      while (pathStack.Count > 0)
       {
-        return _root;
+        var nextTossIsHeads = pathStack.Pop();
+        currNode = nextTossIsHeads ? currNode.Heads : currNode.Tails;
+        if (currNode == null)
+        {
+          return false;
+        }
       }
 
-      return GetAtRecursive(_root, path);
+      return currNode.Data.CompareTo(item.Data) == 0;
     }
-    private Node<T> GetAtRecursive(Node<T> currentNode, bool[] path)
+    public void CopyTo(Node<T>[] array, int arrayIndex)
     {
-      var nextTossIsHeads = path[currentNode.Path.Length];
-
-      var nextNode = currentNode.GetNext(nextTossIsHeads);
-
-      if (nextNode == null)
-      {
-        throw new ArgumentException("Could not find a node in this path: " + path, "path");
-      }
-
-      if (nextNode.Path.SequenceEqual(path))
-        return nextNode;
-
-      return GetAtRecursive(nextNode, path);
+      if (array == null)
+        throw new ArgumentNullException("array");
+      array = ((BinaryTree<T>)this.Clone()).ToArray();
+      if (array.Length  > arrayIndex)
+        throw new ArgumentException("Not enough elements after arrayIndex in the destination array.");
+      array = array.Skip(arrayIndex - 1).ToArray();
     }
-    public void Remove(Node<T> node)
+    bool ICollection<Node<T>>.Remove(Node<T> item)
+    {
+      return this.Remove(item);
+    }
+    public bool Remove(Node<T> node)
     {
       int nodesInSubtree = node.CountSubsequentNodes(node);
+      bool doesContain = this.Contains(node);
 
       if (node == _root)
       {
         _root = null;
         Count = 0;
         Time = -1;
-        return;
+        return doesContain;
       }
 
       if (node.Path.Last())
@@ -101,10 +119,20 @@ namespace ScaffelPikeDerivatives.Objects
       node.Previous = null;
 
       Count -= nodesInSubtree;
-
-      Time = this.Max( x => x.Path.Length);
+      RecountTime();
+      return doesContain;
     }
+    public void Clear()
+    {
+      _root = null;
+      Time = 0;
+      Count = 0;
+    }
+    #endregion
+    #region ICloneable
     public object Clone() => new BinaryTree<T>((Node<T>)_root.Clone()) { Count = this.Count, Time = this.Time };
+    #endregion
+    #region IBinaryTree
     public IEnumerable<Node<T>> MaxInTree()
     {
       var maxInTree = this.Max(x => x.Data);
@@ -116,14 +144,30 @@ namespace ScaffelPikeDerivatives.Objects
       return this.Where(x => x.Data.CompareTo(minInTree) == 0);
     }
 
-    public IEnumerator<Node<T>> GetEnumerator()
+    public Node<T> GetAt(bool[] path)
     {
-      return _root.GetForesightEnumerator();
-    }
+      var pathStack = new Stack<bool>(path.Reverse());
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-      return GetEnumerator();
+      if (pathStack.Count == 0) { return _root; }
+
+      var currNode = _root;
+      while (pathStack.Count > 0)
+      {
+        var nextTossIsHeads = pathStack.Pop();
+        currNode = nextTossIsHeads ? currNode.Heads : currNode.Tails;
+        if (currNode == null)
+        {
+          throw new ArgumentException("Could not find a node in this path: " + path, "path");
+        }
+      }
+
+      return currNode;
     }
+    private int RecountTime()
+    {
+      Time = this.Max(x => x.Path.Length);
+      return Time;
+    }
+    #endregion
   }
 }

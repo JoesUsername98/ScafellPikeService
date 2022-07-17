@@ -48,73 +48,20 @@ namespace ScaffelPikeTests.Derivatives.Factory
       // ...populate tree (left as an exercise)
 
       // Define the Action to perform on each node.
-      Action<double> myAction = x => x = Math.Max(k - x, 0); ///|K-s|
+      Func<Node<double>, double, double, double> myFunc = (x,K,expPayout) => Math.Max(K - x.Data, expPayout); ///|K-s|
 
-      // Traverse the tree with parallel tasks.
-      DoTree(tree.GetAt(new bool[] { }), myAction);
-    }
-    // By using tasks explcitly.
-    private static void DoTree<T>(Node<T> node, Action<T> action) where T : IComparable<T>
-    {
-      if (node == null) return;
-      var left = Task.Factory.StartNew(() => DoTree(node.Tails, action));
-      var right = Task.Factory.StartNew(() => DoTree(node.Heads, action));
-      action(node.Data); //TODO how out how to get the action to modify the data 
-      try
+      foreach (var node in tree)
       {
-        Task.WaitAll(left, right);
+        node.Data= myFunc(node, k,0);
       }
-      catch (AggregateException)
-      {
-        //handle exceptions here
-      }
+
+      //foreach(var node in tree)
+      //{
+      //  var discountRate = 0.25; 
+      //  var expected = (1/(1+discountRate))(p.node.Data
+      //  node.Data = myFunc(node, k);
+      //}
     }
 
-
-    [Fact]
-    public void BinaryTreeEnumeration()
-    {
-      //arrange 
-      int So = 4;
-      int N = 2;
-      double u = 2;
-      double k = 5;
-      //act 
-      var tree = BinaryTreeFactory.CreateSecurityTree(So, N, u);
-      
-
-      foreach(var node in tree)
-      {
-        var thisPath = node.Path;
-        var thisValue = node.Data;
-      }
-      var maxDataInTree = tree.Max(x => x.Data);
-      var maxDataNodes = tree.Where(x => x.Data == maxDataInTree);
-      var minDataInTree = tree.Min(x => x.Data);
-      var minDataNodes = tree.Where(x => x.Data == minDataInTree);
-    }
-
-    [Fact]
-    public void BinaryTreePathEnumeration()
-    {
-      //arrange 
-      int So = 4;
-      int N = 2;
-      double u = 2;
-      double k = 5;
-      //act 
-      var tree = BinaryTreeFactory.CreateSecurityTree(So, N, u);
-      var heads = tree.GetAt(new bool[] { true,true });
-
-      foreach (var prevNodes in heads)
-      {
-        var thisPath = prevNodes.Path.ToList();
-        var thisValue = prevNodes.Data;
-      }
-      var maxDataInTree = heads.Max(x => x.Data);
-      var maxDataNodes = heads.Where(x => x.Data == maxDataInTree);
-      var minDataInTree = heads.Min(x => x.Data);
-      var minDataNodes = heads.Where(x => x.Data == minDataInTree);
-    }
   }
 }

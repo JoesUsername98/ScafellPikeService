@@ -31,7 +31,7 @@ namespace ScaffelPikeDerivatives.Factory
         {
           var noOfHeads = (double)path.Where(p => p).Count();
           var price = (double)initialPrice * Math.Pow( upFactor, noOfHeads) * Math.Pow((double)downFactor, (double)(currTime - noOfHeads));
-          bt.Insert(new Node<double>((double)price, path.ToArray()));
+          bt.Add(new Node<double>((double)price, path.ToArray()));
         };
       }
       return bt;

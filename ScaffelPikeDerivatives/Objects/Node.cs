@@ -62,13 +62,17 @@ namespace ScaffelPikeDerivatives.Objects
     {
       if (node is null) return 0;
 
-      return CountSubsequentNodes(node.Tails) + CountSubsequentNodes(node.Heads) + 1;
+      //return CountSubsequentNodes(node.Tails) + CountSubsequentNodes(node.Heads) + 1;
+      var subTree = new BinaryTree<T>(node);
+      return subTree.Count;
     }
     public int CountTime(Node<T> node)
     {
       if (node == null) return -1;
 
-      return Math.Max(CountTime(node.Tails), CountTime(node.Heads)) + 1;
+      //return Math.Max(CountTime(node.Tails), CountTime(node.Heads)) + 1;
+      var subTree = new BinaryTree<T>(node);
+      return subTree.Time;
     }
     public object Clone()
     {
