@@ -17,7 +17,7 @@ namespace ScaffelPikeDerivatives.Objects
       Path = path;
     }
     [DataMember]
-    public T Data { get; private set; }
+    public T Data { get; set; }
     [DataMember]
     public bool[] Path { get; private set; }
     [DataMember]

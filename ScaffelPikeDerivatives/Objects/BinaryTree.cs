@@ -101,14 +101,8 @@ namespace ScaffelPikeDerivatives.Objects
 
       Time = _root.CountTime(_root);
     }
-    public object Clone()
-    {
-      return new BinaryTree<T>((Node<T>)_root.Clone()) { Count = this.Count, Time = this.Time };
-    }
-    public IEnumerable<Node<T>> MaxInTree()
-    {
-      return MaxInTree(_root);
-    }
+    public object Clone() => new BinaryTree<T>((Node<T>)_root.Clone()) { Count = this.Count, Time = this.Time };
+    public IEnumerable<Node<T>> MaxInTree() => MaxInTree(_root);
     private IEnumerable<Node<T>> MaxInTree(Node<T> node)
     {
       if (node == null)
@@ -143,10 +137,7 @@ namespace ScaffelPikeDerivatives.Objects
       }
       return max;
     }
-    public IEnumerable<Node<T>> MinInTree()
-    {
-      return MinInTree(_root);
-    }
+    public IEnumerable<Node<T>> MinInTree() => MinInTree(_root);
     private IEnumerable<Node<T>> MinInTree(Node<T> node)
     {
       if (node == null)
