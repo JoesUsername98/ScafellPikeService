@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ScaffelPikeDerivatives.Objects.Iterators
 {
-  public class NodeReverseOrderIterator<T> : IEnumerator<Node<T>>, IEnumerator, IDisposable where T : IComparable<T>
+  public class NodeReverseOrderIterator<T> : IEnumerator<Node<T>>, IEnumerator, IDisposable  where T : IEquatable<T>
   {
     /// <summary>
     /// 1  current is leaf node.

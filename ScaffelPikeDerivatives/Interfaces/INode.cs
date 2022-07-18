@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ScaffelPikeDerivatives.Objects.Interfaces
 {
-  public interface INode<T> : ICloneable, IEnumerable<Node<T>> where T : IComparable<T>
+  public interface INode<T> : ICloneable, IEnumerable<INode<T>>, IEquatable<INode<T>> where T : IEquatable<T> 
   {
     T Data { get; }
     Node<T> Heads { get; set; }
@@ -14,7 +14,7 @@ namespace ScaffelPikeDerivatives.Objects.Interfaces
     int CountSubsequentNodes(Node<T> node);
     int CountTime(Node<T> node);
     Node<T> GetNext(bool isHeads);
-    IEnumerable<Node<T>> MaxInPath();
-    IEnumerable<Node<T>> MinInPath();
+    void AddNext(Node<T> nextItem, bool isHeads);
+    IEnumerator<Node<T>> GetForesightEnumerator();
   }
 }

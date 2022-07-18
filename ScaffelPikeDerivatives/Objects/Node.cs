@@ -11,7 +11,7 @@ using ScaffelPikeDerivatives.Objects.Iterators;
 namespace ScaffelPikeDerivatives.Objects
 {
   [DataContract]
-  public class Node<T> : INode<T> where T : IComparable<T>
+  public class Node<T> : INode<T> where T : IEquatable<T>
   {
     public Node(T data, bool[] path)
     {
@@ -34,7 +34,7 @@ namespace ScaffelPikeDerivatives.Objects
     {
       return isHeads ? Heads : Tails;
     }
-    internal void AddNext(Node<T> newNode, bool isNextTossIsHeads)
+    public void AddNext(Node<T> newNode, bool isNextTossIsHeads)
     {
       newNode.Previous = this;
 
@@ -48,21 +48,10 @@ namespace ScaffelPikeDerivatives.Objects
       if (Tails != null) throw new ArgumentException("Cannot overwrite an existing tails node");
       Tails = newNode;
     }
-    public IEnumerable<Node<T>> MaxInPath()
-    {
-      var maxDataInTree = this.Max(x => x.Data);
-      return this.Where(x => x.Data.CompareTo(maxDataInTree) == 0);
-    }
-    public IEnumerable<Node<T>> MinInPath()
-    {
-      var minDataInTree = this.Min(x => x.Data);
-      return this.Where(x => x.Data.CompareTo(minDataInTree) == 0);
-    }
     public int CountSubsequentNodes(Node<T> node)
     {
       if (node is null) return 0;
 
-      //return CountSubsequentNodes(node.Tails) + CountSubsequentNodes(node.Heads) + 1;
       var subTree = new BinaryTree<T>(node);
       return subTree.Count;
     }
@@ -70,7 +59,6 @@ namespace ScaffelPikeDerivatives.Objects
     {
       if (node == null) return -1;
 
-      //return Math.Max(CountTime(node.Tails), CountTime(node.Heads)) + 1;
       var subTree = new BinaryTree<T>(node);
       return subTree.Time;
     }
@@ -93,7 +81,7 @@ namespace ScaffelPikeDerivatives.Objects
     /// Returns only the history of the node.
     /// </summary>
     /// <returns></returns>
-    public IEnumerator<Node<T>> GetEnumerator() => new NodeReverseOrderIterator<T>(this);
+    public IEnumerator<INode<T>> GetEnumerator() => new NodeReverseOrderIterator<T>(this);
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     
     /// <summary>
@@ -101,5 +89,12 @@ namespace ScaffelPikeDerivatives.Objects
     /// </summary>
     /// <returns></returns>
     public IEnumerator<Node<T>> GetForesightEnumerator() => new NodeInOrderIterator<T>(this);
+
+
+    public bool Equals(INode<T> other)
+    {
+      return this.Data.Equals(other.Data) && this.Path.Equals(other.Path);
+    }
+
   }
 }

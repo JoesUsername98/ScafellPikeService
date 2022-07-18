@@ -18,7 +18,8 @@ namespace ScaffelPikeTests.Derivatives.Objects
       var bt = BinaryTreeTestFactory.GenerateHeadsOnlyTree(data);
       //act
       var testNode = bt.GetAt(new bool[] { true, true, true, true, true, true });
-      var maxInPath = testNode.MaxInPath();
+      var maxDataInTree = testNode.Max(x => x.Data);
+      var maxInPath = testNode.Where(x => x.Data == maxDataInTree);
       //assert
       Assert.Equal(data.Max(), maxInPath.First().Data);
       Assert.Equal(data.Count(d => d == data.Max()), maxInPath.Count());
@@ -36,7 +37,8 @@ namespace ScaffelPikeTests.Derivatives.Objects
       var bt = BinaryTreeTestFactory.GenerateHeadsOnlyTree(data);
       //act
       var testNode = bt.GetAt(new bool[] { true, true, true, true, true, true });
-      var minInPath = testNode.MinInPath();
+      var minDataInTree = testNode.Min(x => x.Data);
+      var minInPath = testNode.Where(x => x.Data == minDataInTree); ;
       //assert
       Assert.Equal(data.Min(), minInPath.First().Data);
       Assert.Equal(data.Count(d => d == data.Min()), minInPath.Count());

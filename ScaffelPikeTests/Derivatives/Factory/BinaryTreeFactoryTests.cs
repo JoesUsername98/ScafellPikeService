@@ -25,12 +25,16 @@ namespace ScaffelPikeTests.Derivatives.Factory
 
       //act 
       var tree = d == -1 ? BinaryTreeFactory.CreateSecurityTree(So, N, u) : BinaryTreeFactory.CreateSecurityTree(So, N, u, d);
+      var maxValueInTree = tree.Max(x => x.Data.Security);
+      var minValueInTree = tree.Min(x => x.Data.Security);
+
       //assert
       var exMin = d == -1 ? So * Math.Pow(u, -N) : So * Math.Pow(d, N);
       Assert.Equal(tree.Count, Enumerable.Range(0, N + 1).Sum(i => Combinations.summedNCR(i)));
-      Assert.Equal(So * Math.Pow(u, N), tree.MaxInTree().Select(n => n.Data).Max());
-      Assert.Equal(exMin, tree.MinInTree().Select(n => n.Data).Min());
+      Assert.Equal(So * Math.Pow(u, N), maxValueInTree);
+      Assert.Equal(exMin, minValueInTree);
     }
+
     [Fact]
     /// <summary>
     /// https://docs.microsoft.com/en-us/dotnet/standard/parallel-programming/how-to-traverse-a-binary-tree-with-parallel-tasks
@@ -45,14 +49,12 @@ namespace ScaffelPikeTests.Derivatives.Factory
       //act 
       var tree = BinaryTreeFactory.CreateSecurityTree(So, N, u);
 
-      // ...populate tree (left as an exercise)
-
       // Define the Action to perform on each node.
-      Func<Node<double>, double, double, double> myFunc = (x,K,expPayout) => Math.Max(K - x.Data, expPayout); ///|K-s|
+      Func<Node<State>, double, double, double> myFunc = (x,K,expPayout) => Math.Max(K - x.Data.Security, expPayout); ///|K-s|
 
       foreach (var node in tree)
       {
-        node.Data= myFunc(node, k,0);
+        node.Data.PayOff = myFunc(node, k,0);
       }
 
       //foreach(var node in tree)

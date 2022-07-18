@@ -10,7 +10,7 @@ using ScaffelPikeDerivatives.Objects.Interfaces;
 namespace ScaffelPikeDerivatives.Objects
 {
   [DataContract]
-  public class BinaryTree<T> : IBinaryTree<T> where T : IComparable<T>
+  public class BinaryTree<T> : IBinaryTree<T> where T : IEquatable<T>
   {
     [DataMember]
     private Node<T> _root;
@@ -83,7 +83,7 @@ namespace ScaffelPikeDerivatives.Objects
         }
       }
 
-      return currNode.Data.CompareTo(item.Data) == 0;
+      return currNode.Equals(item);
     }
     public void CopyTo(Node<T>[] array, int arrayIndex)
     {
@@ -101,7 +101,7 @@ namespace ScaffelPikeDerivatives.Objects
     public bool Remove(Node<T> node)
     {
       int nodesInSubtree = node.CountSubsequentNodes(node);
-      bool doesContain = this.Contains(node);
+      bool doesContain = Contains(node);
 
       if (node == _root)
       {
@@ -133,17 +133,6 @@ namespace ScaffelPikeDerivatives.Objects
     public object Clone() => new BinaryTree<T>((Node<T>)_root.Clone()) { Count = this.Count, Time = this.Time };
     #endregion
     #region IBinaryTree
-    public IEnumerable<Node<T>> MaxInTree()
-    {
-      var maxInTree = this.Max(x => x.Data);
-      return this.Where(x => x.Data.CompareTo(maxInTree) == 0);
-    }
-    public IEnumerable<Node<T>> MinInTree()
-    {
-      var minInTree = this.Min(x => x.Data);
-      return this.Where(x => x.Data.CompareTo(minInTree) == 0);
-    }
-
     public Node<T> GetAt(bool[] path)
     {
       var pathStack = new Stack<bool>(path.Reverse());

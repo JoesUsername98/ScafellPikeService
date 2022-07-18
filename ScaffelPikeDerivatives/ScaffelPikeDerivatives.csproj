@@ -47,6 +47,7 @@
     <Compile Include="Objects\BinaryTree.cs" />
     <Compile Include="Interfaces\IBinaryTree.cs" />
     <Compile Include="Interfaces\INode.cs" />
+    <Compile Include="Objects\State.cs" />
     <Compile Include="Objects\Node.cs" />
     <Compile Include="Objects\Iterators\NodeInOrderIterator.cs" />
     <Compile Include="Objects\Iterators\NodeIteratorState.cs" />

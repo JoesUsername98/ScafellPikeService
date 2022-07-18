@@ -14,7 +14,7 @@ namespace ScaffelPikeDerivatives.Objects.Iterators
   /// in order traversal
   /// </summary>
   /// <typeparam name="T"></typeparam>
-  internal class NodeInOrderIterator<T> : IEnumerator<Node<T>>, IEnumerator, IDisposable where T : IComparable<T>
+  internal class NodeInOrderIterator<T> : IEnumerator<Node<T>>, IEnumerator, IDisposable where T : IEquatable<T>
   {
     /// <summary>
     /// 1  current is leaf node.
