@@ -42,11 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory\BinaryTreeEnhancer.cs" />
     <Compile Include="Factory\BinaryTreeFactory.cs" />
     <Compile Include="Factory\Combinations.cs" />
+    <Compile Include="Factory\OptionType.cs" />
     <Compile Include="Objects\BinaryTree.cs" />
     <Compile Include="Interfaces\IBinaryTree.cs" />
     <Compile Include="Interfaces\INode.cs" />
+    <Compile Include="Objects\ExpectableState.cs" />
     <Compile Include="Objects\State.cs" />
     <Compile Include="Objects\Node.cs" />
     <Compile Include="Objects\Iterators\NodeInOrderIterator.cs" />

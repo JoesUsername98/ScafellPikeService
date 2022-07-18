@@ -23,7 +23,7 @@ namespace ScaffelPikeDerivatives.Factory
       if (downFactor == 0) throw new ArgumentException("downFactor cannot be 0", "downFactor");
       if (upFactor < downFactor) throw new ArgumentException("upFactor cannot be less than downFactor");
 
-      var bt = new BinaryTree<State>(new Node<State>( new State() { Security = initialPrice }, new bool[] { }));
+      var bt = new BinaryTree<State>(new Node<State>( new State() { Value = initialPrice }, new bool[] { }));
       for(int currTime = 1; currTime <= time ; currTime++)
       {
         var inputParams = Combinations.GenerateParams(new bool[] { true, false }, currTime);
@@ -31,7 +31,7 @@ namespace ScaffelPikeDerivatives.Factory
         {
           var noOfHeads = (double)path.Where(p => p).Count();
           var price = (double)initialPrice * Math.Pow( upFactor, noOfHeads) * Math.Pow((double)downFactor, (double)(currTime - noOfHeads));
-          bt.Add(new Node<State>(new State() { Security = (double)price }, path.ToArray()) {
+          bt.Add(new Node<State>(new State() { Value = (double)price }, path.ToArray()) {
 
           });
         };

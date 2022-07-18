@@ -8,15 +8,18 @@ using System.Threading.Tasks;
 
 namespace ScaffelPikeDerivatives.Objects
 {
-  public class State : IEquatable<State>
+  public class State : ExpectableState, IEquatable<State>
   {
-    public double Security { get; set; }
-    public double PayOff { get; set; }
-    public double DiscountRate { get; set; }
-
+    public double Value { get; set; }
+    public double ProbabilityHeads { get; set; }
+    public State Expected { get; set; }
     public bool Equals(State other)
     {
-      return Security == other.Security && PayOff == other.PayOff && DiscountRate == other.DiscountRate;
+      return Value == other.Value &&
+              ProbabilityHeads == other.ProbabilityHeads &&
+              PayOff == other.PayOff &&
+              DiscountRate == other.DiscountRate &&
+              Expected == other.Expected;
     }
   }
 }
