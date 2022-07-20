@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ScaffelPikeDerivatives.Factory;
 using ScaffelPikeDerivatives.Objects;
 
-namespace ScaffelPikeDerivatives.Factory
+namespace ScaffelPikeDerivatives.Visitors
 {
   /// <summary>
   /// TODO: add pattern here

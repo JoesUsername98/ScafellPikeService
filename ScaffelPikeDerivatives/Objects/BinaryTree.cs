@@ -19,7 +19,12 @@ namespace ScaffelPikeDerivatives.Objects
     [DataMember]
     public int Time { get; private set; }
     public bool IsReadOnly => false;
-
+    [DataMember]
+    public double? ConstantUpFactor { get; set; }
+    [DataMember]
+    public double? ConstantDownFactor { get; set; }
+    [DataMember]
+    public double? ConstantInterestRate { get; set; }
     public BinaryTree()
     {
       _root = null;

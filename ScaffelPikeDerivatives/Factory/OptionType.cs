@@ -9,6 +9,7 @@ namespace ScaffelPikeDerivatives.Factory
   public enum OptionType
   {
     Call,
-    Put
+    Put,
+    //TODO add more
   }
 }

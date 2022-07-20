@@ -42,7 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factory\BinaryTreeEnhancer.cs" />
+    <Compile Include="Visitors\BinaryTreeEnhancer.cs" />
+    <Compile Include="Visitors\ConstantInterestRateBinaryTreeEnhancer.cs" />
+    <Compile Include="Visitors\ExpectedBinaryTreeEnhancer.cs" />
+    <Compile Include="Visitors\PayoffBinaryTreeEnhancer.cs" />
+    <Compile Include="Visitors\RiskNuetralProbabilityEnhancer.cs" />
+    <Compile Include="Visitors\UnderlyingValueBinaryTreeEnhancer.cs" />
+    <Compile Include="Interfaces\IBinaryTreeEnhancer.cs" />
     <Compile Include="Factory\BinaryTreeFactory.cs" />
     <Compile Include="Factory\Combinations.cs" />
     <Compile Include="Factory\OptionType.cs" />

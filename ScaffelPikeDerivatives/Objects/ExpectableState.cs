@@ -9,12 +9,12 @@ namespace ScaffelPikeDerivatives.Objects
   public class ExpectableState : IEquatable<ExpectableState>
   {
     public double PayOff { get; set; }
-    public double DiscountRate { get; set; }
+    public double InterestRate { get; set; }
 
     public bool Equals(ExpectableState other)
     {
       return PayOff == other.PayOff &&
-              DiscountRate == other.DiscountRate;
+              InterestRate == other.InterestRate;
     }
   }
 }
