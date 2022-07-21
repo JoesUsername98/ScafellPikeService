@@ -8,9 +8,18 @@ namespace ScaffelPikeDerivatives.Objects
 {
   public class ExpectableState : IEquatable<ExpectableState>
   {
+    public double Value { get; set; }
     public double PayOff { get; set; }
-    public double InterestRate { get; set; }
-
+    private double _interestRate;
+    public double InterestRate {
+      get { return _interestRate; }
+      set 
+      {
+        if (value == -1) throw new InvalidOperationException("InterestRate cannot be -1");
+        _interestRate = value;
+      }
+    }
+    public double DiscountRate { get { return 1 / (1 + InterestRate); } }
     public bool Equals(ExpectableState other)
     {
       return PayOff == other.PayOff &&

@@ -39,7 +39,7 @@ namespace ScaffelPikeDerivatives.Visitors
       foreach (var node in subject)
       {
         var state = new State();
-        var noOfHeads = node.Path.Where(p => p).Count();
+        var noOfHeads = node.Path.Count(p => p);
         var noOfTails = node.Time - noOfHeads;
         node.Data.Value = _initialPrice * Math.Pow(_upFactor, noOfHeads) * Math.Pow(_downFactor, noOfTails);
       }

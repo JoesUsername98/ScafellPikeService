@@ -10,7 +10,11 @@ namespace ScaffelPikeDerivatives.Objects
 {
   public class State : ExpectableState, IEquatable<State>
   {
-    public double Value { get; set; }
+    public State()
+    {
+      Expected = new ExpectableState();
+    }
+    public double DeltaHedging { get; set; }
     private double _probabilityHeads;
     public double ProbabilityHeads {
       get { return _probabilityHeads; }
@@ -22,7 +26,7 @@ namespace ScaffelPikeDerivatives.Objects
       } 
     }
     public double ProbabilityTails { get { return 1 - ProbabilityHeads; } }
-    public State Expected { get; set; }
+    public ExpectableState Expected { get; set; }
     public bool Equals(State other)
     {
       return Value == other.Value &&
