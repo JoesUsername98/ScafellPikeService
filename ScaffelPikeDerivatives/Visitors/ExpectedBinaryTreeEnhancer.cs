@@ -27,6 +27,7 @@ namespace ScaffelPikeDerivatives.Visitors
         var headsProperty = (double)_property.GetValue(node.Heads.Data, null);
         var tailsProperty = (double)_property.GetValue(node.Tails.Data, null);
 
+        // eq. (2.3.3)
         var expected = headsProperty * node.Data.ProbabilityHeads + tailsProperty * node.Data.ProbabilityTails;
 
         _expectedProperty.SetValue(node.Data.Expected, expected, null);  

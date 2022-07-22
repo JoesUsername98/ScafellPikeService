@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeDerivatives.Factory
+namespace ScaffelPikeDerivatives.Objects.Enums
 {
-  public enum OptionType
+  public enum OptionExerciseType
   {
-    Call,
-    Put,
+    European,
+    American,
     //TODO add more
   }
 }

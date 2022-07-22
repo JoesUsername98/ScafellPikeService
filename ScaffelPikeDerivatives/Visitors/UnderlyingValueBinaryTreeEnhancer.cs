@@ -41,7 +41,7 @@ namespace ScaffelPikeDerivatives.Visitors
         var state = new State();
         var noOfHeads = node.Path.Count(p => p);
         var noOfTails = node.Time - noOfHeads;
-        node.Data.Value = _initialPrice * Math.Pow(_upFactor, noOfHeads) * Math.Pow(_downFactor, noOfTails);
+        node.Data.UnderlyingValue = _initialPrice * Math.Pow(_upFactor, noOfHeads) * Math.Pow(_downFactor, noOfTails);
       }
 
       subject.ConstantUpFactor = _upFactor;

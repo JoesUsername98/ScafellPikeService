@@ -8,7 +8,7 @@ namespace ScaffelPikeDerivatives.Objects
 {
   public class ExpectableState : IEquatable<ExpectableState>
   {
-    public double Value { get; set; }
+    public double UnderlyingValue { get; set; }
     public double PayOff { get; set; }
     private double _interestRate;
     public double InterestRate {

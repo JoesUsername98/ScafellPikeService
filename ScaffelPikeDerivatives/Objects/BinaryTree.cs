@@ -94,10 +94,16 @@ namespace ScaffelPikeDerivatives.Objects
     {
       if (array == null)
         throw new ArgumentNullException("array");
-      array = ((BinaryTree<T>)this.Clone()).ToArray();
-      if (array.Length  > arrayIndex)
+
+      int i = 0;
+      foreach(var node in this)
+      {
+        if(i >= arrayIndex)  array[i++] = node;
+      }
+
+      if (array.Length  > i)
         throw new ArgumentException("Not enough elements after arrayIndex in the destination array.");
-      array = array.Skip(arrayIndex - 1).ToArray();
+      //array = array.Skip(arrayIndex - 1).ToArray();
     }
     bool ICollection<Node<T>>.Remove(Node<T> item)
     {

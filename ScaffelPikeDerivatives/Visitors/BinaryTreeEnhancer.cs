@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ScaffelPikeDerivatives.Factory;
 using ScaffelPikeDerivatives.Objects;
+using ScaffelPikeDerivatives.Objects.Enums;
 
 namespace ScaffelPikeDerivatives.Visitors
 {
@@ -13,7 +14,7 @@ namespace ScaffelPikeDerivatives.Visitors
   /// </summary>
   public static class BinaryTreeEnhancer
   {
-    public static void EnhancePayoff(BinaryTree<State> subject, OptionType type, double strikePrice)
+    public static void EnhancePayoff(BinaryTree<State> subject, OptionPayoffType type, double strikePrice)
     {
       var payoffStrategy = GetPayoffStrategy(type);
 
@@ -29,15 +30,15 @@ namespace ScaffelPikeDerivatives.Visitors
     /// <param name="type"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    private static Func<Node<State>, double, double> GetPayoffStrategy(OptionType type)
+    private static Func<Node<State>, double, double> GetPayoffStrategy(OptionPayoffType type)
     {
       switch (type)
       {
-        case OptionType.Call:
-          return (x, K) => x.Data.Value - K;
+        case OptionPayoffType.Call:
+          return (x, K) => x.Data.UnderlyingValue - K;
           break;
-        case OptionType.Put:
-          return (x, K) => K - x.Data.Value;
+        case OptionPayoffType.Put:
+          return (x, K) => K - x.Data.UnderlyingValue;
           break;
         default:
           throw new ArgumentException($"No payoff strategy for type {type}", "type");

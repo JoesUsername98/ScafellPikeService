@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ScaffelPikeDerivatives.Factory;
 using ScaffelPikeDerivatives.Objects;
+using ScaffelPikeDerivatives.Objects.Enums;
 using ScaffelPikeDerivatives.Visitors;
 using Xunit;
 
@@ -43,8 +44,8 @@ namespace ScaffelPikeTests.Derivatives.Factory
       underlyingEnhancer.Enhance(tree);
 
       //act 
-      var maxValueInTree = tree.Max(x => x.Data.Value);
-      var minValueInTree = tree.Min(x => x.Data.Value);
+      var maxValueInTree = tree.Max(x => x.Data.UnderlyingValue);
+      var minValueInTree = tree.Min(x => x.Data.UnderlyingValue);
       var exMin = d == -1 ? So * Math.Pow(u, -N) : So * Math.Pow(d, N);
 
       //assert
@@ -148,14 +149,14 @@ namespace ScaffelPikeTests.Derivatives.Factory
       //act 
       new ConstantInterestRateBinaryTreeEnhancer(r).Enhance(tree);
       new RiskNuetralProbabilityEnhancer().Enhance(tree);
-      new ExpectedBinaryTreeEnhancer("Value").Enhance(tree);
+      new ExpectedBinaryTreeEnhancer("UnderlyingValue").Enhance(tree);
 
       //assert
       foreach (var node in tree.Where(n => n.Heads != null && n.Tails != null)) 
       {
-        Assert.Equal(node.Data.Value, node.Data.DiscountRate * node.Data.Expected.Value); //(2.3.5)
-        Assert.Equal(Math.Round(node.Data.Value * Math.Pow(node.Data.DiscountRate, node.Time), 4),
-              Math.Round(node.Data.Expected.Value * Math.Pow(node.Data.DiscountRate, node.Time + 1),4)); //(2.4.5)
+        Assert.Equal(node.Data.UnderlyingValue, node.Data.DiscountRate * node.Data.Expected.UnderlyingValue); //eq (2.3.5)
+        Assert.Equal(Math.Round(node.Data.UnderlyingValue * Math.Pow(node.Data.DiscountRate, node.Time), 4),
+              Math.Round(node.Data.Expected.UnderlyingValue * Math.Pow(node.Data.DiscountRate, node.Time + 1),4)); //eq (2.4.5)
       }
     }
 
@@ -171,25 +172,107 @@ namespace ScaffelPikeTests.Derivatives.Factory
 
       //act 
       new ConstantInterestRateBinaryTreeEnhancer(r).Enhance(tree);
-      new PayoffBinaryTreeEnhancer(OptionType.Call, k).Enhance(tree);
+      new PayoffBinaryTreeEnhancer(OptionPayoffType.Call, k).Enhance(tree);
       new RiskNuetralProbabilityEnhancer().Enhance(tree);
+      new ExpectedBinaryTreeEnhancer("UnderlyingValue").Enhance(tree);
       new ExpectedBinaryTreeEnhancer("PayOff").Enhance(tree);
-      new ExpectedBinaryTreeEnhancer("Value").Enhance(tree);
 
       //assert
       foreach (var node in tree.Where(n => n.Heads != null && n.Tails != null)) 
       {
-        var heads = node.Path.Count(p => p);
-        var tails = node.Path.Count(p => !p);
-        var shouldBePayoff = node.Data.Value - k;
-        Assert.Equal(shouldBePayoff , node.Data.PayOff);
-
-        // Vn / (1+r)^n = En ( Vn+1 / (1+r)^(n+1) )   ---   (2.4.12)
-        // doesnt work
-        Assert.Equal(Math.Round(node.Data.PayOff * Math.Pow(node.Data.DiscountRate, node.Time), 4),
-                     Math.Round(node.Data.Expected.PayOff * Math.Pow(node.Data.DiscountRate, node.Time + 1), 4)); //(2.4.12)
+        Assert.Equal(node.Data.UnderlyingValue - k, node.Data.PayOff);
       }
     }
 
+
+    [Theory]
+    [InlineData(4, 3, 2, 5, 0.25)]
+    public void GenerateTreeWithPutPayoff(int So, int N, double u, double k, double r)
+    {
+      //arrange 
+      var d = 1 / u;
+      var tree = BinaryTreeFactory.CreateTree(N);
+      var underlyingEnhancer = new UnderlyingValueBinaryTreeEnhancer(So, u, d);
+      underlyingEnhancer.Enhance(tree);
+
+      //act 
+      new ConstantInterestRateBinaryTreeEnhancer(r).Enhance(tree);
+      new PayoffBinaryTreeEnhancer(OptionPayoffType.Put, k).Enhance(tree);
+      new RiskNuetralProbabilityEnhancer().Enhance(tree);
+      new ExpectedBinaryTreeEnhancer("UnderlyingValue").Enhance(tree);
+      new ExpectedBinaryTreeEnhancer("PayOff").Enhance(tree);
+
+      //assert
+      foreach (var node in tree.Where(n => n.Heads != null && n.Tails != null))
+      {
+        Assert.Equal(k - node.Data.UnderlyingValue, node.Data.PayOff);
+      }
+    }
+
+    [Theory]
+    [InlineData(4, 3, 2, 5, 0.25)]
+    public void GenerateTreeWithEuropeanCallPrice(int So, int N, double u, double k, double r)
+    {
+      //arrange 
+      var d = 1 / u;
+      var tree = BinaryTreeFactory.CreateTree(N);
+      var underlyingEnhancer = new UnderlyingValueBinaryTreeEnhancer(So, u, d);
+      underlyingEnhancer.Enhance(tree);
+
+      //act 
+      new ConstantInterestRateBinaryTreeEnhancer(r).Enhance(tree);
+      new PayoffBinaryTreeEnhancer(OptionPayoffType.Call, k).Enhance(tree);
+      new RiskNuetralProbabilityEnhancer().Enhance(tree);
+      new ExpectedBinaryTreeEnhancer("PayOff").Enhance(tree);
+      new OptionPriceBinaryTreeEnhancer(OptionExerciseType.European).Enhance(tree);
+
+      //assert
+      //Theorem 2.4.7 Risk-nuetral pricing formula 
+      //The Discounted price of a derivative security is a martingale under risk nuetral pricing. 
+      // Vn / (1+r)^n = En ( Vn+1 / (1+r)^(n+1) )   ---   (2.4.12)
+      var expectedOptionPriceValueAtEachTime = new Dictionary<int, double>();
+      for (int thisTime = tree.Time; thisTime >= 0; thisTime--)
+      {
+        var discountedExpectedOptionPrice
+          = tree.Where(n => n.Time == thisTime)
+                 .Sum(n => n.Data.OptionValue * State.GetAbsoluteDiscountRate(n) * State.GetAbsoluteProb(n));
+
+        expectedOptionPriceValueAtEachTime.Add(thisTime,Math.Round(discountedExpectedOptionPrice,5));
+      }
+      Assert.Equal(1, expectedOptionPriceValueAtEachTime.Values.Distinct().Count());
+    }
+
+    [Theory]
+    [InlineData(4, 3, 2, 5, 0.25)]
+    public void GenerateTreeWithEuropeanPutPrice(int So, int N, double u, double k, double r)
+    {
+      //arrange 
+      var d = 1 / u;
+      var tree = BinaryTreeFactory.CreateTree(N);
+      var underlyingEnhancer = new UnderlyingValueBinaryTreeEnhancer(So, u, d);
+      underlyingEnhancer.Enhance(tree);
+
+      //act 
+      new ConstantInterestRateBinaryTreeEnhancer(r).Enhance(tree);
+      new PayoffBinaryTreeEnhancer(OptionPayoffType.Put, k).Enhance(tree);
+      new RiskNuetralProbabilityEnhancer().Enhance(tree);
+      new ExpectedBinaryTreeEnhancer("PayOff").Enhance(tree);
+      new OptionPriceBinaryTreeEnhancer(OptionExerciseType.European).Enhance(tree);
+
+      //assert
+      //Theorem 2.4.7 Risk-nuetral pricing formula 
+      //The Discounted price of a derivative security is a martingale under risk nuetral pricing. 
+      // Vn / (1+r)^n = En ( Vn+1 / (1+r)^(n+1) )   ---   (2.4.12)
+      var expectedOptionPriceValueAtEachTime = new Dictionary<int, double>();
+      for (int thisTime = tree.Time; thisTime >= 0; thisTime--)
+      {
+        var discountedExpectedOptionPrice
+          = tree.Where(n => n.Time == thisTime)
+                 .Sum(n => n.Data.OptionValue * State.GetAbsoluteDiscountRate(n) * State.GetAbsoluteProb(n));
+
+        expectedOptionPriceValueAtEachTime.Add(thisTime, Math.Round(discountedExpectedOptionPrice, 5));
+      }
+      Assert.Equal(1, expectedOptionPriceValueAtEachTime.Values.Distinct().Count());
+    }
   }
 }
