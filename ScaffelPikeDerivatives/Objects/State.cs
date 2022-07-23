@@ -40,7 +40,10 @@ namespace ScaffelPikeDerivatives.Objects
     /// Get the discount rate of this node down to N = 0 (root)
     /// </summary>
     public static double GetAbsoluteDiscountRate(Node<State> node) =>
-      node.Skip(1).Select(nn => nn.Data.DiscountRate).Aggregate((double)1, (acc, val) => acc * val);
+      node.
+      Skip(1). // this nodes discount rate refers to the rate to get to the next node. skip.
+      Select(nn => nn.Data.DiscountRate).
+      Aggregate((double)1, (acc, val) => acc * val); // product of all the discout
 
 
     /// <summary>

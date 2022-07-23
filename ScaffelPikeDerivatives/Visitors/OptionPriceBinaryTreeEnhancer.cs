@@ -12,10 +12,12 @@ namespace ScaffelPikeDerivatives.Visitors
 {
   public class OptionPriceBinaryTreeEnhancer : IBinaryTreeEnhancer
   {
+    private readonly OptionExerciseType _optionType; 
     private readonly Func<Node<State>, double> _optionPricingStrategy;
 
     public OptionPriceBinaryTreeEnhancer(OptionExerciseType optionType)
     {
+      _optionType = optionType;
       _optionPricingStrategy = GetOptionPricingStrategy(optionType);
     }
 
@@ -25,7 +27,7 @@ namespace ScaffelPikeDerivatives.Visitors
       {
         if (node?.Data?.PayOff is null) throw new NullReferenceException($"Payoff is null {node.Path}");
 
-        if (node.Time == subject.Time)
+        if (node.Time == subject.Time || _optionType == OptionExerciseType.American)
         {
           node.Data.OptionValue = _optionPricingStrategy(node);
           continue;
@@ -45,7 +47,10 @@ namespace ScaffelPikeDerivatives.Visitors
           return (x) => Math.Max(x.Data.PayOff, 0);
           break;
         case OptionExerciseType.American:
-          return (x) => Math.Max(x.Data.PayOff, x.Data.DiscountRate * x.Data.Expected.PayOff);
+          return (x) => Math.Max(x.Data.PayOff, (x.Heads is null || x.Tails is null) ? 0.0 :
+                                    x.Data.DiscountRate *
+                                  (x.Heads.Data.OptionValue * x.Data.ProbabilityHeads +
+                                   x.Tails.Data.OptionValue * x.Data.ProbabilityTails));
           break;
         default:
           throw new ArgumentException($"No option pricing strategy for type {type}", "type");
