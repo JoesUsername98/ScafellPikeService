@@ -57,11 +57,5 @@ namespace ScaffelPikeDerivatives.Factory
     public static long NCR(int n, int r) => Factorial(n) / (Factorial(r) * Factorial(n - r));
 
     public static long summedNCR(int r) => Enumerable.Range(0, r+1).Sum(i => NCR(r, i));
-    //long expectedCount = 0;
-    //for (int i = 0; i <= r; i++)
-    //{
-    //  expectedCount += NCR(r, i);
-    //}
-    //return expectedCount;
   }
 }
