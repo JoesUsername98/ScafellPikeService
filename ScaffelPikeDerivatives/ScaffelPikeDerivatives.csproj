@@ -43,12 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Objects\Enums\OptionExerciseType.cs" />
-    <Compile Include="Visitors\BinaryTreeEnhancer.cs" />
     <Compile Include="Visitors\ConstantInterestRateBinaryTreeEnhancer.cs" />
     <Compile Include="Visitors\ExpectedBinaryTreeEnhancer.cs" />
     <Compile Include="Visitors\OptionPriceBinaryTreeEnhancer.cs" />
     <Compile Include="Visitors\PayoffBinaryTreeEnhancer.cs" />
     <Compile Include="Visitors\RiskNuetralProbabilityEnhancer.cs" />
+    <Compile Include="Visitors\StoppingTimeBinaryTreeEnhancer.cs" />
     <Compile Include="Visitors\UnderlyingValueBinaryTreeEnhancer.cs" />
     <Compile Include="Interfaces\IBinaryTreeEnhancer.cs" />
     <Compile Include="Factory\BinaryTreeFactory.cs" />

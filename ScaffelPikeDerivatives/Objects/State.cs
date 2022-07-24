@@ -27,6 +27,7 @@ namespace ScaffelPikeDerivatives.Objects
       }
     }
     public double ProbabilityTails { get { return 1 - ProbabilityHeads; } }
+    public int OptimalExerciseTime { get; set; }
     public ExpectableState Expected { get; set; }
     public bool Equals(State other)
     {

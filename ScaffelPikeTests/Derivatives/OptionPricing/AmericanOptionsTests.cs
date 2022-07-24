@@ -13,6 +13,14 @@ namespace ScaffelPikeTests.Derivatives.OptionPricing
 {
   public class AmericanOptionsTests
   {
+    /// <summary>
+    /// There is no advantage to early exercise of the american call opion 
+    /// </summary>
+    /// <param name="So"></param>
+    /// <param name="N"></param>
+    /// <param name="u"></param>
+    /// <param name="k"></param>
+    /// <param name="r"></param>
     [Theory]
     [InlineData(4, 3, 2, 5, 0.25)]
     public void GenerateTreeWithAmericanCallPrice(int So, int N, double u, double k, double r)
@@ -40,13 +48,12 @@ namespace ScaffelPikeTests.Derivatives.OptionPricing
 
         expectedOptionPriceValueAtEachTime.Add(thisTime, Math.Round(discountedExpectedOptionPrice, 5));
       }
-      //assert that with time the expected value of the american option deminishes. super-martigale
-      for (int i = 0; i < expectedOptionPriceValueAtEachTime.Values.Count(); i++)
-        Assert.Equal(expectedOptionPriceValueAtEachTime.Values.OrderBy(s => s).ToList()[i], expectedOptionPriceValueAtEachTime.Values.ToList()[i]);
+      //since there is no advantage to early exercise. It should behave as a martingale - the same as a european call.
+      Assert.Equal(1, expectedOptionPriceValueAtEachTime.Values.Distinct().Count());
     }
 
     [Theory]
-    [InlineData(4, 2, 2, 5, 0.25)]
+    [InlineData(4, 6, 2, 5, 0.25)]
     public void GenerateTreeWithAmericanPutPrice(int So, int N, double u, double k, double r)
     {
       //arrange 
