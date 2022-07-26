@@ -1,16 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace ScaffelPikeDerivatives.Objects.Interfaces
 {
-  public interface IBinaryTree<T> : ICloneable where T : IComparable<T>
+  public interface IBinaryTree<T> : ICloneable, ICollection<Node<T>>, IEnumerable<Node<T>> where T : IEquatable<T>
   {
-    int Count { get; }
+    double? ConstantUpFactor { get; set; }
+    double? ConstantDownFactor { get; set; }
+    double? ConstantInterestRate { get; set; }
     int Time  { get; }
     Node<T> GetAt(bool[] path);
-    void Insert(Node<T> newItem);
-    IEnumerable<Node<T>> MaxInTree();
-    IEnumerable<Node<T>> MinInTree();
-    void Remove(Node<T> node);
   }
 }

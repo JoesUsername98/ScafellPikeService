@@ -17,9 +17,14 @@ namespace ScaffelPikeTests.Derivatives.Objects.BinaryTreeTests
       //arrange
       var data = new List<int>() { data1, data2, data3, data4, data5, data6, data7 };
       var bt = BinaryTreeTestFactory.GenerateTimeTwoTree(data);
-      //act and assert
-      Assert.Equal(data.Max(), bt.MaxInTree().First().Data);
-      Assert.Equal(data.Count(d => d == data.Max()), bt.MaxInTree().Count());
+
+      //act
+      var maxValueInTree = bt.Max(x => x.Data);
+      var maxNodesInTree = bt.Where(x => x.Data == maxValueInTree);
+
+      //assert
+      Assert.Equal(data.Max(), maxValueInTree);
+      Assert.Equal(data.Count(d => d == data.Max()), maxNodesInTree.Count());
     }
 
     [Theory]
@@ -32,9 +37,12 @@ namespace ScaffelPikeTests.Derivatives.Objects.BinaryTreeTests
       //arrange
       var data = new List<int>() { data1, data2, data3, data4, data5, data6, data7 };
       var bt = BinaryTreeTestFactory.GenerateTimeTwoTree(data);
-      //act and assert
-      Assert.Equal(data.Min(), bt.MinInTree().First().Data);
-      Assert.Equal(data.Count(d => d == data.Min()), bt.MinInTree().Count());
+      //act
+      var minValueInTree = bt.Min(x => x.Data);
+      var minNodesInTree = bt.Where(x => x.Data == minValueInTree);
+      //assert
+      Assert.Equal(data.Min(), minValueInTree);
+      Assert.Equal(data.Count(d => d == data.Min()), minNodesInTree.Count());
     }
   }
 }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extras.Moq" Version="6.1.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -25,6 +26,10 @@
     <ProjectReference Include="..\ScaffelPikeDataAccess\ScaffelPikeDataAccess.csproj" />
     <ProjectReference Include="..\ScaffelPikeDerivatives\ScaffelPikeDerivatives.csproj" />
     <ProjectReference Include="..\ScaffelPikeServices\ScaffelPikeServices.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
 </Project>

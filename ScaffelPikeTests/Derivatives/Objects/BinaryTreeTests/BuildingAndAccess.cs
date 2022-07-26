@@ -2,7 +2,7 @@
 using ScaffelPikeTests.Derivatives.Objects;
 using Xunit;
 
-namespace BinaryTreeTests
+namespace ScaffelPikeTests.Derivatives.Objects.BinaryTreeTests
 {
   public class BuildingAndAccess
   {
@@ -27,11 +27,19 @@ namespace BinaryTreeTests
     public void GetAnItemThatDoesntExist()
     {
       //arange
-      var nonExistentPath = new bool[] { false, false, false };
+      var nonExistentPath = new bool[] { false, true, false };
       var bt = BinaryTreeTestFactory.GenerateTimeTwoTree();
 
       //act and assert
       var ex = Assert.Throws<ArgumentException>(() => bt.GetAt(nonExistentPath));
+      Assert.Equal(ex.ParamName, "path");
+
+      //arange
+      nonExistentPath = new bool[] { false, true, false, false};
+      bt = BinaryTreeTestFactory.GenerateTimeTwoTree();
+
+      //act and assert
+      ex = Assert.Throws<ArgumentException>(() => bt.GetAt(nonExistentPath));
       Assert.Equal(ex.ParamName, "path");
     }
   }

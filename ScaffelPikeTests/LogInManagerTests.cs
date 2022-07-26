@@ -19,35 +19,35 @@ namespace ScaffelPikeTests
   /// </summary>
   public class LogInManagerTests
   {
-    [Fact]
-    public async void ProcessLogInRequestAsync_ValidCallAutoMock()
-    {
-      ////ARRANGE
-      //int id = 0;
-      //var moqUserData = new Mock<IUserData>();
-      //moqUserData.Setup(x => x.GetUsers()).Returns(Task.FromResult(GetSampleUsers()));
-      //moqUserData.Setup(x => x.GetUser(id)).Returns(Task.FromResult(GetSampleUsers().FirstOrDefault(u => u.Id == id)));
-      //var moqInstanceUserData = moqUserData.Object;
+    //[Fact]
+    //public async void ProcessLogInRequestAsync_ValidCallAutoMock()
+    //{
+    //  ////ARRANGE
+    //  //int id = 0;
+    //  //var moqUserData = new Mock<IUserData>();
+    //  //moqUserData.Setup(x => x.GetUsers()).Returns(Task.FromResult(GetSampleUsers()));
+    //  //moqUserData.Setup(x => x.GetUser(id)).Returns(Task.FromResult(GetSampleUsers().FirstOrDefault(u => u.Id == id)));
+    //  //var moqInstanceUserData = moqUserData.Object;
 
-      //ServiceReferences.Configure(moqInstanceUserData;
+    //  //ServiceReferences.Configure(moqInstanceUserData;
 
-      //  mock.Mock<ISqlDataAccess>()
-      //    .Setup(x => x.LoadData<UserModel, dynamic>("dbo.spUser_GetAll", new { }, "Default"))
-      //    .Returns(Task.FromResult(GetSampleUsers()));
-      //  //mock.Mock<IEnumerable<dynamic>>()
-      //  // .Setup(m => m.Count).Returns(() => items.Count);
+    //  //  mock.Mock<ISqlDataAccess>()
+    //  //    .Setup(x => x.LoadData<UserModel, dynamic>("dbo.spUser_GetAll", new { }, "Default"))
+    //  //    .Returns(Task.FromResult(GetSampleUsers()));
+    //  //  //mock.Mock<IEnumerable<dynamic>>()
+    //  //  // .Setup(m => m.Count).Returns(() => items.Count);
 
-      //  var moqUserModel = mock.Create<UserData>();
-      //  var expected = GetSampleUsers();
-      //  //ACT
-      //  var actual = await moqUserModel.GetUsers();
-      //  //ASSERT
-      //  Assert.NotNull(expected);
-      //  foreach (var user in expected)
-      //  {
-      //    Assert.True(user.Equals(actual.First(a => a.FirstName == user.FirstName)));
-      //  }
-    }
+    //  //  var moqUserModel = mock.Create<UserData>();
+    //  //  var expected = GetSampleUsers();
+    //  //  //ACT
+    //  //  var actual = await moqUserModel.GetUsers();
+    //  //  //ASSERT
+    //  //  Assert.NotNull(expected);
+    //  //  foreach (var user in expected)
+    //  //  {
+    //  //    Assert.True(user.Equals(actual.First(a => a.FirstName == user.FirstName)));
+    //  //  }
+    //}
 
     private IEnumerable<UserModel> GetSampleUsers()
     {

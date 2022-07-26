@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using ScaffelPikeDerivatives.Objects.Interfaces;
+using ScaffelPikeDerivatives.Objects.Iterators;
 
 namespace ScaffelPikeDerivatives.Objects
 {
   [DataContract]
-  public class Node<T> : INode<T> where T : IComparable<T>
+  public class Node<T> : INode<T> where T : IEquatable<T>
   {
     public Node(T data, bool[] path)
     {
@@ -17,7 +19,7 @@ namespace ScaffelPikeDerivatives.Objects
       Path = path;
     }
     [DataMember]
-    public T Data { get; private set; }
+    public T Data { get; set; }
     [DataMember]
     public bool[] Path { get; private set; }
     [DataMember]
@@ -32,7 +34,7 @@ namespace ScaffelPikeDerivatives.Objects
     {
       return isHeads ? Heads : Tails;
     }
-    internal void AddNext(Node<T> newNode, bool isNextTossIsHeads)
+    public void AddNext(Node<T> newNode, bool isNextTossIsHeads)
     {
       newNode.Previous = this;
 
@@ -46,63 +48,19 @@ namespace ScaffelPikeDerivatives.Objects
       if (Tails != null) throw new ArgumentException("Cannot overwrite an existing tails node");
       Tails = newNode;
     }
-    public IEnumerable<Node<T>> MaxInPath()
-    {
-      Node<T> max = this;
-      IEnumerable<Node<T>> maxCol = new List<Node<T>>() { max };
-      Node<T> currentNode = this;
-
-      while (currentNode != null)
-      {
-        if (currentNode.Data.CompareTo(max.Data) > 0)
-        {
-          max = currentNode;
-          maxCol = new List<Node<T>>() { max };
-        }
-        else if (currentNode.Data.CompareTo(max.Data) == 0 && currentNode != this)
-        {
-          maxCol = maxCol.Append(currentNode);
-        }
-
-        currentNode = currentNode.Previous;
-      }
-
-      return maxCol;
-    }
-    public IEnumerable<Node<T>> MinInPath()
-    {
-      Node<T> min = this;
-      IEnumerable<Node<T>> minCol = new List<Node<T>>() { min };
-      Node<T> currentNode = this;
-
-      while (currentNode != null)
-      {
-        if (currentNode.Data.CompareTo(min.Data) < 0)
-        {
-          min = currentNode;
-          minCol = new List<Node<T>>() { min };
-        }
-        else if (currentNode.Data.CompareTo(min.Data) == 0 && currentNode != this)
-        {
-          minCol = minCol.Append(currentNode);
-        }
-
-        currentNode = currentNode.Previous;
-      }
-
-      return minCol;
-    }
     public int CountSubsequentNodes(Node<T> node)
     {
       if (node is null) return 0;
 
-      return CountSubsequentNodes(node.Tails) + CountSubsequentNodes(node.Heads) + 1;
+      var subTree = new BinaryTree<T>(node);
+      return subTree.Count;
     }
     public int CountTime(Node<T> node)
     {
       if (node == null) return -1;
 
-      return Math.Max(CountTime(node.Tails), CountTime(node.Heads)) + 1;
+      var subTree = new BinaryTree<T>(node);
+      return subTree.Time;
     }
     public object Clone()
     {
@@ -119,5 +77,24 @@ namespace ScaffelPikeDerivatives.Objects
       }
       return copiedNode;
     }
+    /// <summary>
+    /// Returns only the history of the node.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator<INode<T>> GetEnumerator() => new NodeReverseOrderIterator<T>(this);
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    
+    /// <summary>
+    /// Returns the node with foresight. For Tree Traversal
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator<Node<T>> GetForesightEnumerator() => new NodeInOrderIterator<T>(this);
+
+
+    public bool Equals(INode<T> other)
+    {
+      return this.Data.Equals(other.Data) && this.Path.Equals(other.Path);
+    }
+
   }
 }

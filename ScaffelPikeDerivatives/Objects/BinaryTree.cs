@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -9,7 +10,7 @@ using ScaffelPikeDerivatives.Objects.Interfaces;
 namespace ScaffelPikeDerivatives.Objects
 {
   [DataContract]
-  public class BinaryTree<T> : IBinaryTree<T> where T : IComparable<T>
+  public class BinaryTree<T> : IBinaryTree<T> where T : IEquatable<T>
   {
     [DataMember]
     private Node<T> _root;
@@ -17,6 +18,13 @@ namespace ScaffelPikeDerivatives.Objects
     public int Count { get; private set; }
     [DataMember]
     public int Time { get; private set; }
+    public bool IsReadOnly => false;
+    [DataMember]
+    public double? ConstantUpFactor { get; set; }
+    [DataMember]
+    public double? ConstantDownFactor { get; set; }
+    [DataMember]
+    public double? ConstantInterestRate { get; set; }
     public BinaryTree()
     {
       _root = null;
@@ -25,69 +33,93 @@ namespace ScaffelPikeDerivatives.Objects
     public BinaryTree(Node<T> root)
     {
       _root = root;
-      Count = 0;
+      Count = this.Select(x => x).Count();
     }
-    public void Insert(Node<T> newItem)
+    #region IEnumerable
+    public IEnumerator<Node<T>> GetEnumerator()
     {
-      if (_root == null)
+      return _root.GetForesightEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return GetEnumerator();
+    }
+    #endregion
+    #region ICollection
+    public void Add(Node<T> newItem)
+    {
+      if (newItem.Path.Length == 0)
       {
         _root = newItem;
         Count++;
         Time = 0;
         return;
       }
-      InsertRecursive(newItem, _root);
-    }
-    private void InsertRecursive(Node<T> newNode, Node<T> lastNode)
-    {
-      var isNextTossIsHeads = newNode.Path[lastNode.Path.Length];
-      var nextNode = lastNode.GetNext(isNextTossIsHeads);
+      var parentNodePath = newItem.Path.Take(newItem.Path.Length - 1);
+      var pathStack = new Stack<bool>(parentNodePath.Reverse());
 
-      if (nextNode == null)
+      var parentNode = _root;
+      while (pathStack.Count > 0)
       {
-        lastNode.AddNext(newNode, isNextTossIsHeads);
-        Time = newNode.Path.Length > Time ? newNode.Path.Length : Time;
-        Count++;
-        return;
+        var nextTossIsHeads = pathStack.Pop();
+        parentNode = nextTossIsHeads ? parentNode.Heads : parentNode.Tails;
+        if (parentNode == null)
+        {
+          throw new ArgumentException("Could not find a parent node in this path: " + parentNodePath, "newItem.Path");
+        }
       }
 
-      InsertRecursive(newNode, nextNode);
+      parentNode.AddNext(newItem, newItem.Path.Last());
+      Time = newItem.Path.Length > Time ? newItem.Path.Length : Time;
+      Count++;
     }
-    public Node<T> GetAt(bool[] path)
+    public bool Contains(Node<T> item)
     {
-      if (path.Length == 0)
+      var pathStack = new Stack<bool>(item.Path.Reverse());
+      var currNode = _root;
+      while (pathStack.Count > 0)
       {
-        return _root;
+        var nextTossIsHeads = pathStack.Pop();
+        currNode = nextTossIsHeads ? currNode.Heads : currNode.Tails;
+        if (currNode == null)
+        {
+          return false;
+        }
       }
 
-      return GetAtRecursive(_root, path);
+      return currNode.Equals(item);
     }
-    private Node<T> GetAtRecursive(Node<T> currentNode, bool[] path)
+    public void CopyTo(Node<T>[] array, int arrayIndex)
     {
-      var nextTossIsHeads = path[currentNode.Path.Length];
+      if (array == null)
+        throw new ArgumentNullException("array");
 
-      var nextNode = currentNode.GetNext(nextTossIsHeads);
-
-      if (nextNode == null)
+      int i = 0;
+      foreach(var node in this)
       {
-        throw new ArgumentException("Could not find a node in this path: " + path, "path");
+        if(i >= arrayIndex)  array[i++] = node;
       }
 
-      if (nextNode.Path.SequenceEqual(path))
-        return nextNode;
-
-      return GetAtRecursive(nextNode, path);
+      if (array.Length  > i)
+        throw new ArgumentException("Not enough elements after arrayIndex in the destination array.");
+      //array = array.Skip(arrayIndex - 1).ToArray();
     }
-    public void Remove(Node<T> node)
+    bool ICollection<Node<T>>.Remove(Node<T> item)
+    {
+      return this.Remove(item);
+    }
+    public bool Remove(Node<T> node)
     {
       int nodesInSubtree = node.CountSubsequentNodes(node);
+      bool doesContain = Contains(node);
 
-      if(node == _root)
+      if (node == _root)
       {
         _root = null;
         Count = 0;
         Time = -1;
-        return;
+        return doesContain;
       }
 
       if (node.Path.Last())
@@ -98,88 +130,44 @@ namespace ScaffelPikeDerivatives.Objects
       node.Previous = null;
 
       Count -= nodesInSubtree;
-
-      Time = _root.CountTime(_root);
+      RecountTime();
+      return doesContain;
     }
-    public object Clone()
+    public void Clear()
     {
-      return new BinaryTree<T>((Node<T>)_root.Clone()) { Count = this.Count, Time = this.Time };
+      _root = null;
+      Time = 0;
+      Count = 0;
     }
-    public IEnumerable<Node<T>> MaxInTree()
+    #endregion
+    #region ICloneable
+    public object Clone() => new BinaryTree<T>((Node<T>)_root.Clone()) { Count = this.Count, Time = this.Time };
+    #endregion
+    #region IBinaryTree
+    public Node<T> GetAt(bool[] path)
     {
-      return MaxInTree(_root);
+      var pathStack = new Stack<bool>(path.Reverse());
+
+      if (pathStack.Count == 0) { return _root; }
+
+      var currNode = _root;
+      while (pathStack.Count > 0)
+      {
+        var nextTossIsHeads = pathStack.Pop();
+        currNode = nextTossIsHeads ? currNode.Heads : currNode.Tails;
+        if (currNode == null)
+        {
+          throw new ArgumentException("Could not find a node in this path: " + path, "path");
+        }
+      }
+
+      return currNode;
     }
-    private IEnumerable<Node<T>> MaxInTree(Node<T> node)
+    private int RecountTime()
     {
-      if (node == null)
-      {
-        return new List<Node<T>>() { };
-      }
-
-      IEnumerable<Node<T>> tailsPath = MaxInTree(node.Tails);
-      IEnumerable<Node<T>> headsPath = MaxInTree(node.Heads);
-
-      IEnumerable<Node<T>> max = new List<Node<T>>() { node };
-      if (tailsPath.Count() == 0 && headsPath.Count() == 0) // LEAF
-      {
-        return max;
-      }
-
-      if (tailsPath.First().Data.CompareTo(max.First().Data) > 0)
-      {
-        max = tailsPath;
-      }
-      else if (tailsPath.First().Data.CompareTo(max.First().Data) == 0)
-      {
-        max = max.Union(tailsPath);
-      }
-      if (headsPath.First().Data.CompareTo(max.First().Data) > 0)
-      {
-        max = headsPath;
-      }
-      else if (headsPath.First().Data.CompareTo(max.First().Data) == 0)
-      {
-        max = max.Union(headsPath);
-      }
-      return max;
+      Time = this.Max(x => x.Path.Length);
+      return Time;
     }
-    public IEnumerable<Node<T>> MinInTree()
-    {
-      return MinInTree(_root);
-    }
-    private IEnumerable<Node<T>> MinInTree(Node<T> node)
-    {
-      if (node == null)
-      {
-        return new List<Node<T>>() { };
-      }
-
-      IEnumerable<Node<T>> tailsPath = MinInTree(node.Tails);
-      IEnumerable<Node<T>> headsPath = MinInTree(node.Heads);
-
-      IEnumerable<Node<T>> min = new List<Node<T>>() { node };
-      if (tailsPath.Count() == 0 && headsPath.Count() == 0) // LEAF
-      {
-        return min;
-      }
-
-      if (tailsPath.First().Data.CompareTo(min.First().Data) < 0)
-      {
-        min = tailsPath;
-      }
-      else if (tailsPath.First().Data.CompareTo(min.First().Data) == 0)
-      {
-        min = min.Union(tailsPath);
-      }
-      if (headsPath.First().Data.CompareTo(min.First().Data) < 0)
-      {
-        min = headsPath;
-      }
-      else if (headsPath.First().Data.CompareTo(min.First().Data) == 0)
-      {
-        min = min.Union(headsPath);
-      }
-      return min;
-    }
+    #endregion
   }
 }
