@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Objects\Enums\OptionExerciseType.cs" />
     <Compile Include="Visitors\ConstantInterestRateBinaryTreeEnhancer.cs" />
+    <Compile Include="Visitors\DeltaHedgingBinaryTreeEnhancer.cs" />
     <Compile Include="Visitors\ExpectedBinaryTreeEnhancer.cs" />
     <Compile Include="Visitors\OptionPriceBinaryTreeEnhancer.cs" />
     <Compile Include="Visitors\PayoffBinaryTreeEnhancer.cs" />
