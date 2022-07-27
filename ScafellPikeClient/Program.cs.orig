@@ -1,0 +1,47 @@
+﻿using System;
+using System.ServiceModel;
+using Autofac;
+using Autofac.Integration.Wcf;
+<<<<<<< HEAD
+using ScafellPikeClient.Controller;
+using ScafellPikeClient.Models;
+using ScafellPikeClient.View;
+using ScafellPikeContracts;
+using ScafellPikeLogger;
+
+namespace ScafellPikeClient
+=======
+using ScaffelPikeClient.Controller;
+using ScaffelPikeClient.Models;
+using ScaffelPikeClient.View;
+using ScaffelPikeContracts;
+using ScaffelPikeLogger;
+
+namespace ScaffelPikeClient
+>>>>>>> parent of 3ab39d9 (Delete ScafellPikeClient directory)
+{
+  internal class Program
+  {
+    [STAThread]
+    static void Main()
+    {
+      Bootstrapper.RegisterContainerBuilder();
+      try
+      {
+        ClientRefs.Configure();
+        var view = new LogInView();
+        var model = new LogInModel();
+        var controller = new LogInController(view, model);
+        view.ShowDialog();
+      }
+      catch (Exception ex)
+      {
+        AutofacHostFactory.Container.Resolve<ChannelFactory<IScaffelPikeService>>().Abort();
+      }
+      finally
+      {
+        AutofacHostFactory.Container.Resolve<ChannelFactory<IScaffelPikeService>>().Close();
+      }
+    }
+  }
+}
