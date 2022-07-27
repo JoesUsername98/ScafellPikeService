@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeHost", "ScaffelPikeHost\ScaffelPikeHost.csproj", "{E0E5249F-DDDF-48BA-8256-B448D00DA730}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScafellPikeHost", "ScaffelPikeHost\ScafellPikeHost.csproj", "{E0E5249F-DDDF-48BA-8256-B448D00DA730}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeClient", "ScaffelPikeClient\ScaffelPikeClient.csproj", "{09E3E928-BC13-49DE-8755-5FE14358EF32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScafellPikeClient", "ScaffelPikeClient\ScafellPikeClient.csproj", "{09E3E928-BC13-49DE-8755-5FE14358EF32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeContracts", "ScaffelPikeLib\ScaffelPikeContracts.csproj", "{C4B3289F-AC1C-4CD0-9F95-B10D7CD33FE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScafellPikeContracts", "ScaffelPikeLib\ScafellPikeContracts.csproj", "{C4B3289F-AC1C-4CD0-9F95-B10D7CD33FE7}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{311A4632-2441-4459-859C-747FAA04ABC7}"
 EndProject
@@ -16,17 +16,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeDataAccess", "ScaffelPikeDataAccess\ScaffelPikeDataAccess.csproj", "{C55EAF43-4518-44F1-BE81-54463CBE14F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScafellPikeDataAccess", "ScaffelPikeDataAccess\ScafellPikeDataAccess.csproj", "{C55EAF43-4518-44F1-BE81-54463CBE14F6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScaffelPikeTests", "ScaffelPikeTests\ScaffelPikeTests.csproj", "{FAB41391-EFDE-4559-AEF0-B302F38F739A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScafellPikeTests", "ScaffelPikeTests\ScafellPikeTests.csproj", "{FAB41391-EFDE-4559-AEF0-B302F38F739A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeLogger", "ScaffelPikeLogger\ScaffelPikeLogger.csproj", "{F6150ED0-6CB7-4D66-90F3-530F32726091}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScafellPikeLogger", "ScaffelPikeLogger\ScafellPikeLogger.csproj", "{F6150ED0-6CB7-4D66-90F3-530F32726091}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeServices", "ScaffelPikeServices\ScaffelPikeServices.csproj", "{39A81D6C-B0DB-4700-AB21-2894C452C825}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScafellPikeServices", "ScaffelPikeServices\ScafellPikeServices.csproj", "{39A81D6C-B0DB-4700-AB21-2894C452C825}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinDataApiManager", "QuandlAPIExt\FinDataApiManager.csproj", "{FB420D39-16EF-415E-A24D-84614C935658}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeDerivatives", "ScaffelPikeDerivatives\ScaffelPikeDerivatives.csproj", "{474BE456-3F5C-49BB-A0B4-D6186704EE1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScafellPikeDerivatives", "ScaffelPikeDerivatives\ScafellPikeDerivatives.csproj", "{474BE456-3F5C-49BB-A0B4-D6186704EE1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
