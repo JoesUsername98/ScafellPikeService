@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{09E3E928-BC13-49DE-8755-5FE14358EF32}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>ScaffelPikeClient</RootNamespace>
-    <AssemblyName>ScaffelPikeClient</AssemblyName>
+    <ProjectGuid>{E0E5249F-DDDF-48BA-8256-B448D00DA730}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ScaffelPikeHost</RootNamespace>
+    <AssemblyName>ScaffelPikeHost</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,39 +33,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>ScaffelPikeHost.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>ScaffelPikeIcon.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup />
   <ItemGroup>
-    <Reference Include="Autofac, Version=6.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.6.0.0\lib\netstandard2.0\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=6.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.6.3.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Autofac.Integration.Wcf, Version=6.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.Wcf.6.0.0\lib\net472\Autofac.Integration.Wcf.dll</HintPath>
     </Reference>
-    <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
-      <HintPath>..\packages\CsvHelper.7.1.1\lib\net45\CsvHelper.dll</HintPath>
-    </Reference>
-    <Reference Include="Flurl, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Flurl.2.8.0\lib\net40\Flurl.dll</HintPath>
-    </Reference>
-    <Reference Include="Flurl.Http, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Flurl.Http.2.4.0\lib\net46\Flurl.Http.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Quandl.NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Quandl.NET.1.2.1\lib\netstandard2.0\Quandl.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="ScaffelPikeContracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\ScaffelPikeLib\bin\Debug\ScaffelPikeContracts.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -76,7 +61,6 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -84,17 +68,8 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reflection.TypeExtensions, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reflection.TypeExtensions.4.5.1\lib\net461\System.Reflection.TypeExtensions.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activation" />
@@ -102,75 +77,45 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="YahooFinanceApi, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YahooFinanceApi.2.1.2\lib\netstandard2.0\YahooFinanceApi.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Controller\ILogInView.cs" />
-    <Compile Include="Controller\LogInController.cs" />
-    <Compile Include="HeartbeatManagerClientSide.cs" />
-    <Compile Include="LogInRequester.cs" />
-    <Compile Include="Models\LogInModel.cs" />
-    <Compile Include="Views\LogInView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\LogInView.Designer.cs">
-      <DependentUpon>LogInView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\GraphView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\GraphView.Designer.cs">
-      <DependentUpon>GraphView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ClientRefs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\ScaffelPikeContracts.PasswordDto.datasource" />
+    <None Include="secrets.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="YahooTickers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ScaffelPikeContracts\ScaffelPikeContracts.csproj">
-      <Project>{c4b3289f-ac1c-4cd0-9f95-b10d7cd33fe7}</Project>
-      <Name>ScaffelPikeContracts</Name>
+    <ProjectReference Include="..\ScaffelPikeDataAccess\ScafellPikeDataAccess.csproj">
+      <Project>{C55EAF43-4518-44F1-BE81-54463CBE14F6}</Project>
+      <Name>ScafellPikeDataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ScaffelPikeLogger\ScaffelPikeLogger.csproj">
+    <ProjectReference Include="..\ScaffelPikeLib\ScafellPikeContracts.csproj">
+      <Project>{C4B3289F-AC1C-4CD0-9F95-B10D7CD33FE7}</Project>
+      <Name>ScafellPikeContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScaffelPikeLogger\ScafellPikeLogger.csproj">
       <Project>{F6150ED0-6CB7-4D66-90F3-530F32726091}</Project>
-      <Name>ScaffelPikeLogger</Name>
+      <Name>ScafellPikeLogger</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\LogInView.resx">
-      <DependentUpon>LogInView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\GraphView.resx">
-      <DependentUpon>GraphView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <ProjectReference Include="..\ScaffelPikeServices\ScafellPikeServices.csproj">
+      <Project>{39A81D6C-B0DB-4700-AB21-2894C452C825}</Project>
+      <Name>ScafellPikeServices</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ScaffelPikeIcon.ico" />

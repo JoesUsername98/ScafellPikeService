@@ -87,9 +87,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ScaffelPikeLib\ScaffelPikeContracts.csproj">
+    <ProjectReference Include="..\ScaffelPikeLib\ScafellPikeContracts.csproj">
       <Project>{c4b3289f-ac1c-4cd0-9f95-b10d7cd33fe7}</Project>
-      <Name>ScaffelPikeContracts</Name>
+      <Name>ScafellPikeContracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
