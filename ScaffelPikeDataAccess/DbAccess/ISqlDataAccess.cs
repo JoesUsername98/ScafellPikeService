@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeDataAccess.DbAccess
+namespace ScafellPikeDataAccess.DbAccess
 {
   public interface ISqlDataAccess
   {

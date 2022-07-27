@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeDerivatives.Factory
+namespace ScafellPikeDerivatives.Factory
 {
   public class Combinations
   {

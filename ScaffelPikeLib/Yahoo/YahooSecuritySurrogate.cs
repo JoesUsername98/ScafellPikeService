@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YahooFinanceApi;
 
-namespace ScaffelPikeContracts.Yahoo
+namespace ScafellPikeContracts.Yahoo
 {
   [DataContract]
   public class YahooSecuritySurrogate

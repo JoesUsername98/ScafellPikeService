@@ -1,8 +1,8 @@
 ﻿using System;
-using ScaffelPikeTests.Derivatives.Objects;
+using ScafellPikeTests.Derivatives.Objects;
 using Xunit;
 
-namespace ScaffelPikeTests.Derivatives.Objects.BinaryTreeTests
+namespace ScafellPikeTests.Derivatives.Objects.BinaryTreeTests
 {
   public class BuildingAndAccess
   {

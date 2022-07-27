@@ -1,17 +1,17 @@
 ﻿using System.Threading.Tasks;
-using ScaffelPikeDataAccess.Data;
-using ScaffelPikeLogger;
-using ScaffelPikeContracts;
+using ScafellPikeDataAccess.Data;
+using ScafellPikeLogger;
+using ScafellPikeContracts;
 using System.Collections.Generic;
-using ScaffelPikeContracts.LogIn;
-using ScaffelPikeContracts.Heartbeat;
-using ScaffelPikeContracts.Quandl;
-using ScaffelPikeContracts.Yahoo;
+using ScafellPikeContracts.LogIn;
+using ScafellPikeContracts.Heartbeat;
+using ScafellPikeContracts.Quandl;
+using ScafellPikeContracts.Yahoo;
 using YahooFinanceApi;
 using System;
 using Autofac;
 
-namespace ScaffelPikeServices
+namespace ScafellPikeServices
 {
   public class ScaffelPikeService : IScaffelPikeService
   {

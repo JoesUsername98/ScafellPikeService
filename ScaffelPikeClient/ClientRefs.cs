@@ -2,11 +2,11 @@
 using System.Configuration;
 using Autofac;
 using Autofac.Integration.Wcf;
-using ScaffelPikeContracts;
-using ScaffelPikeContracts.LogIn;
-using ScaffelPikeLogger;
+using ScafellPikeContracts;
+using ScafellPikeContracts.LogIn;
+using ScafellPikeLogger;
 
-namespace ScaffelPikeClient
+namespace ScafellPikeClient
 {
 
   //Consider Container Injection in the future

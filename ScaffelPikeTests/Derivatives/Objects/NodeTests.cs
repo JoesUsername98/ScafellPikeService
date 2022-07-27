@@ -2,7 +2,7 @@
 using System.Linq;
 using Xunit;
 
-namespace ScaffelPikeTests.Derivatives.Objects
+namespace ScafellPikeTests.Derivatives.Objects
 {
   public class NodeTests
   {

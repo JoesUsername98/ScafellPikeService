@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace ScaffelPikeTests.Derivatives.Objects.BinaryTreeTests
+namespace ScafellPikeTests.Derivatives.Objects.BinaryTreeTests
 {
   public class RemoveNode
   {

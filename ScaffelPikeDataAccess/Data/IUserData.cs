@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ScaffelPikeContracts;
+using ScafellPikeContracts;
 
-namespace ScaffelPikeDataAccess.Data
+namespace ScafellPikeDataAccess.Data
 {
   public interface IUserData
   {

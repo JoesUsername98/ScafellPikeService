@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ScaffelPikeDerivatives.Factory;
+using ScafellPikeDerivatives.Factory;
 using Xunit;
 
-namespace ScaffelPikeTests.Derivatives.Factory
+namespace ScafellPikeTests.Derivatives.Factory
 {
   public class CombinationsTest
   {

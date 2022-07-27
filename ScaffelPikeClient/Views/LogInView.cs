@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using ScaffelPikeClient.Controller;
-using ScaffelPikeClient.Models;
+using ScafellPikeClient.Controller;
+using ScafellPikeClient.Models;
 
-namespace ScaffelPikeClient.View
+namespace ScafellPikeClient.View
 {
   public partial class LogInView : Form, ILogInView
   {

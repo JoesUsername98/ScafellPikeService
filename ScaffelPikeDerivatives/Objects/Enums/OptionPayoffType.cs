@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeDerivatives.Objects.Enums
+namespace ScafellPikeDerivatives.Objects.Enums
 {
   public enum OptionPayoffType
   {

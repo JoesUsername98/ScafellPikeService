@@ -2,13 +2,13 @@
 using System.ServiceModel;
 using Autofac;
 using Autofac.Integration.Wcf;
-using ScaffelPikeClient.Controller;
-using ScaffelPikeClient.Models;
-using ScaffelPikeClient.View;
-using ScaffelPikeContracts;
-using ScaffelPikeLogger;
+using ScafellPikeClient.Controller;
+using ScafellPikeClient.Models;
+using ScafellPikeClient.View;
+using ScafellPikeContracts;
+using ScafellPikeLogger;
 
-namespace ScaffelPikeClient
+namespace ScafellPikeClient
 {
   internal class Program
   {

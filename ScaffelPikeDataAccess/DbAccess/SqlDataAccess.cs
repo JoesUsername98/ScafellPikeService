@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace ScaffelPikeDataAccess.DbAccess
+namespace ScafellPikeDataAccess.DbAccess
 {
   public class SqlDataAccess : ISqlDataAccess
   {

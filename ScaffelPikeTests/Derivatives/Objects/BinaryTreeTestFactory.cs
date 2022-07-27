@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using ScaffelPikeDerivatives.Objects;
+using ScafellPikeDerivatives.Objects;
 
-namespace ScaffelPikeTests.Derivatives.Objects
+namespace ScafellPikeTests.Derivatives.Objects
 {
   public static class BinaryTreeTestFactory
   {

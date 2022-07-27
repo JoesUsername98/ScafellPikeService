@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ScaffelPikeContracts
+namespace ScafellPikeContracts
 {
   public class UserModel: IEquatable<UserModel>
   {

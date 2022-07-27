@@ -1,9 +1,9 @@
 ﻿using System;
-using ScaffelPikeDerivatives.Objects;
-using ScaffelPikeDerivatives.Objects.Enums;
-using ScaffelPikeDerivatives.Objects.Interfaces;
+using ScafellPikeDerivatives.Objects;
+using ScafellPikeDerivatives.Objects.Enums;
+using ScafellPikeDerivatives.Objects.Interfaces;
 
-namespace ScaffelPikeDerivatives.Visitors
+namespace ScafellPikeDerivatives.Visitors
 {
   public class PayoffBinaryTreeEnhancer : IBinaryTreeEnhancer
   {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace ScaffelPikeContracts.Heartbeat
+namespace ScafellPikeContracts.Heartbeat
 {
   [DataContract]
   public class HeartbeatDto

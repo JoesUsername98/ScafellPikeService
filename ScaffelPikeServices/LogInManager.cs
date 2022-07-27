@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using ScaffelPikeContracts.LogIn;
+using ScafellPikeContracts.LogIn;
 
-namespace ScaffelPikeServices
+namespace ScafellPikeServices
 {
   public static class LogInManager
   {

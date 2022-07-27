@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeLogger.Configuration
+namespace ScafellPikeLogger.Configuration
 {
   public class ConsoleLoggerConfiguration : ConfigurationElement
   {

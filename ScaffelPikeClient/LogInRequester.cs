@@ -1,7 +1,7 @@
 ﻿using System;
-using ScaffelPikeContracts.LogIn;
+using ScafellPikeContracts.LogIn;
 
-namespace ScaffelPikeClient
+namespace ScafellPikeClient
 {
   internal static class LogInRequester
   {

@@ -7,9 +7,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using Microsoft.Extensions.Options;
-using ScaffelPikeLogger.Configuration;
+using ScafellPikeLogger.Configuration;
 
-namespace ScaffelPikeLogger
+namespace ScafellPikeLogger
 {
   public class TextLogger : AbstractLogger, ITextLogger
   {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using FinDataApiManager.TransferObjects;
 using Newtonsoft.Json;
-using ScaffelPikeLogger;
+using ScafellPikeLogger;
 using YahooFinanceApi;
 
 namespace FinDataApiManager

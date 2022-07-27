@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ScaffelPikeDerivatives.Factory;
-using ScaffelPikeDerivatives.Visitors;
+using ScafellPikeDerivatives.Factory;
+using ScafellPikeDerivatives.Visitors;
 using Xunit;
 
-namespace ScaffelPikeTests.Derivatives.Factory.Enhancers
+namespace ScafellPikeTests.Derivatives.Factory.Enhancers
 {
   public class RiskNuetralProbabilityEnhancerTests
   {

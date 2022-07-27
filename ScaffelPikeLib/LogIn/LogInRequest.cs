@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace ScaffelPikeContracts.LogIn
+namespace ScafellPikeContracts.LogIn
 {
   [DataContract]
   public class LogInRequest

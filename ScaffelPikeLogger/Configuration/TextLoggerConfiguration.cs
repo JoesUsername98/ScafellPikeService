@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace ScaffelPikeLogger.Configuration
+namespace ScafellPikeLogger.Configuration
 {
   public class TextLoggerConfiguration : ConfigurationElement
   {

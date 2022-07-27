@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ScaffelPikeDerivatives.Factory;
-using ScaffelPikeDerivatives.Objects;
-using ScaffelPikeDerivatives.Objects.Enums;
-using ScaffelPikeDerivatives.Objects.Interfaces;
+using ScafellPikeDerivatives.Factory;
+using ScafellPikeDerivatives.Objects;
+using ScafellPikeDerivatives.Objects.Enums;
+using ScafellPikeDerivatives.Objects.Interfaces;
 
-namespace ScaffelPikeDerivatives.Visitors
+namespace ScafellPikeDerivatives.Visitors
 {
   public class OptionPriceBinaryTreeEnhancer : IBinaryTreeEnhancer
   {

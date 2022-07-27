@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Quandl.NET;
 using Quandl.NET.Model.Response;
 using FinDataApiManager.TransferObjects;
-using ScaffelPikeLogger;
+using ScafellPikeLogger;
 
 namespace FinDataApiManager
 {

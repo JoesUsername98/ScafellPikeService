@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ScaffelPikeDerivatives.Objects;
+using ScafellPikeDerivatives.Objects;
 
-namespace ScaffelPikeDerivatives.Objects.Interfaces
+namespace ScafellPikeDerivatives.Objects.Interfaces
 {
   public interface IBinaryTreeEnhancer 
   { 

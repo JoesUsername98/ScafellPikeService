@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac.Extras.Moq;
 using Moq;
-using ScaffelPikeContracts;
-using ScaffelPikeDataAccess.Data;
-using ScaffelPikeServices;
+using ScafellPikeContracts;
+using ScafellPikeDataAccess.Data;
+using ScafellPikeServices;
 using Xunit;
 
-namespace ScaffelPikeTests
+namespace ScafellPikeTests
 {
   /// <summary>
   /// Given -> Namespace

@@ -4,9 +4,9 @@ using System.Configuration;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using ScaffelPikeContracts.Heartbeat;
+using ScafellPikeContracts.Heartbeat;
 
-namespace ScaffelPikeClient
+namespace ScafellPikeClient
 {
   public static class HeartbeatManagerClientSide
   {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeDerivatives.Objects.Iterators
+namespace ScafellPikeDerivatives.Objects.Iterators
 {
   ///Ripped from sharplab.io when implementing this code (https://stackoverflow.com/questions/27441558/how-to-write-getenumerator-for-a-binary-search-tree)
   ///in Node.GetEnumerator
