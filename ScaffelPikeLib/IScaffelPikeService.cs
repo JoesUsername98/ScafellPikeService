@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using ScaffelPikeContracts.Heartbeat;
-using ScaffelPikeContracts.LogIn;
-using ScaffelPikeContracts.Quandl;
-using ScaffelPikeContracts.Yahoo;
+using ScafellPikeContracts.Heartbeat;
+using ScafellPikeContracts.LogIn;
+using ScafellPikeContracts.Quandl;
+using ScafellPikeContracts.Yahoo;
 using YahooFinanceApi;
 
-namespace ScaffelPikeContracts
+namespace ScafellPikeContracts
 {
   [ServiceContract(Namespace = "http://ScaeffelPike.Service")]
   public interface IScaffelPikeService

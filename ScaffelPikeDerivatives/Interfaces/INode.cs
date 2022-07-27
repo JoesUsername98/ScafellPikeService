@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ScaffelPikeDerivatives.Objects.Interfaces
+namespace ScafellPikeDerivatives.Objects.Interfaces
 {
   public interface INode<T> : ICloneable, IEnumerable<INode<T>>, IEquatable<INode<T>> where T : IEquatable<T> 
   {

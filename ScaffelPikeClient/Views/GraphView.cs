@@ -5,11 +5,11 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using ScaffelPikeContracts.Quandl;
-using ScaffelPikeContracts.Yahoo;
+using ScafellPikeContracts.Quandl;
+using ScafellPikeContracts.Yahoo;
 using static System.Windows.Forms.ListViewItem;
 
-namespace ScaffelPikeClient
+namespace ScafellPikeClient
 {
   /// <summary>
   /// Will be considered depreciated until I decide the direction of my project

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ScaffelPikeContracts;
-using ScaffelPikeDataAccess.DbAccess;
+using ScafellPikeContracts;
+using ScafellPikeDataAccess.DbAccess;
 
-namespace ScaffelPikeDataAccess.Data
+namespace ScafellPikeDataAccess.Data
 {
   public class UserData : IUserData
   {

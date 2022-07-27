@@ -1,7 +1,7 @@
 ﻿using Autofac.Core;
 using Autofac.Integration.Wcf;
-using ScaffelPikeContracts;
-using ScaffelPikeServices;
+using ScafellPikeContracts;
+using ScafellPikeServices;
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Description;

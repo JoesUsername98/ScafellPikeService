@@ -1,4 +1,4 @@
-﻿namespace ScaffelPikeClient.View
+﻿namespace ScafellPikeClient.View
 {
   partial class LogInView
   {

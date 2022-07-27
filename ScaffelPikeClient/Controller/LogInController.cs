@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ScaffelPikeClient.Models;
+using ScafellPikeClient.Models;
 
-namespace ScaffelPikeClient.Controller
+namespace ScafellPikeClient.Controller
 {
   public class LogInController
   {

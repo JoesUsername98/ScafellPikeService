@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ScaffelPikeDerivatives.Objects;
+using ScafellPikeDerivatives.Objects;
 using Xunit;
 
-namespace ScaffelPikeTests.Derivatives.Objects.BinaryTreeTests
+namespace ScafellPikeTests.Derivatives.Objects.BinaryTreeTests
 {
   public class Contains
   {

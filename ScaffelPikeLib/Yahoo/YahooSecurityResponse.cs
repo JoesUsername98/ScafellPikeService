@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using YahooFinanceApi;
 
-namespace ScaffelPikeContracts.Yahoo
+namespace ScafellPikeContracts.Yahoo
 {
   [DataContract]
   public class YahooSecurityResponse

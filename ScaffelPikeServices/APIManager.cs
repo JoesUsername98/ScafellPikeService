@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using FinDataApiManager;
 using FinDataApiManager.TransferObjects;
-using ScaffelPikeContracts;
-using ScaffelPikeContracts.Quandl;
-using ScaffelPikeContracts.Yahoo;
+using ScafellPikeContracts;
+using ScafellPikeContracts.Quandl;
+using ScafellPikeContracts.Yahoo;
 using YahooFinanceApi;
 using System;
 
-namespace ScaffelPikeServices
+namespace ScafellPikeServices
 {
   public static class APIManager
   {

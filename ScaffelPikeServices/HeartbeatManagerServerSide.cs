@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
-using ScaffelPikeContracts.Heartbeat;
+using ScafellPikeContracts.Heartbeat;
 
-namespace ScaffelPikeServices
+namespace ScafellPikeServices
 {
   public static class HeartbeatManagerServerSide
   {

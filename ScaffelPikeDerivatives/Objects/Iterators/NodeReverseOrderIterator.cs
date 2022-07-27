@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeDerivatives.Objects.Iterators
+namespace ScafellPikeDerivatives.Objects.Iterators
 {
   public class NodeReverseOrderIterator<T> : IEnumerator<Node<T>>, IEnumerator, IDisposable  where T : IEquatable<T>
   {

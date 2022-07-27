@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeDerivatives.Objects.Iterators
+namespace ScafellPikeDerivatives.Objects.Iterators
 {
 internal enum NodeIteratorState
   {

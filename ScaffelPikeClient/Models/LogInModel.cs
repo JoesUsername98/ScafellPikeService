@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeClient.Models
+namespace ScafellPikeClient.Models
 {
   public class LogInModel
   {

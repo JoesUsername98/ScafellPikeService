@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ScaffelPikeDerivatives.Factory;
-using ScaffelPikeDerivatives.Objects;
-using ScaffelPikeDerivatives.Objects.Enums;
-using ScaffelPikeDerivatives.Visitors;
+using ScafellPikeDerivatives.Factory;
+using ScafellPikeDerivatives.Objects;
+using ScafellPikeDerivatives.Objects.Enums;
+using ScafellPikeDerivatives.Visitors;
 using Xunit;
 
-namespace ScaffelPikeTests.Derivatives.Factory
+namespace ScafellPikeTests.Derivatives.Factory
 {
   /// <summary>
   /// Responsible for generating trees and generating 

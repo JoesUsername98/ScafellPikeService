@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeDerivatives.Objects
+namespace ScafellPikeDerivatives.Objects
 {
   public class State : ExpectableState, IEquatable<State>
   {

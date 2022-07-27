@@ -1,13 +1,13 @@
 ﻿using Autofac;
 using Autofac.Integration.Wcf;
-using ScaffelPikeContracts;
-using ScaffelPikeLogger;
-using ScaffelPikeLogger.Configuration;
+using ScafellPikeContracts;
+using ScafellPikeLogger;
+using ScafellPikeLogger.Configuration;
 using System.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace ScaffelPikeClient
+namespace ScafellPikeClient
 {
   internal class Bootstrapper
   {

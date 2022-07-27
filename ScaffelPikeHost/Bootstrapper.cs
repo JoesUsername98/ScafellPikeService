@@ -1,10 +1,10 @@
 ﻿using Autofac;
-using ScaffelPikeDataAccess.Data;
-using ScaffelPikeDataAccess.DbAccess;
-using ScaffelPikeContracts;
-using ScaffelPikeLogger;
-using ScaffelPikeLogger.Configuration;
-using ScaffelPikeServices;
+using ScafellPikeDataAccess.Data;
+using ScafellPikeDataAccess.DbAccess;
+using ScafellPikeContracts;
+using ScafellPikeLogger;
+using ScafellPikeLogger.Configuration;
+using ScafellPikeServices;
 using System.Configuration;
 using System.IO;
 using Newtonsoft.Json;

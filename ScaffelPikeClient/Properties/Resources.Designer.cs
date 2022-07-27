@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ScaffelPikeClient.Properties {
+namespace ScafellPikeClient.Properties {
     using System;
     
     

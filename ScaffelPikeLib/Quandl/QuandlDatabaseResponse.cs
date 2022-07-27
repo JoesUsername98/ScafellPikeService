@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace ScaffelPikeContracts.Quandl
+namespace ScafellPikeContracts.Quandl
 {
   [DataContract]
   public class QuandlDatabaseResponse

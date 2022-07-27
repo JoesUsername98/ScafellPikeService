@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeContracts.LogIn
+namespace ScafellPikeContracts.LogIn
 {
   [DataContract]
   public class LogInResponse

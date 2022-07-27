@@ -1,14 +1,14 @@
 using Autofac.Extras.Moq;
 using Moq;
-using ScaffelPikeContracts;
-using ScaffelPikeDataAccess.Data;
-using ScaffelPikeDataAccess.DbAccess;
+using ScafellPikeContracts;
+using ScafellPikeDataAccess.Data;
+using ScafellPikeDataAccess.DbAccess;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ScaffelPikeTests
+namespace ScafellPikeTests
 {
   public class DBTests
   {

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ScaffelPikeDerivatives.Objects.Interfaces
+namespace ScafellPikeDerivatives.Objects.Interfaces
 {
   public interface IBinaryTree<T> : ICloneable, ICollection<Node<T>>, IEnumerable<Node<T>> where T : IEquatable<T>
   {

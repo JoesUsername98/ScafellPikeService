@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ScaffelPikeClient.Models;
+using ScafellPikeClient.Models;
 
-namespace ScaffelPikeClient.Controller
+namespace ScafellPikeClient.Controller
 {
   public interface ILogInView
   {

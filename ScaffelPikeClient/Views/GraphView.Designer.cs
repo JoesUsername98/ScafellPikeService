@@ -1,4 +1,4 @@
-﻿namespace ScaffelPikeClient
+﻿namespace ScafellPikeClient
 {
   partial class GraphView
   {

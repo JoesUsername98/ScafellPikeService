@@ -4,10 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using ScaffelPikeDerivatives.Objects;
-using ScaffelPikeDerivatives.Objects.Interfaces;
+using ScafellPikeDerivatives.Objects;
+using ScafellPikeDerivatives.Objects.Interfaces;
 
-namespace ScaffelPikeDerivatives.Visitors
+namespace ScafellPikeDerivatives.Visitors
 {
   public class ExpectedBinaryTreeEnhancer : IBinaryTreeEnhancer
   {

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using Quandl.NET;
 using Quandl.NET.Model;
 
-namespace ScaffelPikeContracts.Quandl
+namespace ScafellPikeContracts.Quandl
 {
   [DataContract]
   public class QuandlTimeseriesDataResponse

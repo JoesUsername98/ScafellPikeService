@@ -5,9 +5,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using ScaffelPikeDerivatives.Objects.Interfaces;
+using ScafellPikeDerivatives.Objects.Interfaces;
 
-namespace ScaffelPikeDerivatives.Objects
+namespace ScafellPikeDerivatives.Objects
 {
   [DataContract]
   public class BinaryTree<T> : IBinaryTree<T> where T : IEquatable<T>

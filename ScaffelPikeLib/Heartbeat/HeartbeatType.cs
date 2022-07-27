@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScaffelPikeContracts.Heartbeat
+namespace ScafellPikeContracts.Heartbeat
 {
   public enum HeartbeatType
   {
