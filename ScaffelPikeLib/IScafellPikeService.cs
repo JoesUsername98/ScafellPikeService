@@ -11,7 +11,7 @@ using YahooFinanceApi;
 namespace ScafellPikeContracts
 {
   [ServiceContract(Namespace = "http://ScaeffelPike.Service")]
-  public interface IScaffelPikeService
+  public interface IScafellPikeService
   {
     [OperationContract]
     Task<LogInResponse> LogIn(LogInRequest request);

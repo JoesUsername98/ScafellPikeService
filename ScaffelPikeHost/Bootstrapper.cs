@@ -21,7 +21,7 @@ namespace ScaffelPikeHost
       builder.Register(c => new TextLogger((LoggerConfiguration)ConfigurationManager.GetSection("LoggerConfiguration"))).As<ILogger>();
       builder.Register(c => new SqlDataAccess(ConfigurationManager.ConnectionStrings)).As<ISqlDataAccess>();
       builder.Register(c => new UserData(c.Resolve<ISqlDataAccess>())).As<IUserData>();
-      builder.Register(c => new ScaffelPikeService(ConfigurationManager.AppSettings["Environment"], new Guid())).As<IScaffelPikeService>();
+      builder.Register(c => new ScafellPikeService(ConfigurationManager.AppSettings["Environment"], new Guid())).As<IScafellPikeService>();
       AutofacHostFactory.Container = builder.Build();
     }
   }

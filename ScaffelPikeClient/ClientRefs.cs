@@ -17,7 +17,7 @@ namespace ScafellPikeClient
   public static class ClientRefs
   {
     public static ILogger Log { get { return AutofacHostFactory.Container.Resolve<ILogger>(); } }
-    public static IScaffelPikeService ScaffelPikeChannel { get { return AutofacHostFactory.Container.Resolve<IScaffelPikeService>(); } }
+    public static IScafellPikeService ScaffelPikeChannel { get { return AutofacHostFactory.Container.Resolve<IScafellPikeService>(); } }
     public static string Env { get; private set; }
     public static Guid ClientGuid { get; private set; }
     public static DateTime ClientStarTime { get; private set; }

@@ -13,9 +13,9 @@ using Autofac;
 
 namespace ScafellPikeServices
 {
-  public class ScaffelPikeService : IScaffelPikeService
+  public class ScafellPikeService : IScafellPikeService
   {
-    public ScaffelPikeService(string env, Guid serverGuid)
+    public ScafellPikeService(string env, Guid serverGuid)
     {
       ServiceRefs.Configure(env, serverGuid);
       InitService();

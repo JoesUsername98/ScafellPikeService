@@ -26,11 +26,11 @@ namespace ScafellPikeClient
       }
       catch (Exception ex)
       {
-        AutofacHostFactory.Container.Resolve<ChannelFactory<IScaffelPikeService>>().Abort();
+        AutofacHostFactory.Container.Resolve<ChannelFactory<IScafellPikeService>>().Abort();
       }
       finally
       {
-        AutofacHostFactory.Container.Resolve<ChannelFactory<IScaffelPikeService>>().Close();
+        AutofacHostFactory.Container.Resolve<ChannelFactory<IScafellPikeService>>().Close();
       }
     }
   }

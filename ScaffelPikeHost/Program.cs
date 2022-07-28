@@ -13,10 +13,10 @@ namespace ScaffelPikeHost
     static void Main()
     {
       Bootstrapper.RegisterContainerBuilder();
-      ServiceHost selfHost = new ServiceHost(typeof(ScaffelPikeService));
+      ServiceHost selfHost = new ServiceHost(typeof(ScafellPikeService));
       try
       {
-        if (!AutofacHostFactory.Container.ComponentRegistry.TryGetRegistration(new TypedService(typeof(IScaffelPikeService)), out _))
+        if (!AutofacHostFactory.Container.ComponentRegistry.TryGetRegistration(new TypedService(typeof(IScafellPikeService)), out _))
         {
           Console.WriteLine("The service contract has not been registered in the container.");
 
@@ -24,7 +24,7 @@ namespace ScaffelPikeHost
           Environment.Exit(-1);
         }
 
-        selfHost.AddDependencyInjectionBehavior<IScaffelPikeService>(AutofacHostFactory.Container);
+        selfHost.AddDependencyInjectionBehavior<IScafellPikeService>(AutofacHostFactory.Container);
 
         selfHost.Open();
         Console.WriteLine("The service is ready." + Environment.NewLine);

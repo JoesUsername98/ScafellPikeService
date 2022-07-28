@@ -15,8 +15,8 @@ namespace ScafellPikeClient
     {
       ContainerBuilder builder = new ContainerBuilder();
       builder.Register(c => new TextLogger((LoggerConfiguration)ConfigurationManager.GetSection("LoggerConfiguration"))).As<ILogger>();
-      builder.Register(c => new ChannelFactory<IScaffelPikeService>("ScaffelPike")).SingleInstance();
-      builder.Register(c => c.Resolve<ChannelFactory<IScaffelPikeService>>().CreateChannel()).As<IScaffelPikeService>().UseWcfSafeRelease();
+      builder.Register(c => new ChannelFactory<IScafellPikeService>("ScafellPike")).SingleInstance();
+      builder.Register(c => c.Resolve<ChannelFactory<IScafellPikeService>>().CreateChannel()).As<IScafellPikeService>().UseWcfSafeRelease();
       AutofacHostFactory.Container = builder.Build();
     }
   }

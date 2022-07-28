@@ -135,7 +135,7 @@
     <Compile Include="LogInManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="APIManager.cs" />
-    <Compile Include="ScaffelPikeService.cs" />
+    <Compile Include="ScafellPikeService.cs" />
     <Compile Include="ServiceRefs.cs" />
   </ItemGroup>
   <ItemGroup>

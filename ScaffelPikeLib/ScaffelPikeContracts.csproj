@@ -87,7 +87,7 @@
     <Compile Include="Quandl\QuandlDatasetResponse.cs" />
     <Compile Include="Heartbeat\HeartbeatType.cs" />
     <Compile Include="Heartbeat\HeartbeatDto.cs" />
-    <Compile Include="IScaffelPikeService.cs" />
+    <Compile Include="IScafellPikeService.cs" />
     <Compile Include="LogIn\LogInRequest.cs" />
     <Compile Include="LogIn\LogInResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
