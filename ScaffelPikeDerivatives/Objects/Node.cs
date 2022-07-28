@@ -5,10 +5,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using ScafellPikeDerivatives.Objects.Interfaces;
-using ScafellPikeDerivatives.Objects.Iterators;
+using ScaffelPikeDerivatives.Objects.Interfaces;
+using ScaffelPikeDerivatives.Objects.Iterators;
 
-namespace ScafellPikeDerivatives.Objects
+namespace ScaffelPikeDerivatives.Objects
 {
   [DataContract]
   public class Node<T> : INode<T> where T : IEquatable<T>

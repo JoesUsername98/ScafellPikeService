@@ -171,9 +171,9 @@
       <Project>{c4b3289f-ac1c-4cd0-9f95-b10d7cd33fe7}</Project>
       <Name>ScaffelPikeContracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ScaffelPikeLogger\ScafellPikeLogger.csproj">
+    <ProjectReference Include="..\ScaffelPikeLogger\ScaffelPikeLogger.csproj">
       <Project>{F6150ED0-6CB7-4D66-90F3-530F32726091}</Project>
-      <Name>ScafellPikeLogger</Name>
+      <Name>ScaffelPikeLogger</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

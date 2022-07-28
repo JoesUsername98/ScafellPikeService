@@ -23,9 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ScaffelPikeDataAccess\ScafellPikeDataAccess.csproj" />
-    <ProjectReference Include="..\ScaffelPikeDerivatives\ScafellPikeDerivatives.csproj" />
-    <ProjectReference Include="..\ScaffelPikeServices\ScafellPikeServices.csproj" />
+    <ProjectReference Include="..\ScaffelPikeDataAccess\ScaffelPikeDataAccess.csproj" />
+    <ProjectReference Include="..\ScaffelPikeDerivatives\ScaffelPikeDerivatives.csproj" />
+    <ProjectReference Include="..\ScaffelPikeServices\ScaffelPikeServices.csproj" />
   </ItemGroup>
 
   <ItemGroup>
