@@ -2,7 +2,6 @@
 using System.ServiceModel;
 using Autofac;
 using Autofac.Integration.Wcf;
-<<<<<<< HEAD
 using ScafellPikeClient.Controller;
 using ScafellPikeClient.Models;
 using ScafellPikeClient.View;
@@ -10,15 +9,6 @@ using ScafellPikeContracts;
 using ScafellPikeLogger;
 
 namespace ScafellPikeClient
-=======
-using ScaffelPikeClient.Controller;
-using ScaffelPikeClient.Models;
-using ScaffelPikeClient.View;
-using ScaffelPikeContracts;
-using ScaffelPikeLogger;
-
-namespace ScaffelPikeClient
->>>>>>> parent of 3ab39d9 (Delete ScafellPikeClient directory)
 {
   internal class Program
   {
