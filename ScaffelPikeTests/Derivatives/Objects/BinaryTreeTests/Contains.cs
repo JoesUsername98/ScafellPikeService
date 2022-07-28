@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ScafellPikeDerivatives.Objects;
+using ScaffelPikeDerivatives.Objects;
 using Xunit;
 
 namespace ScafellPikeTests.Derivatives.Objects.BinaryTreeTests

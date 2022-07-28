@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ScaffelPikeDerivatives.Objects;
 
 namespace ScafellPikeDerivatives.Objects.Interfaces
 {

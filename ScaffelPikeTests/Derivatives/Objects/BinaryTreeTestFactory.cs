@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ScafellPikeDerivatives.Objects;
+using ScaffelPikeDerivatives.Objects;
 
 namespace ScafellPikeTests.Derivatives.Objects
 {

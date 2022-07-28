@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using ScafellPikeDerivatives.Objects.Interfaces;
+using ScaffelPikeDerivatives.Objects;
 
 namespace ScafellPikeDerivatives.Objects
 {
