@@ -28,7 +28,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinDataApiManager", "Quandl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeDerivatives", "ScaffelPikeDerivatives\ScaffelPikeDerivatives.csproj", "{474BE456-3F5C-49BB-A0B4-D6186704EE1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScafflePikeClientWPF", "ScafflePikeClientWPF\ScafflePikeClientWPF.csproj", "{71F8FA10-FC46-488C-AACD-D91D928B9085}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaffelPikeClientWPF", "ScaffelPikeClientWPF\ScaffelPikeClientWPF.csproj", "{FEC24862-1539-45AD-AEA9-F4F6D817E625}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,10 +78,10 @@ Global
 		{474BE456-3F5C-49BB-A0B4-D6186704EE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{474BE456-3F5C-49BB-A0B4-D6186704EE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{474BE456-3F5C-49BB-A0B4-D6186704EE1E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71F8FA10-FC46-488C-AACD-D91D928B9085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71F8FA10-FC46-488C-AACD-D91D928B9085}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71F8FA10-FC46-488C-AACD-D91D928B9085}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71F8FA10-FC46-488C-AACD-D91D928B9085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEC24862-1539-45AD-AEA9-F4F6D817E625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEC24862-1539-45AD-AEA9-F4F6D817E625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEC24862-1539-45AD-AEA9-F4F6D817E625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEC24862-1539-45AD-AEA9-F4F6D817E625}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -85,7 +85,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ScaffelPikeLogger\ScaffelPikeLogger.csproj">
       <Project>{F6150ED0-6CB7-4D66-90F3-530F32726091}</Project>
-      <Name>ScafellPikeLogger</Name>
+      <Name>ScaffelPikeLogger</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

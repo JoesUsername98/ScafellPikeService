@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ScaffelPikeIcon.png" />
+    <None Remove="viewIcon.png" />
+    <None Remove="viewIconUgly.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.0.0" />
+    <PackageReference Include="Autofac.Wcf" Version="6.0.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ScaffelPikeLib\ScaffelPikeContracts.csproj" />
+    <ProjectReference Include="..\ScaffelPikeLogger\ScaffelPikeLogger.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ScaffelPikeIcon.png" />
+    <Resource Include="viewIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="viewIconUgly.png" />
+  </ItemGroup>
+
+</Project>

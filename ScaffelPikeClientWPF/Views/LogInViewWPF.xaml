@@ -1,0 +1,115 @@
+﻿<Window x:Name='LogInWindow'
+        x:Class="ScafellPikeClientWPF.Views.LogInViewWPF"
+        Loaded='LogInWindow_Loaded'
+        Closing='LogInWindow_Closing'
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScafellPikeClientWPF.Views"
+        Title="ScafflePike Login"
+        Height="170"
+        Width="310"
+        ResizeMode='NoResize'
+        Icon='/ScaffelPikeIcon.png'>
+
+  <Window.Resources>
+    <BooleanToVisibilityConverter x:Key="PasswordVisible" />
+  </Window.Resources>
+
+  <GroupBox RenderTransformOrigin='0.5,0.5'>
+    <GroupBox.RenderTransform>
+      <TransformGroup>
+        <ScaleTransform />
+        <SkewTransform />
+        <RotateTransform Angle='0.192' />
+        <TranslateTransform />
+      </TransformGroup>
+    </GroupBox.RenderTransform>
+    <GroupBox.Header>ScafflePike Login</GroupBox.Header>
+    <GroupBox.Margin>5,5,5,5</GroupBox.Margin>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height='40*' />
+        <RowDefinition Height='48*' />
+        <RowDefinition Height='33*' />
+      </Grid.RowDefinitions>
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width='84*' />
+        <ColumnDefinition Width='151*' />
+        <ColumnDefinition Width='53*' />
+      </Grid.ColumnDefinitions>
+
+      <Label x:Name='UsernameLbl'
+             Content='Username'
+             HorizontalAlignment='Center'
+             VerticalAlignment='Center'
+             Height='26'
+             Width='64' />
+
+      <TextBox x:Name='UsernameTxtBox'
+               Text='JoesUsername'
+               Grid.Column='1'
+               TextWrapping='Wrap'
+               VerticalAlignment='Center'
+               Height='18'
+               Margin='5' 
+               TextChanged='UsernameTxtBox_TextChanged'/>
+
+      <Label x:Name='PasswordLbl'
+             Grid.Row='1'
+             Content='Password'
+             HorizontalAlignment='Center'
+             VerticalAlignment='Center'
+             Height='26'
+             Width='60' />
+
+      <PasswordBox x:Name='PasswordBox'
+                   Password='Ozzy1'
+                   Grid.Column='1'
+                   Grid.Row='1'
+                   VerticalAlignment='Center'
+                   Visibility='Visible'
+                   Height='18'
+                   Margin='5'
+                   PasswordChanged='PasswordBox_PasswordChanged'/>
+
+      <TextBox x:Name='PasswordTxtBoxSlave'
+               Grid.Column='1'
+               Grid.Row='1'
+               VerticalAlignment='Center'
+               Visibility='Hidden'
+               Height='18'
+               Margin='5' />
+
+      <Image x:Name='ViewPasswordImg'
+             Grid.Column='2'
+             HorizontalAlignment='Left'
+             VerticalAlignment='Center'
+             Height='26'
+             Width='44'
+             Grid.Row='1'
+             Source='/viewIcon.png'
+             IsMouseDirectlyOverChanged='ViewPasswordImg_IsMouseDirectlyOverChanged'
+             Margin='3' />
+
+      <Button x:Name='LogInBtn'
+              Click='LogInWindow_LogInBtnClick'
+              Content='Log In'
+              Grid.Column='1'
+              Grid.Row='2'
+              VerticalAlignment='Center'
+              Height='20'
+              Margin='5' />
+
+      <Label x:Name='ConnectionsLbl'
+             Content='-1'
+             Margin='5'
+             Grid.Row='2'
+             VerticalAlignment='Center'
+             Height='26' />
+
+    </Grid>
+  </GroupBox>
+</Window>

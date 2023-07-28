@@ -15,7 +15,7 @@ namespace ScafellPikeClientWPF
   /// Interaction logic for App.xaml
   /// </summary>
   public partial class App : Application
-    {
+  {
     public App()
     {
       Bootstrapper.RegisterContainerBuilder();
@@ -36,5 +36,5 @@ namespace ScafellPikeClientWPF
         AutofacHostFactory.Container.Resolve<ChannelFactory<IScafellPikeService>>().Close();
       }
     }
-    }
+  }
 }
