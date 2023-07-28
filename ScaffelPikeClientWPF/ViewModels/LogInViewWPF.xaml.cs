@@ -37,8 +37,8 @@ namespace ScafellPikeClientWPF.Views
 
     private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
     {
-      if (PasswordBox != null && !String.IsNullOrEmpty(PasswordBox.Password))
-        Password = PasswordBox.Password;
+      //if (PasswordBox != null && !String.IsNullOrEmpty(PasswordBox.Password))
+      //  Password = PasswordBox.Password;
     }
 
     private void UsernameTxtBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)

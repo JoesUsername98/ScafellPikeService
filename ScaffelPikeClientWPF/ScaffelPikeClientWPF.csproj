@@ -108,7 +108,7 @@
     <Compile Include="HeartbeatManagerClientSide.cs" />
     <Compile Include="LogInRequester.cs" />
     <Compile Include="ProgramMaybe.cs" />
-    <Compile Include="Views\LogInViewWPF.xaml.cs">
+    <Compile Include="ViewModels\LogInViewWPF.xaml.cs">
       <DependentUpon>LogInViewWPF.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -118,7 +118,7 @@
     <Compile Include="Controller\ILogInView.cs" />
     <Compile Include="Controller\LogInController.cs" />
     <Compile Include="Models\LogInModel.cs" />
-    <Page Include="Views\LogInViewWPF.xaml">
+    <Page Include="ViewModels\LogInViewWPF.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
